@@ -1,0 +1,265 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="../theme/default/style.css" type="text/css"
+        />
+        <link rel="stylesheet" href="style.css" type="text/css" />
+        <script src="../lib/OpenLayers.js">
+         
+            
+        </script>
+        <script src="server.js" type="text/javascript"></script>
+        <style type="text/css">
+            #wmc {
+                width: 190%;
+                height: 600px;
+            }
+            /* avoid pink tiles */
+            .olImageLoadError {
+                background-color: transparent !important;
+            }
+            
+      #map {
+
+      width: 600px;
+
+      height: 500px;
+
+      border: 1px solid black;
+
+      }            
+         
+      div.olControlMousePosition {
+
+      font-family: Times;
+
+      font-size: 0.75em;
+
+      color: red;
+
+      }     
+         
+      div.olControlLayerSwitcher {
+      color: yellow;
+      width: 35em;
+      }   
+       div.olControlLayerSwitcher .layersDiv    {
+     background-color: blue;
+      }    
+            
+            
+        </style>
+    </head>
+    
+    <body onload="init()">
+        <h1 id="title">Servicios GeoBolivia</h1>
+        <div id="tags"></div>
+        <p id="shortdesc">Visualizacion de servicios GeoBolivia</p>
+        <div id="map" class="smallmap"></div>
+        <div id="docs"></div>
+        <input type="hidden" id="mapOptions" value='{"div": "map", "allOverlays": true}'
+        />
+        <br>
+        <textarea id="wmc" style="visibility:hidden">Pegar</textarea>
+        <div id="docs"></div>
+    </body>
+    <script type="text/javascript">
+        var lon = -64;
+        var lat = -16.5;
+        var zoom = 5;
+        var map, layer;
+
+
+
+
+        function init() {
+
+
+            map = new OpenLayers.Map('map');
+
+            layer = new OpenLayers.Layer.WMS("Fondo GeoBolivia", "http://www.geo.gob.bo:80//geoserver/fondos/wms", {
+                layers: 'openstreetmap'
+            });
+            map.addLayer(layer);
+
+            map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+
+
+
+            OpenLayers.loadURL('myMC2.wmc', null, null, onSuccess, onFailure);
+
+            function onSuccess(request) {
+
+                var format = new OpenLayers.Format.WMC({
+                    'layerOptions': {
+                        buffer: 0
+                    }
+                });
+                format.read(request.responseText, {
+                    map: map
+                });
+                console.debug(map.layers);
+
+                readWMC(request.responseText);
+
+            }
+
+            function onFailure(request) {
+                alert('Failure');
+            }
+
+        }
+
+
+
+
+        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 2;
+
+        var format = new OpenLayers.Format.WMC({
+            'layerOptions': {
+                buffer: 0
+            }
+        });
+        var doc, context;
+
+        function readWMC(text, merge) {
+
+            if (merge) {
+                try {
+                    map = format.read(text, {
+                        map: map
+                    });
+                } catch (err) {
+                    document.getElementById("wmc").value = err;
+                }
+            } else {
+                map.destroy();
+                try {
+                    var jsonFormat = new OpenLayers.Format.JSON();
+                    var mapOptions = jsonFormat.read(OpenLayers.Util.getElement('mapOptions').value);
+                    map = format.read(text, {
+                        map: mapOptions
+                    });
+
+
+
+
+
+                    var numeroLayers = map.baseLayer.div.parentElement.childElementCount //numero de layers que contiene el WMC
+                    var nombreMostrar;
+                    var metadato;
+                    var nombreLayer;
+
+
+                    for (var i = 0; i < numeroLayers; i++) {
+
+
+                        nombreMostrar = map.layers[i].name;
+                        metadato = map.layers[i].name;
+                        nombreLayer = map.layers[i].params.LAYERS
+
+
+
+
+
+                        //metadato
+                        if (map.layers[i].metadataURL != null) {
+                            var metadato = map.layers[i].metadataURL;
+                            metadato = "<a href=" + metadato + " target='_blank' >metadato</a>";
+                        } else {
+                            var metadato = "";
+
+                        }
+
+                       
+
+                        map.layers[i].name = nombreMostrar + " " + metadato;
+                    }
+
+
+
+                } catch (err) {
+                    document.getElementById("wmc").value = err;
+                }
+            }
+
+
+
+            //--------------------------------------------------------------------------            
+            //Codigo para manejar WMSCapabilities y obtener el logo y el url del metadato 
+            OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+            var request = OpenLayers.Request.GET({
+                url: "http://www.geo.gob.bo/geoserver/wms?service=WMS&version=1.1.0&request=GetCapabilities",
+
+                success: function (response) {
+
+                    var format1 = new OpenLayers.Format.XML();
+                    var xml = format1.read(response.responseText);
+
+                    var text = format1.write(xml);
+
+                    var CAPformat = new OpenLayers.Format.WMSCapabilities.v1_1_0();
+                    var cap = CAPformat.read(xml);
+
+
+                    for (var j = 0; j < cap.capability.layers.length; j++) {
+                        layer = cap.capability.layers[j];
+
+                        var logo;
+                        for (var i = 0; i < numeroLayers; i++) {
+
+                            if (layer.name == map.layers[i].params.LAYERS) {
+                                //alert(layer.name);
+
+                                if (layer.attribution != null) {
+
+                                    if (layer.attribution.logo != null) {
+                                        logo = layer.attribution.logo.href;
+
+                                        map.layers[i].name = map.layers[i].name + "<img src='" + logo + "' width=40 height=40>";
+
+                                    } else {
+                                        var logo = "";
+                                    }
+
+
+                                }
+
+
+                            }
+
+                        }
+
+
+                    }
+
+					//		this.dataLbl1=document.createElement("div");
+				//			this.dataLbl1.innerHTML=OpenLayers.i18n("Overlays11")
+
+
+                 //   var ls = new OpenLayers.Control.LayerSwitcher();
+                    var ls=new OpenLayers.Control.LayerSwitcher({'baseLblTitle':"Capas Base",'baseLabelText':"Datos"})
+                 //   map.addControl();
+                    map.addControl(ls);
+                   
+                    ls.maximizeControl();
+
+
+
+                }
+
+
+            }
+
+
+
+
+            )
+
+
+
+        }
+    </script>
+
+</html>
