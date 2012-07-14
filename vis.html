@@ -2,15 +2,14 @@
     
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!--        <link rel="stylesheet" href="http://openlayers.org/api/theme/default/style.css" type="text/css"/>
-        <link rel="stylesheet" href="http://openlayers.org/dev/examples/style.css" type="text/css" />-->
-        <link rel="stylesheet" href="../theme/default/style.css" type="text/css"/>
-        <link rel="stylesheet" href="../examples/style.css" type="text/css" />
-        <script src="../lib/OpenLayers.js"></script>
-<!--        <script src="../lib/deprecated.js"></script>-->
+        <link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/theme/default/style.css" type="text/css"
+        />
+        <link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/examples/style.css" type="text/css" />
+        <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js">
+         
+            
+        </script>
 
-<!--        <script src="http://openlayers.org/api/OpenLayers.js"></script>-->
-<!--        <script src="server.js" type="text/javascript"></script>-->
         <style type="text/css">
             #wmc {
                 width: 190%;
@@ -51,13 +50,47 @@
             
             
         </style>
+        
+       
+   <script>       
+function gup( name ){
+	var regexS = "[\\?&]"+name+"=([^&#]*)";
+	var regex = new RegExp ( regexS );
+	var tmpURL = window.location.href;
+	var results = regex.exec( tmpURL );
+	if( results == null )
+		return"";
+	else
+		return results[1];
+} 
+  </script>         
+        
+        
+        
     </head>
     
+    
+    
+    
     <body onload="init()">
-        <h1 id="title">Servicios GeoBolivia</h1>
-        <div id="tags"></div>
-        <p id="shortdesc">Visualizacion de servicios GeoBolivia</p>
-        <div id="map" class="smallmap"></div>
+    
+
+    
+  <!--      <div id="map" class="smallmap"></div>    -->
+
+ <script>  
+
+            var ancho_param = gup( 'ancho' );
+        
+            var alto_param = gup( 'alto' );
+
+document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
+
+   
+  </script>   
+        
+
+
         <div id="docs"></div>
         <input type="hidden" id="mapOptions" value='{"div": "map", "allOverlays": true}'
         />
@@ -71,10 +104,19 @@
         var zoom = 5;
         var map, layer;
 
-//---*-*-*-*----------------------------
+        
+        
+
+
         function init() {
 
+          
+            
+
             map = new OpenLayers.Map('map');
+
+
+
 
             layer = new OpenLayers.Layer.WMS("Fondo GeoBolivia", "http://www.geo.gob.bo:80//geoserver/fondos/wms", {
                 layers: 'openstreetmap'
@@ -83,10 +125,34 @@
 
             map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
 
+ 
+/*
+            OpenLayers.loadURL('myMC2.wmc', null, null, onSuccess, onFailure);
 
-//            OpenLayers.loadURL('myWMC2.wmc', null, null, onSuccess, onFailure);
+            function onSuccess(request) {
+
+                var format = new OpenLayers.Format.WMC({
+                    'layerOptions': {
+                        buffer: 0
+                    }
+                });
+                format.read(request.responseText, {
+                    map: map
+                });
+                console.debug(map.layers);
+
+                readWMC(request.responseText);
+
+            }
+
+            function onFailure(request) {
+                alert('Failure');
+            }
+            
+  */          
+            
             OpenLayers.Request.GET({
-				url: 'myWMC2.wmc',
+				url: 'archivo.wmc',
 				callback: handler
 				});
 
@@ -106,9 +172,12 @@
                 readWMC(request.responseText);
 
             }
-
+            
 
         }
+
+
+
 
         OpenLayers.IMAGE_RELOAD_ATTEMPTS = 2;
 
@@ -157,8 +226,6 @@
 
 
 
-
-
                         //metadato
                         if (map.layers[i].metadataURL != null) {
                             var metadato = map.layers[i].metadataURL;
@@ -179,6 +246,11 @@
                     document.getElementById("wmc").value = err;
                 }
             }
+
+
+
+
+
 
 
 
@@ -234,6 +306,12 @@
 				//			this.dataLbl1.innerHTML=OpenLayers.i18n("Overlays11")
 
 
+
+
+
+
+
+
                  //   var ls = new OpenLayers.Control.LayerSwitcher();
                     var ls=new OpenLayers.Control.LayerSwitcher({'baseLblTitle':"Capas Base",'baseLabelText':"Datos"})
                  //   map.addControl();
@@ -247,7 +325,7 @@
 
 
             }
-		// esto es una prueba de verificación
+
 
 
 
@@ -256,6 +334,10 @@
 
 
         }
+        
+var pp8p=3;
+        
+        
     </script>
 
 </html>
