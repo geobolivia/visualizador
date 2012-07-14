@@ -1,0 +1,11 @@
+<plugin>
+	<nom>Visualizador GeoBolivia</nom>
+	<auteur>Ariel Perez, Sylvain Lesage</auteur>
+	<licence>GNU/GLP</licence>
+	<version>0.1.0</version>
+	<description>
+	Visualizador de mapas, con OpenLayers, a integrar en páginas web por iframe
+	</description>
+	<etat>dev</etat>
+	<prefix>visualizador</prefix>
+</plugin>
