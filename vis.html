@@ -83,6 +83,7 @@ function gup( name ){
             var ancho_param = gup( 'ancho' );
         
             var alto_param = gup( 'alto' );
+            var wmc_param = gup( 'wmc' );
 
 document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
@@ -150,9 +151,11 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
             }
             
   */          
+	   
+//Aqui se introdujo el parametro wmc_param que es el nombre del archivo wmc que viene en la url
             
             OpenLayers.Request.GET({
-				url: 'archivo.wmc',
+				url: wmc_param,
 				callback: handler
 				});
 
