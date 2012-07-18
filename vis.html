@@ -154,6 +154,7 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 	   
 //Aqui se introdujo el parametro wmc_param que es el nombre del archivo wmc que viene en la url
             
+            OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
             OpenLayers.Request.GET({
 				url: wmc_param,
 				callback: handler
