@@ -6,7 +6,7 @@
         />
         <link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/examples/style.css" type="text/css" />
         <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js">
-         
+        <script src="mapbox.js"></script> 
             
         </script>
 
@@ -28,7 +28,41 @@
 
       border: 1px solid black;
 
-      }            
+      } 
+     
+     
+     #panel {
+                right: 0px;
+                height: 30px; 
+                width: 200px;
+            }
+            #panel div { 
+                float: left;
+                margin: 95px;
+            }
+     
+     
+     
+#controlToggle li {
+            list-style: none;
+        }
+        p {
+            width: 512px;
+        }
+        #options {
+            position: relative;
+            width: 512px;
+        }
+        #output {
+            float: right;
+        }     
+     
+     
+     
+     
+     
+     
+                
          
       div.olControlMousePosition {
 
@@ -47,7 +81,57 @@
        div.olControlLayerSwitcher .layersDiv    {
      background-color: blue;
       }    
-            
+   
+   
+   
+   
+   
+   .olControlPanel div { 
+          display:block;
+          width:  24px;
+          height: 24px;
+          margin: 5px;
+          background-color:white;
+        }
+        
+        .olControlPanel .olControlDrawFeatureItemActive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_on.png");
+        }
+        .olControlPanel .olControlDrawFeatureItemInactive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_off.png");
+        }
+        .olControlPanel .olControlZoomBoxItemInactive { 
+          width:  22px;  
+          height: 22px;
+          background-color: orange;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-off.png");
+        }
+        .olControlPanel .olControlZoomBoxItemActive { 
+          width:  22px;  
+          height: 22px;
+          background-color: blue;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-on.png");
+        }
+        .olControlPanel .olControlZoomToMaxExtentItemInactive { 
+          width:  18px;  
+          height: 18px;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/zoom-world-mini.png");
+        }         
+
+
+
+
+
+
+
+
+
+
+
             
         </style>
         
@@ -75,6 +159,18 @@ function gup( name ){
     <body onload="init()">
     
 
+
+
+
+
+
+
+
+
+
+
+
+
     
   <!--      <div id="map" class="smallmap"></div>    -->
 
@@ -84,12 +180,65 @@ function gup( name ){
         
             var alto_param = gup( 'alto' );
             var wmc_param = gup( 'wmc' );
+            
+            var pan_param = gup( 'pan' );
+            var controles_param = gup( 'controles' );
+            
+            ancho_param=ancho_param-2;
+            alto_param=alto_param-2;
+
 
 document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
-   
-  </script>   
-        
+
+    
+ 
+ 
+    </script>  
+
+
+ 
+
+<div id='options'>
+
+
+ 
+<div id='output'></div>;
+
+ 
+ 
+
+
+
+<ul id='controlToggle'>
+            <li>
+                <input type='radio' name='type' value='none' id='noneToggle'
+                       onclick='toggleControl(this);' checked='checked' />
+                <label for='noneToggle'>Navegar</label>
+            </li>
+            <li>
+                <input type='radio' name='type' value='line' id='lineToggle' onclick='toggleControl(this);' />
+                <label for='lineToggle'>Medida de distancia</label>
+            </li>
+            <li>
+                <input type='radio' name='type' value='polygon' id='polygonToggle' onclick='toggleControl(this);' />
+                <label for='polygonToggle'>Medida de area</label>
+            </li>
+            
+        </ul>
+
+</div>
+
+
+ 
+
+
+
+
+
+<div id="paneldiv" class="olControlNavToolbar"></div>
+
+
 
 
         <div id="docs"></div>
@@ -98,6 +247,13 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
         <br>
         <textarea id="wmc" style="visibility:hidden">Pegar</textarea>
         <div id="docs"></div>
+
+
+
+
+
+
+
     </body>
     <script type="text/javascript">
         var lon = -64;
@@ -112,45 +268,45 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
         function init() {
 
           
-            
+             
 
-            map = new OpenLayers.Map('map');
+          map = new OpenLayers.Map('map');
 
 
+/*
+       map = new OpenLayers.Map ("map", {
+				controls:[
+					new OpenLayers.Control.Navigation(),
+					new OpenLayers.Control.PanZoomBar(),
+					new OpenLayers.Control.LayerSwitcher(),
+					new OpenLayers.Control.Attribution()],
+				maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+				maxResolution: 156543.0399,
+				numZoomLevels: 19,
+				units: 'm',
+				projection: new OpenLayers.Projection("EPSG:4326"),
+				displayProjection: new OpenLayers.Projection("EPSG:4326")
+			} );
+ 
+*/
 
 
             layer = new OpenLayers.Layer.WMS("Fondo GeoBolivia", "http://www.geo.gob.bo:80//geoserver/fondos/wms", {
                 layers: 'openstreetmap'
+                 
             });
+            
+     
+
+            
+            
+            
             map.addLayer(layer);
 
             map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
 
  
-/*
-            OpenLayers.loadURL('myMC2.wmc', null, null, onSuccess, onFailure);
-
-            function onSuccess(request) {
-
-                var format = new OpenLayers.Format.WMC({
-                    'layerOptions': {
-                        buffer: 0
-                    }
-                });
-                format.read(request.responseText, {
-                    map: map
-                });
-                console.debug(map.layers);
-
-                readWMC(request.responseText);
-
-            }
-
-            function onFailure(request) {
-                alert('Failure');
-            }
             
-  */          
 	   
 //Aqui se introdujo el parametro wmc_param que es el nombre del archivo wmc que viene en la url
             
@@ -306,21 +462,135 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
                     }
 
-					//		this.dataLbl1=document.createElement("div");
-				//			this.dataLbl1.innerHTML=OpenLayers.i18n("Overlays11")
+					 
+
+               //    var ls = new OpenLayers.Control.LayerSwitcher();
+          
+          
+                  
+ 
+           
+          
+    
+      if (pan_param=="on")
+        
+       {
+            var panel = new OpenLayers.Control.NavToolbar({'div':OpenLayers.Util.getElement('paneldiv')});
+            map.addControl(panel);
+       }
+           
+     
+     
+     
+     
+     
+ //medidor          
+
+// style the sketch fancy
+            var sketchSymbolizers = {
+                "Point": {
+                    pointRadius: 4,
+                    graphicName: "square",
+                    fillColor: "white",
+                    fillOpacity: 1,
+                    strokeWidth: 1,
+                    strokeOpacity: 1,
+                    strokeColor: "#333333"
+                },
+                "Line": {
+                    strokeWidth: 3,
+                    strokeOpacity: 1,
+                    strokeColor: "#666666",
+                    strokeDashstyle: "dash"
+                },
+                "Polygon": {
+                    strokeWidth: 2,
+                    strokeOpacity: 1,
+                    strokeColor: "#666666",
+                    fillColor: "white",
+                    fillOpacity: 0.3
+                }
+            };
+            var style = new OpenLayers.Style();
+            style.addRules([
+                new OpenLayers.Rule({symbolizer: sketchSymbolizers})
+            ]);
+            var styleMap = new OpenLayers.StyleMap({"default": style});
+            
+            // allow testing of specific renderers via "?renderer=Canvas", etc
+            
+        var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+            renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+
+            measureControls = {
+                line: new OpenLayers.Control.Measure(
+                    OpenLayers.Handler.Path, {
+                        persist: true,
+                        handlerOptions: {
+                            layerOptions: {
+                                renderers: renderer,
+                                styleMap: styleMap
+                            }
+                        }
+                    }
+                ),
+                polygon: new OpenLayers.Control.Measure(
+                    OpenLayers.Handler.Polygon, {
+                        persist: true,
+                        handlerOptions: {
+                            layerOptions: {
+                                renderers: renderer,
+                                styleMap: styleMap
+                            }
+                        }
+                    }
+                )
+            };
+            
+            var control;
+            for(var key in measureControls) {
+                control = measureControls[key];
+                control.events.on({
+                    "Medida": handleMeasurements,
+                    "measurepartial": handleMeasurements
+                });
+                map.addControl(control);
+            }
+            
+        document.getElementById('noneToggle').checked = true;
 
 
+//-----------------------------
 
 
+map.addControl(new OpenLayers.Control.MousePosition());
+ //map.addControl(new OpenLayers.Projection("EPSG:4326"));
+/*
+                    var ol_wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",
+                    "", {layers: ''},
+                    {'attribution': 'Proveído por GeoBolivia'});
 
-
-
-
-                 //   var ls = new OpenLayers.Control.LayerSwitcher();
-                    var ls=new OpenLayers.Control.LayerSwitcher({'baseLblTitle':"Capas Base",'baseLabelText':"Datos"})
-                 //   map.addControl();
-                    map.addControl(ls);
-                   
+                map.addLayer(ol_wms);  
+           
+  */         
+ 
+/*
+                 shade = new OpenLayers.Layer.WMS("Fondo",
+                "http://www.geo.gob.bo:80//geoserver/fondos/wms",
+                {layers: "openstreetmap", reaspect: "false", transparent: 'true'},
+                {'attribution': 'Proveído por GeoBolivia'},
+                {isBaseLayer: false,opacity: 0});
+                 map.addLayer(shade);
+    */       
+           
+           
+           
+           
+           
+                   var ls=new OpenLayers.Control.LayerSwitcher({'baseLblTitle':"Capas Base",'baseLabelText':"Datos"})
+                   map.addControl(ls);
+                                     
+                                   
                     ls.maximizeControl();
 
 
@@ -339,7 +609,60 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
         }
         
-var pp8p=3;
+ function handleMeasurements(event) {
+            var geometry = event.geometry;
+            var units = event.units;
+            var order = event.order;
+            var measure = event.measure;
+            var element = document.getElementById('output');
+            var out = "";
+            if(order == 1) {
+                out += "Medida: " + measure.toFixed(3) + " " + units;
+            } else {
+                out += "Medida: " + measure.toFixed(3) + " " + units + "<sup>2</" + "sup>";
+            }
+            element.innerHTML = out;
+        }
+
+        function toggleControl(element) {
+            for(key in measureControls) {
+                var control = measureControls[key];
+                if(element.value == key && element.checked) {
+                    control.activate();
+                } else {
+                    control.deactivate();
+                }
+            }
+        }
+        
+        function toggleGeodesic(element) {
+            for(key in measureControls) {
+                var control = measureControls[key];
+                control.geodesic = element.checked;
+            }
+        }
+        
+        function toggleImmediate(element) {
+            for(key in measureControls) {
+                var control = measureControls[key];
+                control.setImmediate(element.checked);
+            }
+        }
+ 
+ 
+ 
+ 
+ var shade = null;
+        var maxOpacity = 0.9;
+        var minOpacity = 0.1;
+        function changeOpacity(byOpacity) {
+            var newOpacity = (parseFloat(OpenLayers.Util.getElement('opacity').value) + byOpacity).toFixed(1);
+            newOpacity = Math.min(maxOpacity,
+                                  Math.max(minOpacity, newOpacity));
+            OpenLayers.Util.getElement('opacity').value = newOpacity;
+            shade.setOpacity(newOpacity);
+        }
+ 
         
         
     </script>
