@@ -2,14 +2,18 @@
     
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/theme/default/style.css" type="text/css"
+
+<link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/theme/default/style.css" type="text/css"
         />
+
         <link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/examples/style.css" type="text/css" />
-        <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js"></script>
-        
+
+        <link rel="stylesheet" href="geo.css" type="text/css"/>
+
+        <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js">
         <script src="mapbox.js"></script> 
-        <script src="herramientas.js"></script>     
-        
+            
+        </script>
 
         <style type="text/css">
             #wmc {
@@ -21,16 +25,7 @@
                 background-color: transparent !important;
             }
             
-      #map {
-
-      width: 600px;
-
-      height: 500px;
-
-      border: 1px solid black;
-
-      } 
-     
+    
      
      #panel {
                 right: 0px;
@@ -126,18 +121,7 @@
 
 
 
-		.miPanel {position: relative; left: 103px; 
-			height: 438px; width: 78px; margin: 6px; border: solid 2px blue; 
-			background-color: #00d0ff; }
-	
-		.btn1ItemInactive {float: left; width: 32px; height:32px; margin: 2px; border: solid 1px #333333; 
-			border-bottom: solid 2px #333333; border-right: solid 2px #333333; 
-			background-color: #0069b4; background-image: url('http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-on.png');background-repeat: no-repeat; 
-			background-position: center; cursor: pointer;}	
-		.btn2ItemInactive {float: left; width: 332px; height:32px; margin: 2px; border: solid 1px #333333; 
-			border-bottom: solid 2px #333333; border-right: solid 2px #333333; 
-			background-color: #0069b4; background-image: url('http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-off.png');background-repeat: no-repeat; 
-			background-position: center; cursor: pointer;}
+
 
 
 
@@ -206,12 +190,11 @@ function gup( name ){
 
 document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
+    </script>  
+
 
  
-</script>  
 
- 
- 
 
 <div id='options' >
  
@@ -251,16 +234,11 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
                document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_on.png' onClick='btn2Click()'>"); 
       
                 }
-                
-                               
-                
-                
+
                 </script>
                 
             </li>
-           
 </ul>
-
 </div>
 
 
@@ -287,8 +265,9 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
 
 
-
-</body>
+    <div id="layerswitcher" class="olControlLayerSwitcher"></div>
+    <div id="layerswitcher2" class="olControlLayerSwitcher"></div>
+    </body>
     <script type="text/javascript">
         var lon = -64;
         var lat = -16.5;
@@ -479,14 +458,10 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
                                     if (layer.attribution.logo != null) {
                                         logo = layer.attribution.logo.href;
-    												 leyenda=layer.styles[0].legend.href;	
+                                        leyenda=layer.styles[0].legend.href;
 
-                                        map.layers[i].name = map.layers[i].name + "<img src='" + logo + "' width=40 height=40>";
-
-												
-              					//		document.write("<DIV><img src='" + leyenda + "' width=90 height=90></DIV>");
-                                     
-
+                                        map.layers[i].name = map.layers[i].name + "<img src='" + logo + "' max-width=16 max-height=16>";
+													 map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80>";	
                                     } else {
                                         var logo = "";
                                     }
@@ -502,9 +477,16 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
                     }
 
+					 
 
+               //    var ls = new OpenLayers.Control.LayerSwitcher();
           
-  /*  
+          
+                  
+ 
+           
+  /*        
+    
       if (pan_param=="on")
         
        {
@@ -515,9 +497,7 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
    */  
      
      
-      
-
- 
+     
      
  //medidor          
 
@@ -597,7 +577,8 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
 //-----------------------------
 
-map.addControl(new OpenLayers.Control.MousePosition());
+map.displayProjection = new OpenLayers.Projection("EPSG:4326");
+map.addControl(new OpenLayers.Control.MousePosition({id: "ll_mouse"}));
  //map.addControl(new OpenLayers.Projection("EPSG:4326"));
 /*
                     var ol_wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",
@@ -605,7 +586,7 @@ map.addControl(new OpenLayers.Control.MousePosition());
                     {'attribution': 'Proveído por GeoBolivia'});
 
                 map.addLayer(ol_wms);  
-         
+           
   */         
  
 /*
@@ -616,81 +597,78 @@ map.addControl(new OpenLayers.Control.MousePosition());
                 {isBaseLayer: false,opacity: 0});
                  map.addLayer(shade);
     */       
+           
+           
+           
+           
+// ESTE CÓDIGO EXTRAE EL layerswitcher DE LA CAJA DEL MAPA25           
+		  var ly_switchr=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher')})
 
-
-
-
-/*
-info = new OpenLayers.Control.WMSGetFeatureInfo({
-            url: 'http://demo.opengeo.org/geoserver/wms', 
-            title: 'Identify features by clicking',
-            queryVisible: true,
-            eventListeners: {
-                getfeatureinfo: function(event) {
-                    map.addPopup(new OpenLayers.Popup.FramedCloud(
-                        "chicken", 
-                        map.getLonLatFromPixel(event.xy),
-                        null,
-                        event.text,
-                        null,
-                        true
-                    ));
-                }
-            }
-        });
-        map.addControl(info);
-        info.activate();
-
-*/
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                   var ls=new OpenLayers.Control.LayerSwitcher({'baseLblTitle':"Capas Base",'baseLabelText':"Datos"})
-              //     ls.ascending = false;
-             //      ls.useLegendGraphics = true;                   
-                   map.addControl(ls);
-                                 
+		  map.addControl(ly_switchr);
+                                     
                                    
-                    ls.maximizeControl();
-   
+		  var ly_switchr1=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher2')})
 
-// create the panel where the controls will be added
-
-
-
-
-                //    layerSwitcher = new OpenLayers.Control.LayerSwitcher();
-                //    layerSwitcher.ascending = false;
-                //    layerSwitcher.useLegendGraphics = true;
-
-               //     map.addControl(layerSwitcher);
-
-
-
-
+		  map.addControl(ly_switchr1);
 
 
                 }
 
+
             }
+
+
+
 
             )
 
+
+
+        }
+        
+ function handleMeasurements(event) {
+            var geometry = event.geometry;
+            var units = event.units;
+            var order = event.order;
+            var measure = event.measure;
+            var element = document.getElementById('output');
+            var out = "";
+            if(order == 1) {
+                out += "Medida: " + measure.toFixed(3) + " " + units;
+            } else {
+                out += "Medida: " + measure.toFixed(3) + " " + units + "<sup>2</" + "sup>";
+            }
+            element.innerHTML = out;
         }
 
-//----------------
+        function toggleControl(element) {
+            for(key in measureControls) {
+                var control = measureControls[key];
+                if(element.value == key && element.checked) {
+                    control.activate();
+                } else {
+                    control.deactivate();
+                }
+            }
+        }
+        
+        function toggleGeodesic(element) {
+            for(key in measureControls) {
+                var control = measureControls[key];
+                control.geodesic = element.checked;
+            }
+        }
+        
+        function toggleImmediate(element) {
+            for(key in measureControls) {
+                var control = measureControls[key];
+                control.setImmediate(element.checked);
+            }
+        }
+ 
+ 
+ 
+ 
 //Estas funciones son para las herramientas       
  function handleMeasurements(event) {
             var geometry = event.geometry;
@@ -758,7 +736,6 @@ info = new OpenLayers.Control.WMSGetFeatureInfo({
   
 		}
  
-
         
         
     </script>
