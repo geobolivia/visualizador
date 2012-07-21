@@ -5,10 +5,11 @@
         <link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/theme/default/style.css" type="text/css"
         />
         <link rel="stylesheet" href="http://www.geo.gob.bo/lib/OpenLayers/examples/style.css" type="text/css" />
-        <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js">
+        <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js"></script>
+        
         <script src="mapbox.js"></script> 
-            
-        </script>
+        <script src="herramientas.js"></script>     
+        
 
         <style type="text/css">
             #wmc {
@@ -125,7 +126,18 @@
 
 
 
-
+		.miPanel {position: relative; left: 103px; 
+			height: 438px; width: 78px; margin: 6px; border: solid 2px blue; 
+			background-color: #00d0ff; }
+	
+		.btn1ItemInactive {float: left; width: 32px; height:32px; margin: 2px; border: solid 1px #333333; 
+			border-bottom: solid 2px #333333; border-right: solid 2px #333333; 
+			background-color: #0069b4; background-image: url('http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-on.png');background-repeat: no-repeat; 
+			background-position: center; cursor: pointer;}	
+		.btn2ItemInactive {float: left; width: 332px; height:32px; margin: 2px; border: solid 1px #333333; 
+			border-bottom: solid 2px #333333; border-right: solid 2px #333333; 
+			background-color: #0069b4; background-image: url('http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-off.png');background-repeat: no-repeat; 
+			background-position: center; cursor: pointer;}
 
 
 
@@ -182,7 +194,11 @@ function gup( name ){
             var wmc_param = gup( 'wmc' );
             
             var pan_param = gup( 'pan' );
-            var controles_param = gup( 'controles' );
+            
+            
+            var pan_param = gup( 'pan' ); 
+            var area_param = gup( 'area' );
+            var distancia_param = gup( 'distancia' );            
             
             ancho_param=ancho_param-2;
             alto_param=alto_param-2;
@@ -191,41 +207,59 @@ function gup( name ){
 document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
 
-    
  
- 
-    </script>  
-
-
- 
-
-<div id='options'>
-
-
- 
-<div id='output'></div>;
+</script>  
 
  
  
 
-
-
+<div id='options' >
+ 
+<div id='output'></div>
 <ul id='controlToggle'>
+
+    
             <li>
-                <input type='radio' name='type' value='none' id='noneToggle'
-                       onclick='toggleControl(this);' checked='checked' />
-                <label for='noneToggle'>Navegar</label>
+                <script> 
+                 
+                if (pan_param=="on" ||  distancia_param=="on" ||  area_param=="on" )
+                {
+             // document.write("<input type='radio' name='type' value='none' id='noneToggle' onclick='toggleControl(this);' checked='checked' /><label for='noneToggle'>Navegar</label>");
+            //    document.write(" <img name='image1' value='none' src='http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-on.png' onclick='toggleControl(this);'>"); 
+                document.write("<div id='pan' style='visibility:hidden;'><input type='radio' name='type' value='none' id='noneToggle' onclick='toggleControl(this);' checked='checked' /><label for='noneToggle'>Navegar</label></div>");
+                document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/pan_on.png' onClick='btn3Click()'>");
+              
+                }
+                else
+                {
+                document.write("<div id='pan' style='visibility:hidden;'><input type='radio' name='type' value='none' id='noneToggle' onclick='toggleControl(this);' checked='checked' /><label for='noneToggle'>Navegar</label></div>");
+                }
+                
+                
+                if (distancia_param=="on")
+                {
+              //  document.write("<input type='radio' name='type' value='line' id='lineToggle' onclick='toggleControl(this);' />  <label for='lineToggle'>Medida de distancia</label>");
+                document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/img/measuring-stick-on.png' onClick='btn1Click()'>");               
+       
+                }
+                
+                
+                if (area_param=="on")
+                {
+               // document.write("<input type='radio' name='type' value='polygon' id='polygonToggle' onclick='toggleControl(this);' />  <label for='polygonToggle'>Medida de area</label>");
+              //  document.write(" <img name='image1'  value='polygon' src='http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-off.png' onClick='btn1Click()'>"); 
+               document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_on.png' onClick='btn2Click()'>"); 
+      
+                }
+                
+                               
+                
+                
+                </script>
+                
             </li>
-            <li>
-                <input type='radio' name='type' value='line' id='lineToggle' onclick='toggleControl(this);' />
-                <label for='lineToggle'>Medida de distancia</label>
-            </li>
-            <li>
-                <input type='radio' name='type' value='polygon' id='polygonToggle' onclick='toggleControl(this);' />
-                <label for='polygonToggle'>Medida de area</label>
-            </li>
-            
-        </ul>
+           
+</ul>
 
 </div>
 
@@ -254,7 +288,7 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
 
 
-    </body>
+</body>
     <script type="text/javascript">
         var lon = -64;
         var lat = -16.5;
@@ -435,6 +469,7 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
                         layer = cap.capability.layers[j];
 
                         var logo;
+                        var leyenda;
                         for (var i = 0; i < numeroLayers; i++) {
 
                             if (layer.name == map.layers[i].params.LAYERS) {
@@ -444,8 +479,13 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
                                     if (layer.attribution.logo != null) {
                                         logo = layer.attribution.logo.href;
+    												 leyenda=layer.styles[0].legend.href;	
 
                                         map.layers[i].name = map.layers[i].name + "<img src='" + logo + "' width=40 height=40>";
+
+												
+              					//		document.write("<DIV><img src='" + leyenda + "' width=90 height=90></DIV>");
+                                     
 
                                     } else {
                                         var logo = "";
@@ -462,16 +502,9 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
                     }
 
-					 
 
-               //    var ls = new OpenLayers.Control.LayerSwitcher();
           
-          
-                  
- 
-           
-          
-    
+  /*  
       if (pan_param=="on")
         
        {
@@ -479,10 +512,12 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
             map.addControl(panel);
        }
            
+   */  
      
      
-     
-     
+      
+
+ 
      
  //medidor          
 
@@ -562,7 +597,6 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
 //-----------------------------
 
-
 map.addControl(new OpenLayers.Control.MousePosition());
  //map.addControl(new OpenLayers.Projection("EPSG:4326"));
 /*
@@ -571,7 +605,7 @@ map.addControl(new OpenLayers.Control.MousePosition());
                     {'attribution': 'Proveído por GeoBolivia'});
 
                 map.addLayer(ol_wms);  
-           
+         
   */         
  
 /*
@@ -582,33 +616,82 @@ map.addControl(new OpenLayers.Control.MousePosition());
                 {isBaseLayer: false,opacity: 0});
                  map.addLayer(shade);
     */       
-           
-           
-           
-           
-           
+
+
+
+
+/*
+info = new OpenLayers.Control.WMSGetFeatureInfo({
+            url: 'http://demo.opengeo.org/geoserver/wms', 
+            title: 'Identify features by clicking',
+            queryVisible: true,
+            eventListeners: {
+                getfeatureinfo: function(event) {
+                    map.addPopup(new OpenLayers.Popup.FramedCloud(
+                        "chicken", 
+                        map.getLonLatFromPixel(event.xy),
+                        null,
+                        event.text,
+                        null,
+                        true
+                    ));
+                }
+            }
+        });
+        map.addControl(info);
+        info.activate();
+
+*/
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
                    var ls=new OpenLayers.Control.LayerSwitcher({'baseLblTitle':"Capas Base",'baseLabelText':"Datos"})
+              //     ls.ascending = false;
+             //      ls.useLegendGraphics = true;                   
                    map.addControl(ls);
-                                     
+                                 
                                    
                     ls.maximizeControl();
+   
+
+// create the panel where the controls will be added
+
+
+
+
+                //    layerSwitcher = new OpenLayers.Control.LayerSwitcher();
+                //    layerSwitcher.ascending = false;
+                //    layerSwitcher.useLegendGraphics = true;
+
+               //     map.addControl(layerSwitcher);
+
+
+
 
 
 
                 }
 
-
             }
-
-
-
 
             )
 
-
-
         }
-        
+
+//----------------
+//Estas funciones son para las herramientas       
  function handleMeasurements(event) {
             var geometry = event.geometry;
             var units = event.units;
@@ -624,45 +707,58 @@ map.addControl(new OpenLayers.Control.MousePosition());
             element.innerHTML = out;
         }
 
-        function toggleControl(element) {
-            for(key in measureControls) {
+        
+
+		function btn1Click() {
+  
+ 
+		  for(key in measureControls) {
                 var control = measureControls[key];
-                if(element.value == key && element.checked) {
+                if("line" == key ) {
                     control.activate();
                 } else {
                     control.deactivate();
                 }
-            }
-        }
-        
-        function toggleGeodesic(element) {
-            for(key in measureControls) {
+                 
+            }	
+  
+		}
+
+
+      function btn2Click() {
+  
+		  for(key in measureControls) {
                 var control = measureControls[key];
-                control.geodesic = element.checked;
-            }
-        }
-        
-        function toggleImmediate(element) {
-            for(key in measureControls) {
+                
+                
+                 if("polygon" == key ) {
+                    control.activate();
+                } else {
+                    control.deactivate();
+                }
+ 
+            }	
+  
+		}
+
+ 	    function btn3Click() {
+  
+		  for(key in measureControls) {
                 var control = measureControls[key];
-                control.setImmediate(element.checked);
-            }
-        }
+                
+                
+                 if("none" == key ) {
+                    control.activate();
+                } else {
+                    control.deactivate();
+                }
  
+                
+            }	
+  
+		}
  
- 
- 
- var shade = null;
-        var maxOpacity = 0.9;
-        var minOpacity = 0.1;
-        function changeOpacity(byOpacity) {
-            var newOpacity = (parseFloat(OpenLayers.Util.getElement('opacity').value) + byOpacity).toFixed(1);
-            newOpacity = Math.min(maxOpacity,
-                                  Math.max(minOpacity, newOpacity));
-            OpenLayers.Util.getElement('opacity').value = newOpacity;
-            shade.setOpacity(newOpacity);
-        }
- 
+
         
         
     </script>
