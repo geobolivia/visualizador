@@ -1,0 +1,22 @@
+
+.olControlLayerSwitcher {
+  z-index: 1500;
+  left: 100px;
+  top: 500px;
+}
+
+#options {
+  margin-top: 60px;
+}
+
+#layerswitcher {
+	height: 100px;
+}
+#layerswitcher2 {
+	width: 200px;
+}
+/*
+#map div:first-child div:first-child {
+    top: 100px !important;
+}
+*/
