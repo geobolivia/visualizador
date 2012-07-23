@@ -178,25 +178,23 @@ function gup( name ){
             var pan_param = gup( 'pan' ); 
             var area_param = gup( 'area' );
             var distancia_param = gup( 'distancia' );            
+            var alturaControl;
+            var alturaSwitch;   
             
             ancho_param=ancho_param-2;
             alto_param=alto_param-2;
-
-
-             
+    
+            alturaControl=2.414-0.147*alto_param
+     
 
 
 document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
-    </script>  
-
-
+document.write("<div style='top:" + alturaControl + "' id='options' ><div id='output'></div>");
  
-
-
-<div id='options' >
+</script>  
  
-<div id='output'></div>
+ 
 <ul id='controlToggle'>
 
     
@@ -283,28 +281,11 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
         function init() {
 
-          
-             
+          alturaSwitch=300;
+        //  document.write("<div style='top:" + alturaSwitch + "' id='layerswitcher'></div>");   
 
           map = new OpenLayers.Map('map');
 
-
-/*
-       map = new OpenLayers.Map ("map", {
-				controls:[
-					new OpenLayers.Control.Navigation(),
-					new OpenLayers.Control.PanZoomBar(),
-					new OpenLayers.Control.LayerSwitcher(),
-					new OpenLayers.Control.Attribution()],
-				maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
-				maxResolution: 156543.0399,
-				numZoomLevels: 19,
-				units: 'm',
-				projection: new OpenLayers.Projection("EPSG:4326"),
-				displayProjection: new OpenLayers.Projection("EPSG:4326")
-			} );
- 
-*/
 
 
             layer = new OpenLayers.Layer.WMS("Fondo GeoBolivia", "http://www.geo.gob.bo:80//geoserver/fondos/wms", {
@@ -313,7 +294,6 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
             });
             
      
-
             
             
             
@@ -472,9 +452,7 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
                                         
                                         map.layers[i].name = map.layers[i].name + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                         map.layers[i].name = map.layers[i].name + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
-													 
-													 
-													 map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80>";	
+												//	 map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80 max-height=80>";	
 													 
                                     } else {
                                         var logo = "";
@@ -612,18 +590,17 @@ map.addControl(new OpenLayers.Control.MousePosition({id: "ll_mouse"}));
            
 
  
-          
-           
+        
+   
 // ESTE CÓDIGO EXTRAE EL layerswitcher DE LA CAJA DEL MAPA25           
 		  var ly_switchr=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher')})
   //ly_switchr.getLegendGraphics(true);
 		  map.addControl(ly_switchr);
-                                     
-   
+                                   
+//  document.write(" </div>"); 
     
-    /*
-                               
-		  var ly_switchr1=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher2')})
+ /*
+  		  var ly_switchr1=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher2')})
 
 		  map.addControl(ly_switchr1);
 */
@@ -633,34 +610,18 @@ map.addControl(new OpenLayers.Control.MousePosition({id: "ll_mouse"}));
  //document.write("<div><img name='image2' src='"+ leyenda + "' > </div>"); 
  //   document.write("<div id='options1'><img name='image1' src='"+ leyenda + "' </div>");    
 
-
-
-
-
                 }
 
 
             }
 
-
-
-
             )
 
-
-
-   
-
- 
-
+  //  alert(leyenda);
 
         }
         
-        
-
-        
-        
-        
+    
  function handleMeasurements(event) {
             var geometry = event.geometry;
             var units = event.units;
