@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="geo.css" type="text/css"/>
 
         <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js"></script> 
-        <script src="mapbox.js"></script> 
+         
         <script>    
         var logo;
         var leyenda;
@@ -448,7 +448,8 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
                     var CAPformat = new OpenLayers.Format.WMSCapabilities.v1_1_0();
                     var cap = CAPformat.read(xml);
 
-                 
+                    var titulo;
+                    var pagweb;
                   
                     for (var j = 0; j < cap.capability.layers.length; j++) {
                         layer = cap.capability.layers[j];
@@ -466,10 +467,13 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
                                     if (layer.attribution.logo != null) {
                                         logo = layer.attribution.logo.href;
                                         leyenda=layer.styles[0].legend.href;
+                                        titulo=layer.attribution.title;
+                                        pagweb=layer.attribution.href;
+                                        
 
                                         map.layers[i].name = map.layers[i].name + "<img src='" + logo + "' max-width=16 max-height=16>";
 													 map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80>";	
-													 
+													 map.layers[i].name = map.layers[i].name + " " + titulo + " " + pagweb;
 													 
 													 
                                     } else {
