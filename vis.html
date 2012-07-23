@@ -10,11 +10,14 @@
 
         <link rel="stylesheet" href="geo.css" type="text/css"/>
 
-        <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js">
+        <script src="http://www.geo.gob.bo/lib/OpenLayers/lib/OpenLayers.js"></script> 
         <script src="mapbox.js"></script> 
-            
+        <script>    
+        var logo;
+        var leyenda;
         </script>
-
+        
+        
         <style type="text/css">
             #wmc {
                 width: 190%;
@@ -48,6 +51,7 @@
         #options {
             position: relative;
             width: 512px;
+            top: -60px;
         }
         #output {
             float: right;
@@ -158,15 +162,6 @@ function gup( name ){
 
 
 
-
-
-
-
-
-
-
-
-
     
   <!--      <div id="map" class="smallmap"></div>    -->
 
@@ -186,6 +181,9 @@ function gup( name ){
             
             ancho_param=ancho_param-2;
             alto_param=alto_param-2;
+
+
+             
 
 
 document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
@@ -242,7 +240,12 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 </div>
 
 
+
+
  
+ 
+ 
+
 
 
 
@@ -273,8 +276,8 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
         var lat = -16.5;
         var zoom = 5;
         var map, layer;
+ 
 
-        
         
 
 
@@ -422,15 +425,15 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
 
 
-		  var ly_switchr=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher')})
 
-		  map.addControl(ly_switchr);
 
 
 
 
             //--------------------------------------------------------------------------            
             //Codigo para manejar WMSCapabilities y obtener el logo y el url del metadato 
+
+                       
             OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
             var request = OpenLayers.Request.GET({
                 url: "http://www.geo.gob.bo/geoserver/wms?service=WMS&version=1.1.0&request=GetCapabilities",
@@ -445,12 +448,14 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
                     var CAPformat = new OpenLayers.Format.WMSCapabilities.v1_1_0();
                     var cap = CAPformat.read(xml);
 
-
+                 
+                  
                     for (var j = 0; j < cap.capability.layers.length; j++) {
                         layer = cap.capability.layers[j];
 
-                        var logo;
-                        var leyenda;
+                //        var logo;
+                //        var leyenda;
+                
                         for (var i = 0; i < numeroLayers; i++) {
 
                             if (layer.name == map.layers[i].params.LAYERS) {
@@ -464,12 +469,16 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
                                         map.layers[i].name = map.layers[i].name + "<img src='" + logo + "' max-width=16 max-height=16>";
 													 map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80>";	
+													 
+													 
+													 
                                     } else {
                                         var logo = "";
                                     }
 
 
                                 }
+                                
 
 
                             }
@@ -479,13 +488,11 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
                     }
 
-					 
+					  
 
                //    var ls = new OpenLayers.Control.LayerSwitcher();
           
           
-                  
- 
            
   /*        
     
@@ -497,7 +504,6 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
        }
            
    */  
-     
      
      
      
@@ -600,16 +606,31 @@ map.addControl(new OpenLayers.Control.MousePosition({id: "ll_mouse"}));
                  map.addLayer(shade);
     */       
            
-           
-           
+
+ 
+          
            
 // ESTE CÓDIGO EXTRAE EL layerswitcher DE LA CAJA DEL MAPA25           
-
+		  var ly_switchr=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher')})
+  //ly_switchr.getLegendGraphics(true);
+		  map.addControl(ly_switchr);
                                      
-                                   
+   
+    
+    /*
+                               
 		  var ly_switchr1=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher2')})
 
 		  map.addControl(ly_switchr1);
+*/
+ 
+ 
+   //   alert(leyenda);
+ //document.write("<div><img name='image2' src='"+ leyenda + "' > </div>"); 
+ //   document.write("<div id='options1'><img name='image1' src='"+ leyenda + "' </div>");    
+
+
+
 
 
                 }
@@ -624,7 +645,17 @@ map.addControl(new OpenLayers.Control.MousePosition({id: "ll_mouse"}));
 
 
 
+   
+
+ 
+
+
         }
+        
+        
+
+        
+        
         
  function handleMeasurements(event) {
             var geometry = event.geometry;

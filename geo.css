@@ -11,10 +11,12 @@
 
 #layerswitcher {
 	height: 200px;
-        width: 400px;
+        width: 500px;
+        left: 0px;
+        top: 560px;
 }
 #layerswitcher2 {
-        left: 400px;
+        left: 500px;
 	width: 400px;
         height: 200px; 
 }
