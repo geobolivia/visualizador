@@ -1,8 +1,10 @@
 
 .olControlLayerSwitcher {
+  
   z-index: 1500;
   left: 100px;
   top: 500px;
+  
 }
 
 #options {
@@ -10,10 +12,12 @@
 }
 
 #layerswitcher {
-	height: 200px;
-        width: 650px;
+        position: absolute;
+	
+        width: 640px;
         left: 0px;
-        top: 560px;
+        
+                
 }
 #layerswitcher2 {
         left: 500px;
