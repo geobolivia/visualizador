@@ -422,7 +422,9 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
 
 
+		  var ly_switchr=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher')})
 
+		  map.addControl(ly_switchr);
 
 
 
@@ -602,9 +604,7 @@ map.addControl(new OpenLayers.Control.MousePosition({id: "ll_mouse"}));
            
            
 // ESTE CÓDIGO EXTRAE EL layerswitcher DE LA CAJA DEL MAPA25           
-		  var ly_switchr=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher')})
 
-		  map.addControl(ly_switchr);
                                      
                                    
 		  var ly_switchr1=new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher2')})

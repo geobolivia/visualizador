@@ -10,10 +10,13 @@
 }
 
 #layerswitcher {
-	height: 100px;
+	height: 200px;
+        width: 400px;
 }
 #layerswitcher2 {
-	width: 200px;
+        left: 400px;
+	width: 400px;
+        height: 200px; 
 }
 /*
 #map div:first-child div:first-child {
