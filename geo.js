@@ -26,7 +26,7 @@ alto_param = alto_param - 2;
 
 alto_param = alto_param - 300; // se resta 300 porque el panel tiene altura 300
 
-ancho_param = ancho_param - 100;
+//ancho_param = ancho_param - 100;
 
 
 
