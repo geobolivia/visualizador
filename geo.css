@@ -28,3 +28,127 @@
     top: 100px !important;
 }
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            #wmc {
+                width: 190%;
+                height: 600px;
+            }
+            /* avoid pink tiles */
+            .olImageLoadError {
+                background-color: transparent !important;
+            }
+            
+    
+     
+     #panel {
+                right: 0px;
+                height: 30px; 
+                width: 200px;
+            }
+            #panel div { 
+                float: left;
+                margin: 95px;
+            }
+     
+     
+     
+#controlToggle li {
+            list-style: none;
+        }
+        p {
+            width: 512px;
+        }
+        #options {
+            position: relative;
+            width: 512px;
+            top: -60px;
+        }
+        #output {
+            float: right;
+        }     
+     
+     
+     
+     
+     
+     
+                
+         
+      div.olControlMousePosition {
+
+      font-family: Times;
+
+      font-size: 0.75em;
+
+      color: red;
+
+      }     
+         
+      div.olControlLayerSwitcher {
+      color: yellow;
+      width: 35em;
+      }   
+       div.olControlLayerSwitcher .layersDiv    {
+     background-color: blue;
+      }    
+   
+   
+   
+   
+   
+   .olControlPanel div { 
+          display:block;
+          width:  24px;
+          height: 24px;
+          margin: 5px;
+          background-color:white;
+        }
+        
+        .olControlPanel .olControlDrawFeatureItemActive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_on.png");
+        }
+        .olControlPanel .olControlDrawFeatureItemInactive { 
+          width:  22px;  
+          height: 22px;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_off.png");
+        }
+        .olControlPanel .olControlZoomBoxItemInactive { 
+          width:  22px;  
+          height: 22px;
+          background-color: orange;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-off.png");
+        }
+        .olControlPanel .olControlZoomBoxItemActive { 
+          width:  22px;  
+          height: 22px;
+          background-color: blue;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-on.png");
+        }
+        .olControlPanel .olControlZoomToMaxExtentItemInactive { 
+          width:  18px;  
+          height: 18px;
+          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/zoom-world-mini.png");
+        }
