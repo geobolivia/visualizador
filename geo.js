@@ -39,7 +39,7 @@ document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param +
 
 document.write("<div style='top:" + alturaControl + "' id='options' ><div id='output'></div>");
          
-document.write("<div style='overflow:scroll;height:200; color: white;background-color:darkblue;top:" + alturaSwitch + "' id='layerswitcher'> </div>"); 
+document.write("<div style='overflow:scroll;height:200; color: white;background-color:red;top:" + alturaSwitch + "' id='layerswitcher'> </div>"); 
  
                  
                 if (pan_param=="on" ||  distancia_param=="on" ||  area_param=="on" )
