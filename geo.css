@@ -21,7 +21,7 @@
 #layerswitcher {
 	
 	     overflow-y:scroll;
-        height:200;
+        height:100;
         margin: 0 auto;
         color: white;
         background-color:#eb9f10;
@@ -42,22 +42,6 @@
     top: 100px !important;
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -100,8 +84,13 @@
         }
         #output {
             float: right;
+            
         }     
      
+        #medidores {
+            float: left;
+            position: absolute
+        }     
      
      
      

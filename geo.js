@@ -9,6 +9,25 @@ var leyenda;
 var titulo;
 var pagweb;
 
+var var_aux;
+var top_mapa;
+var width_Switch;
+var top_Switch;
+var top_Control;
+var width_Leyenda;
+var top_leyenda;
+var height_leyenda;
+var width_leyenda;
+
+
+width_leyenda=150;
+top_Control=-70;
+
+ 
+var leyenda_param = gup('leyenda');
+var capas_param = gup('capas');
+ 
+
 var ancho_param = gup('ancho');
 var alto_param = gup('alto');
 var wmc_param = gup('wmc');
@@ -17,36 +36,164 @@ var area_param = gup('area');
 var distancia_param = gup('distancia');
 
 
-var alturaControl;
-var alturaSwitch;
+ 
+ 
+var geobol_ArrayInfo1 = new Array();
+var geobol_ArrayInfo2 = new Array();
 
+ 
+
+
+
+//**************************************           
+var jjj;
+//**************************************        
+
+
+
+if ( pan_param=="on" || area_param=="on" || distancia_param=="on") 
+var_aux="existe";
+else
+var_aux="no_existe";
+
+
+
+// esto es si el mapa esta solo  ( 000)
+if (leyenda_param != "on" && capas_param != "on" && var_aux!="existe") {
 
 ancho_param = ancho_param - 2;
 alto_param = alto_param - 2;
-
-alto_param = alto_param - 300; // se resta 300 porque el panel tiene altura 300
-
-//ancho_param = ancho_param - 100;
-
-var geobol_ArrayInfo = new Array();
-
-
-alturaControl = -60
-
-alturaSwitch = 70;
-
-//**************************************           
+top_mapa=0;
+top_Switch=0;
+width_Switch=0;
+ 
+}
 
 
+//esto es si existe el mapa y los controles (001)
+if (leyenda_param != "on" && capas_param != "on" && var_aux=="existe") {
+
+ 
+ancho_param = ancho_param - 40;
+alto_param = alto_param - 40;
+top_mapa=40;
+top_Switch=0;
+width_Switch=0;
 
 
-document.write("<div style='width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
+}
 
-document.write("<div style='top:" + alturaControl + "' id='options' ><div id='output'></div>");
+ 
+//esto es si existe el mapa y capas (010)
+if (leyenda_param != "on" && capas_param == "on" && var_aux!="existe") {
 
-document.write("<div style='top:" + alturaSwitch + "' id='layerswitcher'> </div>");
+ancho_param = ancho_param - 100;
+alto_param = alto_param - 100;
+top_mapa=0;
+top_Switch=alto_param-58;
+width_Switch=ancho_param;
+ 
+}
 
-document.write("<div id='layerinfo'> </div>");
+
+//esto es si existe el mapa y capas (011)
+if (leyenda_param != "on" && capas_param == "on" && var_aux=="existe") {
+
+ancho_param = ancho_param - 140;
+alto_param = alto_param - 140;
+top_mapa=40;
+top_Switch=alto_param+48;
+width_Switch=ancho_param;
+ 
+}
+
+//esto es si existe el mapa y capas (100)
+if (leyenda_param == "on" && capas_param != "on" && var_aux!="existe") {
+
+ancho_param = ancho_param - 90 -width_leyenda;
+alto_param = alto_param -2;
+top_mapa=2;
+top_Switch=0;
+width_Switch=0;
+ 
+
+left_leyenda=ancho_param;
+top_leyenda=top_mapa;
+height_leyenda=alto_param;
+}
+
+
+//esto es si existe el mapa y leyenda (101)
+if (leyenda_param == "on" && capas_param != "on" && var_aux=="existe") {
+
+ancho_param = ancho_param - 90 -width_leyenda;
+alto_param = alto_param - 40;
+top_mapa=40;
+top_Switch=0;
+width_Switch=0;
+ 
+
+left_leyenda=ancho_param;
+top_leyenda=top_mapa+10;
+height_leyenda=alto_param;
+}
+
+ 
+//esto es si existe el mapa y leyenda (110)
+if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
+
+
+height_leyenda=alto_param;
+
+ancho_param = ancho_param - 90 -width_leyenda;
+alto_param = alto_param-100;
+top_mapa=0;
+top_Switch=alto_param+10;
+width_Switch=ancho_param;
+ 
+ 
+left_leyenda=ancho_param; 
+top_leyenda=top_mapa+10;
+
+} 
+ 
+ 
+//esto es si existe el mapa y leyenda (111)
+if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
+
+
+//ancho_param = ancho_param - 240
+ancho_param = ancho_param - 90 -width_leyenda;
+
+alto_param = alto_param-140;
+top_mapa=40;
+top_Switch=alto_param+50;
+width_Switch=ancho_param;
+ 
+height_leyenda=alto_param+100; 
+left_leyenda=ancho_param; 
+top_leyenda=top_mapa+10;
+
+}  
+ 
+ 
+  
+
+
+document.write("<div style='position:absolute;top:" + top_mapa + "; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
+
+document.write("<div style='top:" + top_Control + "' id='options' ><div id='output'></div>");
+
+document.write("<div style='top:" + "30" + "; width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
+
+document.write("<div style='top:" + top_Switch + ";height:100;width:" + width_Switch + "' id='layerswitcher'> </div>");
+
+document.write("<div style='top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerinfo'> </div>");
+
+
+
+
+
 
 if (pan_param == "on" || distancia_param == "on" || area_param == "on") {
 
@@ -162,23 +309,33 @@ function readWMC(text, merge) {
             for (var i = 0; i < numeroLayers; i++) {
 
 
-                nombreMostrar = map.layers[i].name;
-                metadato = map.layers[i].name;
+                nombre = map.layers[i].name;
+                
                 nombreLayer = map.layers[i].params.LAYERS
 
                 //metadato
-                if (map.layers[i].metadataURL != null) {
-                    var metadato = map.layers[i].metadataURL;
+                if (map.layers[i].metadataURL != undefined) {
+		    var metadato = map.layers[i].metadataURL;
+                    //var metadato = map.layers[i].metadataURL;
                     metadato = " <a href=" + metadato + " target='_blank' >metadato</a>";
-		    nombreMostrar = nombreMostrar + "" + metadato;
+		    nombremetadat = nombre + " " + metadato;
+		    geobol_ArrayInfo1[i] = nombremetadat;
+                    geobol_ArrayInfo2[i] = nombre;
                 } else {
                     var metadato = "";
-
+//    		    nombremetadat = nombre + "" + metadato;
+		    geobol_ArrayInfo1[i] = nombre;
+                    geobol_ArrayInfo2[i] = nombre;
                 }
 
 //	********	PRUEBA
-//                map.layers[i].name = nombreMostrar + " " + metadato;
-                geobol_ArrayInfo[i] = nombreMostrar;
+/*                map.layers[i].name = nombreMostrar + " " + metadato;
+                if (i != 0) {
+                geobol_ArrayInfo1[i+1] = nombremetadat;
+                geobol_ArrayInfo2[i] = nombreMostrar;
+		} else {
+		  geobol_ArrayInfo2[i] = nombreMostrar;
+		}*/
 //	********	PRUEBA
             }
 
@@ -281,7 +438,7 @@ function readWMC(text, merge) {
                 })
             };
 
-	    var mivar2 = "<p></p>";
+	    var mivar2 = '<p></p>';
             var control;
             for (var key in measureControls) {
                 control = measureControls[key];
@@ -333,26 +490,36 @@ function readWMC(text, merge) {
 
 				
 				
-                                geobol_ArrayInfo[i] = "<p>" + geobol_ArrayInfo[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
-                                geobol_ArrayInfo[i] = geobol_ArrayInfo[i] + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
-                                geobol_ArrayInfo[i] = geobol_ArrayInfo[i] + " " + "<img src='" + leyenda + "' max-width=80 max-height=80></p>";
-				mivar2 = mivar2 + geobol_ArrayInfo[i];
+                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                                geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
+                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' max-width=80 max-height=80>";
+				map.layers[i].name = geobol_ArrayInfo2[i];				
+				mivar2 = mivar2 + geobol_ArrayInfo1[i] + "</p>";
 				
 //	********	DESCOMENTAR LO Q SIGUE PARA VOLVER A LO ANTERIOR
 /*                                map.layers[i].name = map.layers[i].name + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
-                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
-                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80 max-height=80>";
+                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
+                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' style='max-width=80; max-height=80'>";
 */
 //	********	DESCOMENTAR LO PREVIO PARA VOLVER A LO ANTERIOR
 //	LO SGTE FUNCIONA!!!
 mivar=i+1+(i*2);
 /*
-document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].childNodes[0].nodeValue = geobol_ArrayInfo[i];
+document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].childNodes[0].nodeValue = geobol_ArrayInfo1[i];
 
-document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo[i];
+document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo1[i];
 */
 document.getElementById('layerinfo').innerHTML = mivar2;
-			      
+document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo2[i];
+
+
+/*
+jjj=document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[4];
+jjj.onclick = geobol();
+*/
+
+
+
 			    } else {
                                 logo = "";
                             }
@@ -393,4 +560,17 @@ function gup(name) {
     else return results[1];
 }
 
-//*************************
+//jjj=document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[4];
+//jjj.onclick = 
+function geobol() {
+var mielemento = document.getElementById('layerinfo').childNodes[0];
+mielemento.innerHTML = "xXxXxXxXx zZzZzZzZz";
+}
+
+
+/*************************
+function pruebaariel(a,b) {
+//  var x1 = document.getElementById('layerinfo').childNodes[0];
+//  var x2 = document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[4];
+a.innerHTML = b.innerHTML;
+}*/

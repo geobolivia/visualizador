@@ -55,7 +55,7 @@ function handleMeasurements(event) {
     var units = event.units;
     var order = event.order;
     var measure = event.measure;
-    var element = document.getElementById('output');
+    var element = document.getElementById('medidores');
     var out = "";
     if (order == 1) {
         out += "Medida: " + measure.toFixed(3) + " " + units;
