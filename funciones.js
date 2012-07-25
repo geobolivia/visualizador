@@ -67,20 +67,7 @@ function handleMeasurements(event) {
 
 
 
-function handleMeasurements(event) {
-    var geometry = event.geometry;
-    var units = event.units;
-    var order = event.order;
-    var measure = event.measure;
-    var element = document.getElementById('output');
-    var out = "";
-    if (order == 1) {
-        out += "Medida: " + measure.toFixed(3) + " " + units;
-    } else {
-        out += "Medida: " + measure.toFixed(3) + " " + units + "<sup>2</" + "sup>";
-    }
-    element.innerHTML = out;
-}
+
 
 function toggleControl(element) {
     for (key in measureControls) {
@@ -107,44 +94,3 @@ function toggleImmediate(element) {
     }
 }
 
-
-
-function handleMeasurements(event) {
-    var geometry = event.geometry;
-    var units = event.units;
-    var order = event.order;
-    var measure = event.measure;
-    var element = document.getElementById('output');
-    var out = "";
-    if (order == 1) {
-        out += "Medida: " + measure.toFixed(3) + " " + units;
-    } else {
-        out += "Medida: " + measure.toFixed(3) + " " + units + "<sup>2</" + "sup>";
-    }
-    element.innerHTML = out;
-}
-
-function toggleControl(element) {
-    for (key in measureControls) {
-        var control = measureControls[key];
-        if (element.value == key && element.checked) {
-            control.activate();
-        } else {
-            control.deactivate();
-        }
-    }
-}
-
-function toggleGeodesic(element) {
-    for (key in measureControls) {
-        var control = measureControls[key];
-        control.geodesic = element.checked;
-    }
-}
-
-function toggleImmediate(element) {
-    for (key in measureControls) {
-        var control = measureControls[key];
-        control.setImmediate(element.checked);
-    }
-}
