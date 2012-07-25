@@ -1,3 +1,10 @@
+#layerinfo {
+  position: absolute;
+  top: 300px;
+  background-color: gray;
+}
+
+
 
 .olControlLayerSwitcher {
   

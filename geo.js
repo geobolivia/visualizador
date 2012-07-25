@@ -28,7 +28,7 @@ alto_param = alto_param - 300; // se resta 300 porque el panel tiene altura 300
 
 //ancho_param = ancho_param - 100;
 
-
+var geobol_ArrayInfo = new Array();
 
 
 alturaControl = -60
@@ -46,6 +46,7 @@ document.write("<div style='top:" + alturaControl + "' id='options' ><div id='ou
 
 document.write("<div style='top:" + alturaSwitch + "' id='layerswitcher'> </div>");
 
+document.write("<div id='layerinfo'> </div>");
 
 if (pan_param == "on" || distancia_param == "on" || area_param == "on") {
 
@@ -157,7 +158,7 @@ function readWMC(text, merge) {
             var metadato;
             var nombreLayer;
 
-
+//	********	AQUI RESCATO METADATOS
             for (var i = 0; i < numeroLayers; i++) {
 
 
@@ -165,20 +166,20 @@ function readWMC(text, merge) {
                 metadato = map.layers[i].name;
                 nombreLayer = map.layers[i].params.LAYERS
 
-
-
                 //metadato
                 if (map.layers[i].metadataURL != null) {
                     var metadato = map.layers[i].metadataURL;
-                    metadato = "<a href=" + metadato + " target='_blank' >metadato</a>";
+                    metadato = " <a href=" + metadato + " target='_blank' >metadato</a>";
+		    nombreMostrar = nombreMostrar + "" + metadato;
                 } else {
                     var metadato = "";
 
                 }
 
-
-
-                map.layers[i].name = nombreMostrar + " " + metadato;
+//	********	PRUEBA
+//                map.layers[i].name = nombreMostrar + " " + metadato;
+                geobol_ArrayInfo[i] = nombreMostrar;
+//	********	PRUEBA
             }
 
 
@@ -210,44 +211,6 @@ function readWMC(text, merge) {
             var cap = CAPformat.read(xml);
 
 
-
-            for (var j = 0; j < cap.capability.layers.length; j++) {
-                layer = cap.capability.layers[j];
-
-
-
-                for (var i = 0; i < numeroLayers; i++) {
-
-                    if (layer.name == map.layers[i].params.LAYERS) {
-
-
-                        if (layer.attribution != null) {
-
-                            if (layer.attribution.logo != null) {
-                                logo = layer.attribution.logo.href;
-                                leyenda = layer.styles[0].legend.href;
-                                titulo = layer.attribution.title;
-                                pagweb = layer.attribution.href;
-
-                                map.layers[i].name = map.layers[i].name + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
-                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
-                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80 max-height=80>";
-
-                            } else {
-                                logo = "";
-                            }
-
-
-                        }
-
-
-
-                    }
-
-                }
-
-
-            }
 
 
 
@@ -318,6 +281,7 @@ function readWMC(text, merge) {
                 })
             };
 
+	    var mivar2 = "<p></p>";
             var control;
             for (var key in measureControls) {
                 control = measureControls[key];
@@ -347,6 +311,63 @@ function readWMC(text, merge) {
             })
             //ly_switchr.getLegendGraphics(true);
             map.addControl(ly_switchr);
+
+	    
+            for (var j = 0; j < cap.capability.layers.length; j++) {
+                layer = cap.capability.layers[j];
+
+
+//	*********	AQUI AUMENTO AL METADATO: LINK, LOGO, LEYENDA
+                for (var i = 0; i < numeroLayers; i++) {
+
+                    if (layer.name == map.layers[i].params.LAYERS) {
+
+
+                        if (layer.attribution != null) {
+
+                            if (layer.attribution.logo != null) {
+                                logo = layer.attribution.logo.href;
+                                leyenda = layer.styles[0].legend.href;
+                                titulo = layer.attribution.title;
+                                pagweb = layer.attribution.href;
+
+				
+				
+                                geobol_ArrayInfo[i] = "<p>" + geobol_ArrayInfo[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                                geobol_ArrayInfo[i] = geobol_ArrayInfo[i] + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
+                                geobol_ArrayInfo[i] = geobol_ArrayInfo[i] + " " + "<img src='" + leyenda + "' max-width=80 max-height=80></p>";
+				mivar2 = mivar2 + geobol_ArrayInfo[i];
+				
+//	********	DESCOMENTAR LO Q SIGUE PARA VOLVER A LO ANTERIOR
+/*                                map.layers[i].name = map.layers[i].name + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
+                                map.layers[i].name = map.layers[i].name + " " + "<img src='" + leyenda + "' max-width=80 max-height=80>";
+*/
+//	********	DESCOMENTAR LO PREVIO PARA VOLVER A LO ANTERIOR
+//	LO SGTE FUNCIONA!!!
+mivar=i+1+(i*2);
+/*
+document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].childNodes[0].nodeValue = geobol_ArrayInfo[i];
+
+document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo[i];
+*/
+document.getElementById('layerinfo').innerHTML = mivar2;
+			      
+			    } else {
+                                logo = "";
+                            }
+
+
+                        }
+
+
+
+                    }
+
+                }
+
+
+            }
 
 
 
