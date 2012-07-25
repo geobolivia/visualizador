@@ -22,7 +22,7 @@ var width_leyenda;
 
 width_leyenda=150;
 top_Control=-70;
-
+var visibilidad_leyenda;
  
 var leyenda_param = gup('leyenda');
 var capas_param = gup('capas');
@@ -41,7 +41,19 @@ var distancia_param = gup('distancia');
 var geobol_ArrayInfo1 = new Array();
 var geobol_ArrayInfo2 = new Array();
 
+ //--------
+top_mapa=2;
+top_Switch=0;
+width_Switch=0;
  
+
+left_leyenda=0;
+top_leyenda=0;
+height_leyenda=0;
+visibilidad_leyenda="visible";
+//----------
+
+
 
 
 
@@ -51,11 +63,13 @@ var jjj;
 
 
 
-if ( pan_param=="on" || area_param=="on" || distancia_param=="on") 
+if ( pan_param=="on" || area_param=="on" || distancia_param=="on") {
 var_aux="existe";
+}
 else
+{
 var_aux="no_existe";
-
+}
 
 
 // esto es si el mapa esta solo  ( 000)
@@ -66,21 +80,20 @@ alto_param = alto_param - 2;
 top_mapa=0;
 top_Switch=0;
 width_Switch=0;
+visibilidad_leyenda="hidden";
  
 }
 
 
 //esto es si existe el mapa y los controles (001)
 if (leyenda_param != "on" && capas_param != "on" && var_aux=="existe") {
-
  
 ancho_param = ancho_param - 40;
 alto_param = alto_param - 40;
 top_mapa=40;
 top_Switch=0;
 width_Switch=0;
-
-
+visibilidad_leyenda="hidden";
 }
 
  
@@ -92,7 +105,7 @@ alto_param = alto_param - 100;
 top_mapa=0;
 top_Switch=alto_param-58;
 width_Switch=ancho_param;
- 
+visibilidad_leyenda="hidden";
 }
 
 
@@ -104,7 +117,7 @@ alto_param = alto_param - 140;
 top_mapa=40;
 top_Switch=alto_param+48;
 width_Switch=ancho_param;
- 
+visibilidad_leyenda="hidden";
 }
 
 //esto es si existe el mapa y capas (100)
@@ -120,6 +133,7 @@ width_Switch=0;
 left_leyenda=ancho_param;
 top_leyenda=top_mapa;
 height_leyenda=alto_param;
+visibilidad_leyenda="visible";
 }
 
 
@@ -136,6 +150,7 @@ width_Switch=0;
 left_leyenda=ancho_param;
 top_leyenda=top_mapa+10;
 height_leyenda=alto_param;
+visibilidad_leyenda="visible";
 }
 
  
@@ -154,13 +169,13 @@ width_Switch=ancho_param;
  
 left_leyenda=ancho_param; 
 top_leyenda=top_mapa+10;
+visibilidad_leyenda="visible";
 
 } 
  
  
 //esto es si existe el mapa y leyenda (111)
 if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
-
 
 //ancho_param = ancho_param - 240
 ancho_param = ancho_param - 90 -width_leyenda;
@@ -173,6 +188,7 @@ width_Switch=ancho_param;
 height_leyenda=alto_param+100; 
 left_leyenda=ancho_param; 
 top_leyenda=top_mapa+10;
+visibilidad_leyenda="visible";
 
 }  
  
@@ -188,7 +204,9 @@ document.write("<div style='top:" + "30" + "; width:" + "200" + "; left:" + "90"
 
 document.write("<div style='top:" + top_Switch + ";height:100;width:" + width_Switch + "' id='layerswitcher'> </div>");
 
-document.write("<div style='top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerinfo'> </div>");
+
+
+document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerinfo'> </div>");
 
 
 
