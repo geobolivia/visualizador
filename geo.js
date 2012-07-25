@@ -53,8 +53,8 @@ height_leyenda=0;
 visibilidad_leyenda="visible";
 //----------
 
-
-
+//ancho_param = ancho_param +100;
+ 
 
 
 //**************************************           
@@ -335,7 +335,7 @@ function readWMC(text, merge) {
                 if (map.layers[i].metadataURL != undefined) {
 		    var metadato = map.layers[i].metadataURL;
                     //var metadato = map.layers[i].metadataURL;
-                    metadato = " <a href=" + metadato + " target='_blank' >metadato</a>";
+                    metadato = "<BR> <a href=" + metadato + " target='_blank' >metadato</a>";
 		    nombremetadat = nombre + " " + metadato;
 		    geobol_ArrayInfo1[i] = nombremetadat;
                     geobol_ArrayInfo2[i] = nombre;
@@ -508,9 +508,17 @@ function readWMC(text, merge) {
 
 				
 				
-                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
-                                geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' max-width=16 max-height=16>";
-                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' max-width=80 max-height=80>";
+                           //     geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                          //      geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + "<br>" + "<img src='" + logo + "' style='max-width=16 max-height=16'>";
+                          //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
+                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
+                                geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + "<br><img src='" + leyenda + "' style='max-width=80; max-height=80'>";
+                                
+                                
+                                
+                                
+                                
 				map.layers[i].name = geobol_ArrayInfo2[i];				
 				mivar2 = mivar2 + geobol_ArrayInfo1[i] + "</p>";
 				
