@@ -123,7 +123,9 @@ visibilidad_leyenda="hidden";
 //esto es si existe el mapa y capas (100)
 if (leyenda_param == "on" && capas_param != "on" && var_aux!="existe") {
 
-ancho_param = ancho_param - 90 -width_leyenda;
+//ancho_param = ancho_param - 90 -width_leyenda;
+ancho_param = ancho_param -width_leyenda;
+
 alto_param = alto_param -2;
 top_mapa=2;
 top_Switch=0;
@@ -140,7 +142,9 @@ visibilidad_leyenda="visible";
 //esto es si existe el mapa y leyenda (101)
 if (leyenda_param == "on" && capas_param != "on" && var_aux=="existe") {
 
-ancho_param = ancho_param - 90 -width_leyenda;
+//ancho_param = ancho_param - 90 -width_leyenda;
+ancho_param = ancho_param -width_leyenda;
+
 alto_param = alto_param - 40;
 top_mapa=40;
 top_Switch=0;
@@ -160,7 +164,9 @@ if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 
 height_leyenda=alto_param;
 
-ancho_param = ancho_param - 90 -width_leyenda;
+//ancho_param = ancho_param - 90 -width_leyenda;
+ancho_param = ancho_param -width_leyenda;
+
 alto_param = alto_param-100;
 top_mapa=0;
 top_Switch=alto_param+10;
@@ -178,8 +184,8 @@ visibilidad_leyenda="visible";
 if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
 
 //ancho_param = ancho_param - 240
-ancho_param = ancho_param - 90 -width_leyenda;
-
+//ancho_param = ancho_param - 90 -width_leyenda;
+ancho_param = ancho_param  -width_leyenda;
 alto_param = alto_param-140;
 top_mapa=40;
 top_Switch=alto_param+50;
