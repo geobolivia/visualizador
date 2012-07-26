@@ -173,7 +173,7 @@ visibilidad_switcher="hidden";
 if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 
 
-height_leyenda=alto_param;
+hheight_leyenda=alto_param;
 //ancho_param = ancho_param - 90 -width_leyenda;
 ancho_param = ancho_param -width_leyenda;
 
