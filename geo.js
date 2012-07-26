@@ -34,7 +34,7 @@ var wmc_param = gup('wmc');
 var pan_param = gup('pan');
 var area_param = gup('area');
 var distancia_param = gup('distancia');
-
+var visibilidad_switcher;
 
  
  
@@ -51,6 +51,7 @@ left_leyenda=0;
 top_leyenda=0;
 height_leyenda=0;
 visibilidad_leyenda="visible";
+visibilidad_switcher="visible";
 //----------
 
 //ancho_param = ancho_param +100;
@@ -81,7 +82,7 @@ top_mapa=0;
 top_Switch=0;
 width_Switch=0;
 visibilidad_leyenda="hidden";
- 
+visibilidad_switcher="hidden"; 
 }
 
 
@@ -94,6 +95,7 @@ top_mapa=40;
 top_Switch=0;
 width_Switch=0;
 visibilidad_leyenda="hidden";
+visibilidad_switcher="hidden"; 
 }
 
  
@@ -136,6 +138,7 @@ left_leyenda=ancho_param;
 top_leyenda=top_mapa;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
+visibilidad_switcher="hidden"; 
 }
 
 
@@ -150,11 +153,11 @@ top_mapa=40;
 top_Switch=0;
 width_Switch=0;
  
-
 left_leyenda=ancho_param;
 top_leyenda=top_mapa+10;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
+visibilidad_switcher="hidden"; 
 }
 
  
@@ -208,7 +211,7 @@ document.write("<div style='top:" + top_Control + "' id='options' ><div id='outp
 
 document.write("<div style='top:" + "30" + "; width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
 
-document.write("<div style='top:" + top_Switch + ";height:100;width:" + width_Switch + "' id='layerinfo'> </div>");
+document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_Switch + ";height:100;width:" + width_Switch + "' id='layerinfo'> </div>");
 
 
 
@@ -270,7 +273,9 @@ function init() {
 
     //Aqui se introdujo el parametro wmc_param que es el nombre del archivo wmc que viene en la url
 
-    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
+    
     OpenLayers.Request.GET({
         url: wmc_param,
         callback: handler
