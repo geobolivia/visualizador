@@ -37,7 +37,7 @@ var pan_param = gup('pan');
 var area_param = gup('area');
 var distancia_param = gup('distancia');
 var visibilidad_switcher;
-
+var margen=50;
  
  
 var geobol_ArrayInfo1 = new Array();
@@ -91,7 +91,7 @@ visibilidad_switcher="hidden";
 //esto es si existe el mapa y los controles (001)
 if (leyenda_param != "on" && capas_param != "on" && var_aux=="existe") {
  
-ancho_param = ancho_param - 40;
+ancho_param = ancho_param;
 alto_param = alto_param - 40;
 top_mapa=40;
 top_Switch=0;
@@ -104,10 +104,13 @@ visibilidad_switcher="hidden";
 //esto es si existe el mapa y capas (010)
 if (leyenda_param != "on" && capas_param == "on" && var_aux!="existe") {
 
-ancho_param = ancho_param - 100;
+ancho_param = ancho_param;
 alto_param = alto_param - 100;
+
 top_mapa=0;
-top_Switch=alto_param-58;
+top_Switch=alto_param-38;  //58
+
+
 width_Switch=ancho_param;
 visibilidad_leyenda="hidden";
 }
@@ -116,10 +119,11 @@ visibilidad_leyenda="hidden";
 //esto es si existe el mapa y capas (011)
 if (leyenda_param != "on" && capas_param == "on" && var_aux=="existe") {
 
-ancho_param = ancho_param - 140;
+ancho_param = ancho_param;
 alto_param = alto_param - 140;
 top_mapa=40;
-top_Switch=alto_param+48;
+//top_Switch=alto_param+48;
+top_Switch=alto_param;
 width_Switch=ancho_param;
 visibilidad_leyenda="hidden";
 }
@@ -137,7 +141,7 @@ width_Switch=0;
  
 
 left_leyenda=ancho_param;
-top_leyenda=top_mapa;
+top_leyenda=top_mapa-40;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
@@ -156,7 +160,7 @@ top_Switch=0;
 width_Switch=0;
  
 left_leyenda=ancho_param;
-top_leyenda=top_mapa+10;
+top_leyenda=top_mapa-40;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
@@ -168,18 +172,17 @@ if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 
 
 height_leyenda=alto_param;
-
 //ancho_param = ancho_param - 90 -width_leyenda;
 ancho_param = ancho_param -width_leyenda;
 
 alto_param = alto_param-100;
 top_mapa=0;
-top_Switch=alto_param+10;
+top_Switch=alto_param-40; // rev
 width_Switch=ancho_param;
  
  
 left_leyenda=ancho_param; 
-top_leyenda=top_mapa+10;
+top_leyenda=top_mapa-40;
 visibilidad_leyenda="visible";
 
 } 
@@ -193,15 +196,22 @@ if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
 ancho_param = ancho_param  -width_leyenda;
 alto_param = alto_param-140;
 top_mapa=40;
-top_Switch=alto_param+50;
+top_Switch=alto_param;
 width_Switch=ancho_param;
  
 height_leyenda=alto_param+100; 
 left_leyenda=ancho_param; 
-top_leyenda=top_mapa+10;
+top_leyenda=top_mapa-40;
 visibilidad_leyenda="visible";
 
 }  
+ 
+ 
+ top_mapa=top_mapa+margen;
+ top_Switch=top_Switch+margen;
+ top_leyenda=top_leyenda+margen;
+ top_Control=top_Control+margen;
+ 
  
  
   
@@ -275,10 +285,10 @@ function init() {
 
     //Aqui se introdujo el parametro wmc_param que es el nombre del archivo wmc que viene en la url
 
-    
     // MIENTRAS NO ARREGLEMOS EL PROXY, PARA TRABAJAR DESCOMENTAR LAS LINEAS 278 Y 390, Y COMENTAR LA 279 Y LA 391
     OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
     //OpenLayers.ProxyHost = "http://www-dev.geo.gob.bo/proxy/?url=";
+
     
     OpenLayers.Request.GET({
         url: wmc_param,
@@ -391,6 +401,7 @@ function readWMC(text, merge) {
     
     OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
     //OpenLayers.ProxyHost = "http://www-dev.geo.gob.bo/proxy/?url=";
+
     var request = OpenLayers.Request.GET({
         url: "http://www.geo.gob.bo/geoserver/wms?service=WMS&version=1.1.0&request=GetCapabilities",
 
