@@ -618,6 +618,8 @@ function gup(name) {
     else return results[1];
 }
 
+// PARA IR TRABAJANDO EN UN CODIGO JS QUE NOS PERMITA PARSEAR URLS PARA AÑADIR O QUITAR PARAMETROS!!! ...stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript
+
 //jjj=document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[4];
 //jjj.onclick = 
 /*
