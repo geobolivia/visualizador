@@ -384,8 +384,9 @@ function readWMC(text, merge) {
     //--------------------------------------------------------------------------            
     //Codigo para manejar WMSCapabilities y obtener el logo y el url del metadato 
 
-
-    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    
+    //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
     var request = OpenLayers.Request.GET({
         url: "http://www.geo.gob.bo/geoserver/wms?service=WMS&version=1.1.0&request=GetCapabilities",
 
