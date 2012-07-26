@@ -208,11 +208,11 @@ document.write("<div style='top:" + top_Control + "' id='options' ><div id='outp
 
 document.write("<div style='top:" + "30" + "; width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
 
-document.write("<div style='top:" + top_Switch + ";height:100;width:" + width_Switch + "' id='layerswitcher'> </div>");
+document.write("<div style='top:" + top_Switch + ";height:100;width:" + width_Switch + "' id='layerinfo'> </div>");
 
 
 
-document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerinfo'> </div>");
+document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
 
 
 
@@ -246,6 +246,9 @@ if (area_param == "on") {
 
 function init() {
 
+    elem=document.body;
+//    elem.style.background-color="red";
+  
     alturaSwitch = 300;
 
     map = new OpenLayers.Map('map');
@@ -518,8 +521,8 @@ function readWMC(text, merge) {
                           //      geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + "<br>" + "<img src='" + logo + "' style='max-width=16 max-height=16'>";
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
                                 geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
-                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
-                                geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + "<br><img src='" + leyenda + "' style='max-width=80; max-height=80'>";
+                                geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
+                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80; max-height=80'>";
                                 
                                 
                                 
