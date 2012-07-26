@@ -35,7 +35,7 @@ var pan_param = gup('pan');
 var area_param = gup('area');
 var distancia_param = gup('distancia');
 var visibilidad_switcher;
-var margen=50;
+var margen=0;
  
  
 var geobol_ArrayInfo1 = new Array();
@@ -191,31 +191,32 @@ if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
 
 //ancho_param = ancho_param - 240
 //ancho_param = ancho_param - 90 -width_leyenda;
-ancho_param = ancho_param  -width_leyenda;
+ancho_param = ancho_param-width_leyenda-20;
 alto_param = alto_param-140;
 top_mapa=40;
-top_Switch=alto_param;
+top_Switch=alto_param+top_mapa+15;
 width_Switch=ancho_param;
  
 height_leyenda=alto_param+100; 
-left_leyenda=ancho_param; 
-top_leyenda=top_mapa-40;
+left_leyenda=ancho_param+20; 
+top_leyenda=top_mapa;  //-40
 visibilidad_leyenda="visible";
 
 }  
  
- 
+ /*
  top_mapa=top_mapa+margen;
  top_Switch=top_Switch+margen;
  top_leyenda=top_leyenda+margen;
  top_Control=top_Control+margen;
  
- 
+ */
  
   
+document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
 
 
-document.write("<div style='position:absolute;top:" + top_mapa + "; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
+document.write("<div style='position:absolute;left=0;top:" + top_mapa + "; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
 document.write("<div style='top:" + top_Control + "' id='options' ><div id='output'></div>");
 
@@ -225,7 +226,6 @@ document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_Swit
 
 
 
-document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
 
 
 
