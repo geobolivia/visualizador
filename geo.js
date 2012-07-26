@@ -1,6 +1,6 @@
 // al 26 de julio 1100am
 
-//variables                          
+//variables    ---------                      
 var lon = -64;
 var lat = -16.5;
 var zoom = 5;
