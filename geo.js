@@ -533,6 +533,8 @@ function readWMC(text, merge) {
                             if (layer.attribution.logo != null) {
                                 logo = layer.attribution.logo.href;
                                 leyenda = layer.styles[0].legend.href;
+				leyenda = leyenda + "&legend_options=fontSize:9";
+//				leyenda = encodeURIComponent(leyenda);
                                 titulo = layer.attribution.title;
                                 pagweb = layer.attribution.href;
 
@@ -618,11 +620,16 @@ function gup(name) {
 
 //jjj=document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[4];
 //jjj.onclick = 
+/*
 function geobol() {
 var mielemento = document.getElementById('layerinfo').childNodes[0];
 mielemento.innerHTML = "xXxXxXxXx zZzZzZzZz";
 }
 
+function leyenda_urls(argum) {
+ var encodLeyenda = encodeURIComponent(argum);
+ return encodLeyenda;
+}
 
 /*************************
 function pruebaariel(a,b) {
