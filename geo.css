@@ -1,7 +1,8 @@
 /* al 26 de julio 1100am */
 
 #layerinfo {
-  position: absolute;
+ overflow:scroll; 
+ position: absolute;
   top: 300px;
   background-color: #e4ef84;
 }
@@ -22,7 +23,7 @@
 
 #layerswitcher {
 	
-	     overflow-y:scroll;
+	overflow:scroll;
         height:100;
         margin: 0 auto;
         color: white;
