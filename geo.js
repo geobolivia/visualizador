@@ -142,8 +142,8 @@ top_Switch=0;
 width_Switch=0;
  
 
-left_leyenda=ancho_param;
-top_leyenda=top_mapa-40;
+left_leyenda=ancho_param+20; 
+top_leyenda=top_mapa;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
@@ -161,8 +161,8 @@ top_mapa=40;
 top_Switch=0;
 width_Switch=0;
  
-left_leyenda=ancho_param;
-top_leyenda=top_mapa-40;
+left_leyenda=ancho_param+20;
+top_leyenda=top_mapa;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
