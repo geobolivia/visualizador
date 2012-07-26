@@ -532,7 +532,7 @@ function readWMC(text, merge) {
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
                                 geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
-                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80; max-height=80'>";
+                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + ">";
                                 
                                 
                                 
