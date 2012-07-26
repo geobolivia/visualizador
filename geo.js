@@ -1,3 +1,5 @@
+// al 26 de julio 1100am
+
 //variables                          
 var lon = -64;
 var lat = -16.5;
@@ -283,8 +285,10 @@ function init() {
 
     //Aqui se introdujo el parametro wmc_param que es el nombre del archivo wmc que viene en la url
 
+    // MIENTRAS NO ARREGLEMOS EL PROXY, PARA TRABAJAR DESCOMENTAR LAS LINEAS 278 Y 390, Y COMENTAR LA 279 Y LA 391
     OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
-    //OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
+    //OpenLayers.ProxyHost = "http://www-dev.geo.gob.bo/proxy/?url=";
+
     
     OpenLayers.Request.GET({
         url: wmc_param,
@@ -396,7 +400,8 @@ function readWMC(text, merge) {
 
     
     OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
-    //OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
+    //OpenLayers.ProxyHost = "http://www-dev.geo.gob.bo/proxy/?url=";
+
     var request = OpenLayers.Request.GET({
         url: "http://www.geo.gob.bo/geoserver/wms?service=WMS&version=1.1.0&request=GetCapabilities",
 
@@ -538,7 +543,7 @@ function readWMC(text, merge) {
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
                                 geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
-                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80; max-height=80'>";
+                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + ">";
                                 
                                 
                                 
