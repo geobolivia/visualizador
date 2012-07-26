@@ -110,7 +110,7 @@ ancho_param = ancho_param;
 alto_param = alto_param - 100;
 
 top_mapa=0;
-top_Switch=alto_param-38;  //58
+top_Switch=alto_param+top_mapa+10;
 
 
 width_Switch=ancho_param;
@@ -125,7 +125,7 @@ ancho_param = ancho_param;
 alto_param = alto_param - 140;
 top_mapa=40;
 //top_Switch=alto_param+48;
-top_Switch=alto_param;
+top_Switch=alto_param+top_mapa+10;
 width_Switch=ancho_param;
 visibilidad_leyenda="hidden";
 }
@@ -173,19 +173,20 @@ visibilidad_switcher="hidden";
 if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 
 
-hheight_leyenda=alto_param;
+height_leyenda=alto_param;
 //ancho_param = ancho_param - 90 -width_leyenda;
 ancho_param = ancho_param -width_leyenda;
 
 alto_param = alto_param-100;
 top_mapa=0;
-top_Switch=alto_param-40; // rev
+top_Switch=alto_param+top_mapa+10;
 width_Switch=ancho_param;
  
  
-left_leyenda=ancho_param; 
-top_leyenda=top_mapa-40;
+left_leyenda=ancho_param+20; 
+top_leyenda=top_mapa;
 visibilidad_leyenda="visible";
+visibilidad_switcher="visible";
 
 } 
  
