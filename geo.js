@@ -38,6 +38,7 @@ var area_param = gup('area');
 var distancia_param = gup('distancia');
 var visibilidad_switcher;
 var margen=0;
+var height_switcher;
  
  
 var geobol_ArrayInfo1 = new Array();
@@ -52,6 +53,7 @@ width_Switch=0;
 left_leyenda=0;
 top_leyenda=0;
 height_leyenda=0;
+height_switcher=0;
 visibilidad_leyenda="visible";
 visibilidad_switcher="visible";
 //----------
@@ -191,28 +193,25 @@ visibilidad_leyenda="visible";
 //esto es si existe el mapa y leyenda (111)
 if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
 
-//ancho_param = ancho_param - 240
-//ancho_param = ancho_param - 90 -width_leyenda;
-ancho_param = ancho_param-width_leyenda-20;
+ancho_param = ancho_param-width_leyenda;
 alto_param = alto_param-140;
+height_switcher=100;
 top_mapa=40;
-top_Switch=alto_param+top_mapa+15;
+top_Switch=alto_param+top_mapa+10;
 width_Switch=ancho_param;
  
 height_leyenda=alto_param+100; 
+
+
 left_leyenda=ancho_param+20; 
-top_leyenda=top_mapa;  //-40
+
+top_leyenda=top_mapa;   
 visibilidad_leyenda="visible";
+visibilidad_switcher="visible";
 
 }  
  
- /*
- top_mapa=top_mapa+margen;
- top_Switch=top_Switch+margen;
- top_leyenda=top_leyenda+margen;
- top_Control=top_Control+margen;
  
- */
  
   
 document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
