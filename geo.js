@@ -57,7 +57,7 @@ var geobol_ArrayInfo2 = new Array();
 //----------------------
 
 
-
+top_control=-82//-alto_param*0.1;
 
  //--------
 top_mapa=2;
@@ -71,6 +71,11 @@ height_leyenda=0;
 height_switcher=0;
 visibilidad_leyenda="visible";
 visibilidad_switcher="visible";
+
+left_mapa=0;
+
+
+
 //----------
 
 //ancho_param = ancho_param +100;
@@ -100,6 +105,7 @@ alto_param = alto_param - 2;
 top_mapa=0;
 top_Switch=0;
 width_Switch=0;
+left_mapa=0;
 visibilidad_leyenda="hidden";
 visibilidad_switcher="hidden"; 
 }
@@ -108,11 +114,16 @@ visibilidad_switcher="hidden";
 //esto es si existe el mapa y los controles (001)
 if (leyenda_param != "on" && capas_param != "on" && var_aux=="existe") {
  
-ancho_param = ancho_param;
+ 
+top_mapa=alto_param*0.04; 
+ 
+ancho_param = ancho_param-2;
 alto_param = alto_param - 40;
-top_mapa=40;
+
 top_Switch=0;
 width_Switch=0;
+
+
 visibilidad_leyenda="hidden";
 visibilidad_switcher="hidden"; 
 }
@@ -121,45 +132,78 @@ visibilidad_switcher="hidden";
 //esto es si existe el mapa y capas (010)
 if (leyenda_param != "on" && capas_param == "on" && var_aux!="existe") {
 
-ancho_param = ancho_param;
-alto_param = alto_param - 100;
+
+
+height_switch=alto_param*0.2;
+
+
 
 top_mapa=0;
-top_Switch=alto_param+top_mapa+10;
+top_switch=alto_param-height_switch+4
+width_switch=ancho_param;
+
+ancho_param = ancho_param;
+alto_param =alto_param - height_switch -0.15*height_switch ;
+left_switch=left_mapa;
 
 
 width_Switch=ancho_param;
 visibilidad_leyenda="hidden";
+ 
+visibilidad_switcher="visible";
+
+
 }
 
 
 //esto es si existe el mapa y capas (011)
 if (leyenda_param != "on" && capas_param == "on" && var_aux=="existe") {
 
-ancho_param = ancho_param;
-alto_param = alto_param - 140;
-top_mapa=40;
-//top_Switch=alto_param+48;
-top_Switch=alto_param+top_mapa+10;
-width_Switch=ancho_param;
+height_switch=alto_param*0.2;
+top_mapa=alto_param*0.04;  //40
+top_switch=alto_param-height_switch+4
+ 
+width_switch=ancho_param 
+height_leyenda=alto_param-alto_param*0.035; 
+
+ancho_param = ancho_param-2;
+ 
+alto_param =alto_param - height_switch -0.15*height_switch ;//+top_control
+
+width_switch=ancho_param;
+
+left_leyenda=ancho_param  ; 
+
+left_mapa=0;
+left_switch=left_mapa;
+ 
+
 visibilidad_leyenda="hidden";
+ visibilidad_switcher="visible";
 }
 
 //esto es si existe el mapa y capas (100)
 if (leyenda_param == "on" && capas_param != "on" && var_aux!="existe") {
 
-//ancho_param = ancho_param - 90 -width_leyenda;
-ancho_param = ancho_param -width_leyenda;
-
-alto_param = alto_param -2;
-top_mapa=2;
-top_Switch=0;
-width_Switch=0;
  
+top_mapa=0;
 
-left_leyenda=ancho_param+20; 
+top_switch=alto_param-height_switch+4
+
+width_leyenda=ancho_param-0.8*ancho_param;
+width_switch=ancho_param-width_leyenda;
+height_leyenda=alto_param; 
+
+ancho_param = ancho_param-width_leyenda;
+ 
+alto_param =alto_param;//+top_control
+
+left_leyenda=ancho_param  ; 
+
+left_mapa=0;
+ 
 top_leyenda=top_mapa;
-height_leyenda=alto_param;
+
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
 }
@@ -168,17 +212,28 @@ visibilidad_switcher="hidden";
 //esto es si existe el mapa y leyenda (101)
 if (leyenda_param == "on" && capas_param != "on" && var_aux=="existe") {
 
-//ancho_param = ancho_param - 90 -width_leyenda;
-ancho_param = ancho_param -width_leyenda;
 
-alto_param = alto_param - 40;
-top_mapa=40;
-top_Switch=0;
-width_Switch=0;
+height_switch=alto_param*0.2;
+top_mapa=alto_param*0.04;  //40
+
+
+width_leyenda=ancho_param-0.8*ancho_param;
+
+height_leyenda=alto_param-alto_param*0.035; 
+
+ancho_param = ancho_param-width_leyenda;
  
-left_leyenda=ancho_param+20;
-top_leyenda=top_mapa;
-height_leyenda=alto_param;
+alto_param =height_leyenda;//+top_control
+
+
+
+left_leyenda=ancho_param  ; 
+
+left_mapa=0;
+
+top_leyenda=top_mapa; 
+
+
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
 }
@@ -188,18 +243,29 @@ visibilidad_switcher="hidden";
 if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 
 
-height_leyenda=alto_param;
-//ancho_param = ancho_param - 90 -width_leyenda;
-ancho_param = ancho_param -width_leyenda;
+height_switch=alto_param*0.2;
+top_mapa=0;  //40
 
-alto_param = alto_param-100;
-top_mapa=0;
-top_Switch=alto_param+top_mapa+10;
-width_Switch=ancho_param;
+
+
+width_leyenda=ancho_param-0.8*ancho_param;
+width_switch=ancho_param-width_leyenda;
+height_leyenda=alto_param; 
+
+ancho_param = ancho_param-width_leyenda;
  
- 
-left_leyenda=ancho_param+20; 
-top_leyenda=top_mapa;
+alto_param =alto_param - height_switch ;//+top_control
+
+width_switch=ancho_param;
+
+left_leyenda=ancho_param  ; 
+
+left_mapa=0;
+left_switch=left_mapa;
+top_leyenda=top_mapa;  
+
+top_switch=alto_param ;
+
 visibilidad_leyenda="visible";
 visibilidad_switcher="visible";
 
@@ -209,10 +275,10 @@ visibilidad_switcher="visible";
 //esto es si existe el mapa y leyenda (111)
 if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
 
-var_aux=alto_param;
+
 height_switch=alto_param*0.2;
 top_mapa=alto_param*0.04;  //40
-top_control=-82//-alto_param*0.1;
+
 top_switch=alto_param-height_switch+4//+top_control;//-top_mapa; //+10
 
 
@@ -250,7 +316,7 @@ visibilidad_switcher="visible";
 document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
 
 
-document.write("<div style='position:absolute;left=0;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
+document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
 
 
