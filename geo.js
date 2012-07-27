@@ -13,16 +13,22 @@ var pagweb;
 
 var var_aux;
 var top_mapa;
-var width_Switch;
-var top_Switch;
+var width_switch;
+var top_switch;
 var top_Control;
 var width_Leyenda;
 var top_leyenda;
 var height_leyenda;
 var width_leyenda;
+var top_medidores;
+var left_mapa;
+var left_switch;
+width_leyenda=150; // 150
+//width_leyenda="10%"; // 150
 
 
-width_leyenda=150;
+
+
 top_Control=-70;
 var visibilidad_leyenda;
  
@@ -38,10 +44,20 @@ var area_param = gup('area');
 var distancia_param = gup('distancia');
 var visibilidad_switcher;
 var margen=0;
+var height_switch;
  
  
 var geobol_ArrayInfo1 = new Array();
 var geobol_ArrayInfo2 = new Array();
+
+//conversion a porcentaje
+//ancho_param_por=100;
+//width_leyenda_por=20; // 150
+
+//----------------------
+
+
+
 
  //--------
 top_mapa=2;
@@ -52,6 +68,7 @@ width_Switch=0;
 left_leyenda=0;
 top_leyenda=0;
 height_leyenda=0;
+height_switcher=0;
 visibilidad_leyenda="visible";
 visibilidad_switcher="visible";
 //----------
@@ -140,8 +157,8 @@ top_Switch=0;
 width_Switch=0;
  
 
-left_leyenda=ancho_param;
-top_leyenda=top_mapa-40;
+left_leyenda=ancho_param+20; 
+top_leyenda=top_mapa;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
@@ -159,8 +176,8 @@ top_mapa=40;
 top_Switch=0;
 width_Switch=0;
  
-left_leyenda=ancho_param;
-top_leyenda=top_mapa-40;
+left_leyenda=ancho_param+20;
+top_leyenda=top_mapa;
 height_leyenda=alto_param;
 visibilidad_leyenda="visible";
 visibilidad_switcher="hidden"; 
@@ -192,43 +209,56 @@ visibilidad_switcher="visible";
 //esto es si existe el mapa y leyenda (111)
 if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
 
-//ancho_param = ancho_param - 240
-//ancho_param = ancho_param - 90 -width_leyenda;
-ancho_param = ancho_param-width_leyenda-20;
-alto_param = alto_param-140;
-top_mapa=40;
-top_Switch=alto_param+top_mapa+15;
-width_Switch=ancho_param;
+var_aux=alto_param;
+height_switch=alto_param*0.2;
+top_mapa=alto_param*0.04;  //40
+top_control=-82//-alto_param*0.1;
+top_switch=alto_param-height_switch+4//+top_control;//-top_mapa; //+10
+
+
+
+//top_medidores="90%";
+width_leyenda=ancho_param-0.8*ancho_param;
+//top_switch=alto_param-height_switch+top_control ; //(alto_param-height_switcher+top_medidores) ; //alto_param+top_mapa+top_medidores;  //+10
+width_switch=ancho_param-width_leyenda;
+height_leyenda=alto_param-alto_param*0.035; 
+
+
+ancho_param = ancho_param-width_leyenda;
+//alto_param = height_leyenda-height_switch-top_control;  //alto_param-140;
  
-height_leyenda=alto_param+100; 
-left_leyenda=ancho_param+20; 
-top_leyenda=top_mapa;  //-40
+alto_param =alto_param - height_switch -0.15*height_switch ;//+top_control
+
+width_switch=ancho_param;
+
+left_leyenda=ancho_param  ; //left_leyenda=ancho_param+20; 
+
+left_mapa=0;
+left_switch=left_mapa;
+top_leyenda=top_mapa;   
 visibilidad_leyenda="visible";
+visibilidad_switcher="visible";
 
 }  
  
- /*
- top_mapa=top_mapa+margen;
- top_Switch=top_Switch+margen;
- top_leyenda=top_leyenda+margen;
- top_Control=top_Control+margen;
  
- */
+ 
+ 
+ 
  
   
 document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
 
 
-document.write("<div style='position:absolute;left=0;top:" + top_mapa + "; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
-
-document.write("<div style='top:" + top_Control + "' id='options' ><div id='output'></div>");
-
-document.write("<div style='top:" + "30" + "; width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
-
-document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_Switch + ";height:100;width:" + width_Switch + "' id='layerinfo'> </div>");
+document.write("<div style='position:absolute;left=0;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
 
 
+document.write("<div style='width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
+
+document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_switch + "; left:" + left_switch+ " ;height:" + height_switch + " ; width:" + width_switch + "' id='layerinfo'> </div>");
+
+document.write("<div style='position:absolute;top:" + top_control + "' id='options' ><div id='output'></div>");
 
 
 
@@ -357,7 +387,6 @@ function readWMC(text, merge) {
 
 
                 nombre = map.layers[i].name;
-//		nombre = "<div class='titulo layerinfo'>" + nombre + "</div>";
                 
                 nombreLayer = map.layers[i].params.LAYERS
 
