@@ -357,7 +357,7 @@ function readWMC(text, merge) {
 
 
                 nombre = map.layers[i].name;
-		nombre = "<div class='titulo layerinfo'>" + nombre + "</div>";
+//		nombre = "<div class='titulo layerinfo'>" + nombre + "</div>";
                 
                 nombreLayer = map.layers[i].params.LAYERS
 
@@ -365,7 +365,7 @@ function readWMC(text, merge) {
                 if (map.layers[i].metadataURL != undefined) {
 		    var metadato = map.layers[i].metadataURL;
                     //var metadato = map.layers[i].metadataURL;
-                    metadato = "<BR> <a href=" + metadato + " target='_blank' >metadato</a>";
+                    metadato = "<a href=" + metadato + " target='_blank' >metadato</a>";
 		    nombremetadat = nombre + metadato;
 		    geobol_ArrayInfo1[i] = nombremetadat;
                     geobol_ArrayInfo2[i] = nombre;
@@ -547,13 +547,12 @@ function readWMC(text, merge) {
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
                                 geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
-                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "'>";
+//                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<img src='" + leyenda + "'>";
+				leyenda = "<img src='" + leyenda + "'>";
                                 
                                 
-                                
-                                
-                                
-				map.layers[i].name = geobol_ArrayInfo2[i];				
+// EN LA SGTE LINEA SE LE ASIGNA EL STRING HTML FORMADO AL LABEL DEL FRAMESWITCHER                                
+				map.layers[i].name = geobol_ArrayInfo2[i];
 				mivar2 = mivar2 + geobol_ArrayInfo1[i] + "</p>";
 				
 //	********	DESCOMENTAR LO Q SIGUE PARA VOLVER A LO ANTERIOR
@@ -570,7 +569,9 @@ document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[
 document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo1[i];
 */
 document.getElementById('layerinfo').innerHTML = mivar2;
-document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo2[i];
+
+// LA SIGUIENTE LINEA DE CODIGO ES REDUNDANTE A "map.layers[i].name = geobol_ArrayInfo2[i];" Y ES UN ARTIFICIO PARA QUE PERSISTA LA "INYECCIÓN DOM" DEL GRAFICO DE LA LEYENDA DENTRO DE LOS LABELS DEL LAYERSWITCHER
+//document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo2[i];
 
 
 /*
