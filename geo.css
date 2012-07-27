@@ -1,14 +1,5 @@
 /* al 26 de julio 1100am */
 
-.titulo {
-  
-}
-
-.layerinfo {
-  
-}
-
-
 #layerinfo {
  overflow:scroll; 
  position: absolute;
@@ -19,7 +10,7 @@
 #ll_mouse {
  
  position: absolute;
-  top: 340px;
+  top: 95%;
   font-size: 90%;
   background-color: #e4ef84;
 }
