@@ -359,7 +359,7 @@ document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_swit
 document.write("<div style='position:absolute;top:" + top_control + "' id='options' ><div id='output'></div>");
 
 //enlace a GeoBolivia 
-document.write("<div id='Enlace' class='olControlPermalink olControlNoSelect' style='position:absolute;left:" + left_mapa+ " ; top:" + top_permalink + "' unselectable='on'><a href='http://www.geo.gob.bo'>GeoBolivia (Infraestructura de Datos Espaciales)</a></div>");
+document.write("<div id='Enlace' class='olControlPermalink olControlNoSelect' style='position:absolute;left:" + left_mapa+ " ; top:" + top_permalink + "' unselectable='on'><a href='http://www.geo.gob.bo' target='_blank' >GeoBolivia (Infraestructura de Datos Espaciales)</a></div>");
 
 
 
