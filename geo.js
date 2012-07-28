@@ -56,6 +56,7 @@ var height_switch;
  
 var geobol_ArrayInfo1 = new Array();
 var geobol_ArrayInfo2 = new Array();
+var geobol_leyenda = new Array();
 
 
 altocapas_param=altocapas_param/100;
@@ -649,7 +650,7 @@ function readWMC(text, merge) {
                             if (layer.attribution.logo != null) {
                                 logo = layer.attribution.logo.href;
                                 leyenda = layer.styles[0].legend.href;
-				leyenda = leyenda + "&legend_options=fontSize:9";
+				geobol_leyenda[i] = leyenda + "&legend_options=fontSize:9";
 //				leyenda = encodeURIComponent(leyenda);
                                 titulo = layer.attribution.title;
                                 pagweb = layer.attribution.href;
@@ -662,13 +663,13 @@ function readWMC(text, merge) {
                                 geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
 //                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<img src='" + leyenda + "'>";
-				leyenda = "<img src='" + leyenda + "'>";
+//				geobol_leyenda[i] = "<img src='" + leyenda + "'>";
                                 
                                 
 // EN LA SGTE LINEA SE LE ASIGNA EL STRING HTML FORMADO AL LABEL DEL FRAMESWITCHER                                
 				map.layers[i].name = geobol_ArrayInfo2[i];
 				mivar2 = mivar2 + geobol_ArrayInfo1[i] + "</p>";
-				
+				geobolivia_leyenda(geobol_leyenda[i],i);
 //	********	DESCOMENTAR LO Q SIGUE PARA VOLVER A LO ANTERIOR
 /*                                map.layers[i].name = map.layers[i].name + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 map.layers[i].name = map.layers[i].name + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
@@ -734,6 +735,16 @@ function gup(name) {
     if (results == null) return "";
     else return results[1];
 }
+
+function geobolivia_leyenda(x,y) {
+  var mi_img = document.createElement("img");
+  var img_padre = document.getElementById("layerswitcher").childNodes[1].childNodes[3];
+  var img_hijos = img_padre.getElementsByTagName("br");
+  mi_img.setAttribute("src",x);
+  //return mi_img;
+  img_padre.insertBefore(mi_img,img_hijos[y]);
+}
+
 
 // PARA IR TRABAJANDO EN UN CODIGO JS QUE NOS PERMITA PARSEAR URLS PARA AÑADIR O QUITAR PARAMETROS!!! ...stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript
 
