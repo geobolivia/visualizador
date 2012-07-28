@@ -379,14 +379,14 @@ if (pan_param == "on" || distancia_param == "on" || area_param == "on") {
 
 if (distancia_param == "on") {
 
-    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/img/measuring-stick-on.png' onClick='btn1Click()'>");
+    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/ruler.png' onClick='btn1Click()'>");
 
 }
 
 
 if (area_param == "on") {
 
-    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_on.png' onClick='btn2Click()'>");
+    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_polygon_on.png' onClick='btn2Click()'>");
 
 }
 
