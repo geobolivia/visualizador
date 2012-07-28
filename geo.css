@@ -10,10 +10,10 @@
 #ll_mouse {
  
  position: absolute;
-  top: 95%;
   font-size: 92%;
   background-color: #e4ef84;
   font-weight:bold;
+   
 }
 
 .olControlLayerSwitcher {

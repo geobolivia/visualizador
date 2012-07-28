@@ -57,7 +57,7 @@ var height_switch;
 var geobol_ArrayInfo1 = new Array();
 var geobol_ArrayInfo2 = new Array();
 var geobol_leyenda = new Array();
-
+ 
 
 altocapas_param=altocapas_param/100;
 largoleyenda_param=largoleyenda_param/100;
@@ -87,7 +87,7 @@ visibilidad_switcher="visible";
 left_mapa=0;
 
 
-
+  
 //----------
 
 //ancho_param = ancho_param +100;
@@ -221,6 +221,7 @@ left_leyenda=ancho_param  ;
 
 left_mapa=0;
  
+ 
 top_leyenda=top_mapa;
 
 visibilidad_leyenda="visible";
@@ -241,11 +242,11 @@ top_mapa=alto_param*0.04;  //40
 width_leyenda=ancho_param*largoleyenda_param;
 
 
-height_leyenda=alto_param-alto_param*0.035; 
+height_leyenda=alto_param; 
 
 ancho_param = ancho_param-width_leyenda;
  
-alto_param =height_leyenda;//+top_control
+alto_param =alto_param-alto_param*0.035; ;//+top_control
 
 
 
@@ -253,7 +254,8 @@ left_leyenda=ancho_param  ;
 
 left_mapa=0;
 
-top_leyenda=top_mapa; 
+//top_leyenda=top_mapa; 
+top_leyenda=0; 
 
 
 visibilidad_leyenda="visible";
@@ -268,9 +270,7 @@ if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 height_switch=alto_param*altocapas_param ;
 top_mapa=0; 
 
-
-
-//width_leyenda=ancho_param-0.8*ancho_param;
+ 
 
 width_leyenda=ancho_param*largoleyenda_param;
 
@@ -287,7 +287,7 @@ left_leyenda=ancho_param  ;
 
 left_mapa=0;
 left_switch=left_mapa;
-top_leyenda=top_mapa;  
+top_leyenda=0;  
 
 top_switch=alto_param ;
 
@@ -318,7 +318,7 @@ width_leyenda=ancho_param*largoleyenda_param;
 
  
 width_switch=ancho_param-width_leyenda;
-height_leyenda=alto_param-alto_param*0.035; 
+height_leyenda=alto_param//-alto_param*0.035; 
 
 
 ancho_param = ancho_param-width_leyenda;
@@ -333,7 +333,7 @@ left_leyenda=ancho_param  ; //left_leyenda=ancho_param+20;
 
 left_mapa=0;
 left_switch=left_mapa;
-top_leyenda=top_mapa;   
+top_leyenda=0;   
 visibilidad_leyenda="visible";
 visibilidad_switcher="visible";
 
@@ -341,7 +341,7 @@ visibilidad_switcher="visible";
  
  
 top_permalink=alto_param+0.05* alto_param;
- 
+
  
  
   
@@ -355,6 +355,10 @@ document.write("<div style='top:5 ; width:" + "200" + "; left:" + "110"+ ";' id=
 
 
 document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_switch + "; left:" + left_switch+ " ;height:" + height_switch + " ; width:" + width_switch + "' id='layerinfo'> </div>");
+
+
+
+
 
 document.write("<div style='position:absolute;top:" + top_control + "' id='options' ><div id='output'></div>");
 
