@@ -4,15 +4,16 @@
  overflow:auto; 
  position: absolute;
   top: 300px;
-  background-color: #e4ef84;
+  opacity:0;
 }
 
 #ll_mouse {
  
  position: absolute;
   font-size: 92%;
-  background-color: #e4ef84;
+  background-color: #ffffff;
   font-weight:bold;
+  color:darkblue
    
 }
 
@@ -35,12 +36,11 @@
         margin: 0 auto;
         color: white;
         background-color:#eb9f10;
+        opacity: 0.6;
         position:absolute;
-	     left:0px;
+	left:0px;
         width: 640px;
-         
-        
-                
+      
 }
 #layerswitcher2 {
         left: 500px;
@@ -55,10 +55,7 @@
 
 
 
-
-
-
-            #wmc {
+    #wmc {
                 width: 190%;
                 height: 600px;
             }

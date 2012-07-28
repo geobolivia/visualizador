@@ -374,7 +374,7 @@ document.write("<div id='Enlace' class='olControlPermalink olControlNoSelect' st
 if (pan_param == "on" || distancia_param == "on" || area_param == "on") {
 
     document.write("<div id='pan' style='visibility:hidden;'><input type='radio' name='type' value='none' id='noneToggle' onclick='toggleControl(this);' checked='checked' /><label for='noneToggle'>Navegar</label></div>");
-    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/pan_on.png' onClick='btn3Click()'>");
+    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/pan_off.png' onClick='btn3Click()'>");
 
 } else {
     document.write("<div id='pan' style='visibility:hidden;'><input type='radio' name='type' value='none' id='noneToggle' onclick='toggleControl(this);' checked='checked' /><label for='noneToggle'>Navegar</label></div>");
@@ -390,7 +390,7 @@ if (distancia_param == "on") {
 
 if (area_param == "on") {
 
-    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_polygon_on.png' onClick='btn2Click()'>");
+    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_polygon_off.png' onClick='btn2Click()'>");
 
 }
 
