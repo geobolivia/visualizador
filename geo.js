@@ -348,7 +348,7 @@ top_permalink=alto_param+0.05* alto_param;
 document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
 
 
-document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
+document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + " ; padding:10px' id='map'></div>");
 
 
 document.write("<div style='top:5 ; width:" + "200" + "; left:" + "110"+ ";' id='medidores'> </div>");
@@ -500,7 +500,7 @@ function readWMC(text, merge) {
                 if (map.layers[i].metadataURL != undefined) {
 		    var metadato = map.layers[i].metadataURL;
                     //var metadato = map.layers[i].metadataURL;
-                    metadato = "<a href=" + metadato + " target='_blank' >metadato</a>";
+                    metadato = "<a href=" + metadato + " target='_blank' > metadato</a>";
 		    nombremetadat = nombre + metadato;
 		    geobol_ArrayInfo1[i] = nombremetadat;
                     geobol_ArrayInfo2[i] = nombre;

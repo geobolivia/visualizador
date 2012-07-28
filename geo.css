@@ -1,10 +1,14 @@
 /* al 26 de julio 1100am */
 
+body { background-color: transparent;}
 #layerinfo {
  overflow:auto; 
  position: absolute;
-  top: 300px;
-  opacity:0;
+
+  background-color: transparent;
+   
+  padding: 10px;
+ 
 }
 
 #ll_mouse {
@@ -34,12 +38,13 @@
 	overflow:auto;
         height:100;
         margin: 0 auto;
-        color: white;
-        background-color:#eb9f10;
-        opacity: 0.6;
+        color: #003a6b;
+        background-color: transparent;
+         
         position:absolute;
 	left:0px;
         width: 640px;
+        padding: 10px;
       
 }
 #layerswitcher2 {
@@ -163,3 +168,5 @@
           height: 18px;
           background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/zoom-world-mini.png");
         }
+
+
