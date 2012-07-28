@@ -351,7 +351,7 @@ document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyen
 document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
 
-document.write("<div style='width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
+document.write("<div style='top:5 ; width:" + "200" + "; left:" + "110"+ ";' id='medidores'> </div>");
 
 
 document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_switch + "; left:" + left_switch+ " ;height:" + height_switch + " ; width:" + width_switch + "' id='layerinfo'> </div>");
