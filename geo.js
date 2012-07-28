@@ -765,6 +765,11 @@ function geobolivia_leyenda(x,y) {
   img_padre.insertBefore(mi_img,img_hijos[y]);
 }
 
+function geobolivia_leyenda2() {
+              for (var i = 1; i < map.layers.length; i++) {
+		geobolivia_leyenda(geobol_leyenda[i],i);
+	      }
+}
 
 // PARA IR TRABAJANDO EN UN CODIGO JS QUE NOS PERMITA PARSEAR URLS PARA AÑADIR O QUITAR PARAMETROS!!! ...stackoverflow.com/questions/486896/adding-a-parameter-to-the-url-with-javascript
 
