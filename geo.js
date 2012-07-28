@@ -48,7 +48,7 @@ var largoleyenda_param = gup('largoleyenda');
 
 
 
-
+var top_permalink;
 var visibilidad_switcher;
 var margen=0;
 var height_switch;
@@ -340,7 +340,7 @@ visibilidad_switcher="visible";
 }  
  
  
- 
+top_permalink=alto_param+0.05* alto_param;
  
  
  
@@ -353,14 +353,13 @@ document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + lef
 
 document.write("<div style='width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
 
+
 document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_switch + "; left:" + left_switch+ " ;height:" + height_switch + " ; width:" + width_switch + "' id='layerinfo'> </div>");
 
 document.write("<div style='position:absolute;top:" + top_control + "' id='options' ><div id='output'></div>");
 
-
-document.write("<div style='width:" + "200" + "; left:" + "110"+ ";' id='enlace'> </div>");
-
-
+//enlace a GeoBolivia 
+document.write("<div id='Enlace' class='olControlPermalink olControlNoSelect' style='position:absolute;left:" + left_mapa+ " ; top:" + top_permalink + "' unselectable='on'><a href='http://www.geo.gob.bo'>GeoBolivia (Infraestructura de Datos Espaciales)</a></div>");
 
 
 
