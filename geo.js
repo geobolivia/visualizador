@@ -42,6 +42,13 @@ var wmc_param = gup('wmc');
 var pan_param = gup('pan');
 var area_param = gup('area');
 var distancia_param = gup('distancia');
+
+var altocapas_param = gup('altocapas');
+var largoleyenda_param = gup('largoleyenda');
+
+
+
+
 var visibilidad_switcher;
 var margen=0;
 var height_switch;
@@ -50,9 +57,13 @@ var height_switch;
 var geobol_ArrayInfo1 = new Array();
 var geobol_ArrayInfo2 = new Array();
 
-//conversion a porcentaje
-//ancho_param_por=100;
-//width_leyenda_por=20; // 150
+
+altocapas_param=altocapas_param/100;
+largoleyenda_param=largoleyenda_param/100;
+
+
+
+
 
 //----------------------
 
@@ -134,7 +145,7 @@ if (leyenda_param != "on" && capas_param == "on" && var_aux!="existe") {
 
 
 
-height_switch=alto_param*0.2;
+height_switch=alto_param*altocapas_param ;
 
 
 
@@ -143,7 +154,10 @@ top_switch=alto_param-height_switch+4
 width_switch=ancho_param;
 
 ancho_param = ancho_param;
-alto_param =alto_param - height_switch -0.15*height_switch ;
+
+
+alto_param =alto_param - height_switch
+
 left_switch=left_mapa;
 
 
@@ -159,7 +173,7 @@ visibilidad_switcher="visible";
 //esto es si existe el mapa y capas (011)
 if (leyenda_param != "on" && capas_param == "on" && var_aux=="existe") {
 
-height_switch=alto_param*0.2;
+height_switch=alto_param*altocapas_param ;
 top_mapa=alto_param*0.04;  //40
 top_switch=alto_param-height_switch+4
  
@@ -168,7 +182,9 @@ height_leyenda=alto_param-alto_param*0.035;
 
 ancho_param = ancho_param-2;
  
-alto_param =alto_param - height_switch -0.15*height_switch ;//+top_control
+ var_aux= 83.3333 *altocapas_param -16.6667;
+alto_param =alto_param - height_switch -0.15*height_switch  + var_aux ;// esta se aumento
+
 
 width_switch=ancho_param;
 
@@ -243,8 +259,8 @@ visibilidad_switcher="hidden";
 if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 
 
-height_switch=alto_param*0.2;
-top_mapa=0;  //40
+height_switch=alto_param*altocapas_param ;
+top_mapa=0; 
 
 
 
@@ -276,14 +292,16 @@ visibilidad_switcher="visible";
 if (leyenda_param == "on" && capas_param == "on" && var_aux=="existe") {
 
 
-height_switch=alto_param*0.2;
-top_mapa=alto_param*0.04;  //40
+//height_switch=alto_param*altocapas_param ;
+height_switch=alto_param*altocapas_param ;
 
-top_switch=alto_param-height_switch+4//+top_control;//-top_mapa; //+10
+top_mapa=alto_param*0.04;  
 
 
 
-//top_medidores="90%";
+top_switch=alto_param-height_switch+4  ; //var_aux
+
+
 width_leyenda=ancho_param-0.8*ancho_param;
 //top_switch=alto_param-height_switch+top_control ; //(alto_param-height_switcher+top_medidores) ; //alto_param+top_mapa+top_medidores;  //+10
 width_switch=ancho_param-width_leyenda;
@@ -291,9 +309,10 @@ height_leyenda=alto_param-alto_param*0.035;
 
 
 ancho_param = ancho_param-width_leyenda;
-//alto_param = height_leyenda-height_switch-top_control;  //alto_param-140;
  
-alto_param =alto_param - height_switch -0.15*height_switch ;//+top_control
+ 
+ var_aux= 83.3333 *altocapas_param -16.6667;
+alto_param =alto_param - height_switch -0.15*height_switch  + var_aux ;// esta se aumento
 
 width_switch=ancho_param;
 
