@@ -207,7 +207,9 @@ top_mapa=0;
 
 top_switch=alto_param-height_switch+4
 
-width_leyenda=ancho_param-0.8*ancho_param;
+//width_leyenda=ancho_param-0.8*ancho_param;
+width_leyenda=ancho_param*largoleyenda_param;
+
 width_switch=ancho_param-width_leyenda;
 height_leyenda=alto_param; 
 
@@ -234,7 +236,10 @@ height_switch=alto_param*0.2;
 top_mapa=alto_param*0.04;  //40
 
 
-width_leyenda=ancho_param-0.8*ancho_param;
+//width_leyenda=ancho_param-0.8*ancho_param;
+
+width_leyenda=ancho_param*largoleyenda_param;
+
 
 height_leyenda=alto_param-alto_param*0.035; 
 
@@ -265,7 +270,10 @@ top_mapa=0;
 
 
 
-width_leyenda=ancho_param-0.8*ancho_param;
+//width_leyenda=ancho_param-0.8*ancho_param;
+
+width_leyenda=ancho_param*largoleyenda_param;
+
 width_switch=ancho_param-width_leyenda;
 height_leyenda=alto_param; 
 
@@ -303,8 +311,12 @@ top_mapa=alto_param*0.04;
 top_switch=alto_param-height_switch+4  ; //var_aux
 
 
-width_leyenda=ancho_param-0.8*ancho_param;
-//top_switch=alto_param-height_switch+top_control ; //(alto_param-height_switcher+top_medidores) ; //alto_param+top_mapa+top_medidores;  //+10
+//width_leyenda=ancho_param-0.8*ancho_param;
+
+
+width_leyenda=ancho_param*largoleyenda_param;
+
+ 
 width_switch=ancho_param-width_leyenda;
 height_leyenda=alto_param-alto_param*0.035; 
 
@@ -339,12 +351,17 @@ document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyen
 document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
 
 
-
 document.write("<div style='width:" + "200" + "; left:" + "90"+ ";' id='medidores'> </div>");
 
 document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_switch + "; left:" + left_switch+ " ;height:" + height_switch + " ; width:" + width_switch + "' id='layerinfo'> </div>");
 
 document.write("<div style='position:absolute;top:" + top_control + "' id='options' ><div id='output'></div>");
+
+
+document.write("<div style='width:" + "200" + "; left:" + "110"+ ";' id='enlace'> </div>");
+
+
+
 
 
 
@@ -534,6 +551,9 @@ function readWMC(text, merge) {
 
 
 
+//comentario de Geobolivia
+
+
 
 
 
@@ -721,8 +741,9 @@ jjj.onclick = geobol();
 
     )
 
-    //  alert(leyenda);
-
+         
+    
+ 
 }
 
 

@@ -1,4 +1,4 @@
-/*	al 27 de julio 1836 pm	*/
+/* al 26 de julio 1100am */
 
 #layerinfo {
  overflow:auto; 
@@ -99,9 +99,14 @@
         #medidores {
             float: left;
             position: absolute
+            
         }     
      
-     
+        #enlace {
+            float: left;
+            position: absolute
+            
+        }
      
      
      
