@@ -397,7 +397,7 @@ function init() {
     elem=document.body;
 //    elem.style.background-color="red";
   
-    alturaSwitch = 300;
+ 
 
     map = new OpenLayers.Map('map');
 
