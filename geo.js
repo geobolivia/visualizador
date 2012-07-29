@@ -766,7 +766,7 @@ function geobolivia_leyenda(x,y) {
 }
 
 function geobolivia_leyenda2() {
-              for (var i = 1; i < map.layers.length; i++) {
+              for (var i = 0; i < map.layers.length; i++) {
 		geobolivia_leyenda(geobol_leyenda[i],i);
 	      }
 }
