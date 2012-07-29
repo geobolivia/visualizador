@@ -1,19 +1,24 @@
 /* al 26 de julio 1100am */
 
+body { background-color: transparent;}
 #layerinfo {
  overflow:auto; 
  position: absolute;
-  top: 300px;
-  background-color: #e4ef84;
+
+  background-color: transparent;
+   
+  padding: 10px;
+ 
 }
 
 #ll_mouse {
  
  position: absolute;
-  top: 95%;
   font-size: 92%;
-  background-color: #e4ef84;
+  background-color: #ffffff;
   font-weight:bold;
+  color:darkblue
+   
 }
 
 .olControlLayerSwitcher {
@@ -33,14 +38,14 @@
 	overflow:auto;
         height:100;
         margin: 0 auto;
-        color: white;
-        background-color:#eb9f10;
-        position:absolute;
-	     left:0px;
-        width: 640px;
+        color: #003a6b;
+        background-color: transparent;
          
-        
-                
+        position:absolute;
+	left:0px;
+        width: 640px;
+        padding: 10px;
+      
 }
 #layerswitcher2 {
         left: 500px;
@@ -55,10 +60,7 @@
 
 
 
-
-
-
-            #wmc {
+    #wmc {
                 width: 190%;
                 height: 600px;
             }
@@ -105,9 +107,6 @@
      
 
      
-     
-     
-                
          
       div.olControlMousePosition {
 
@@ -166,3 +165,5 @@
           height: 18px;
           background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/zoom-world-mini.png");
         }
+
+

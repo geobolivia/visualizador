@@ -57,7 +57,7 @@ var height_switch;
 var geobol_ArrayInfo1 = new Array();
 var geobol_ArrayInfo2 = new Array();
 var geobol_leyenda = new Array();
-
+ 
 
 altocapas_param=altocapas_param/100;
 largoleyenda_param=largoleyenda_param/100;
@@ -87,7 +87,7 @@ visibilidad_switcher="visible";
 left_mapa=0;
 
 
-
+  
 //----------
 
 //ancho_param = ancho_param +100;
@@ -221,6 +221,7 @@ left_leyenda=ancho_param  ;
 
 left_mapa=0;
  
+ 
 top_leyenda=top_mapa;
 
 visibilidad_leyenda="visible";
@@ -241,11 +242,11 @@ top_mapa=alto_param*0.04;  //40
 width_leyenda=ancho_param*largoleyenda_param;
 
 
-height_leyenda=alto_param-alto_param*0.035; 
+height_leyenda=alto_param; 
 
 ancho_param = ancho_param-width_leyenda;
  
-alto_param =height_leyenda;//+top_control
+alto_param =alto_param-alto_param*0.035; ;//+top_control
 
 
 
@@ -253,7 +254,8 @@ left_leyenda=ancho_param  ;
 
 left_mapa=0;
 
-top_leyenda=top_mapa; 
+//top_leyenda=top_mapa; 
+top_leyenda=0; 
 
 
 visibilidad_leyenda="visible";
@@ -268,9 +270,7 @@ if (leyenda_param == "on" && capas_param == "on" && var_aux!="existe") {
 height_switch=alto_param*altocapas_param ;
 top_mapa=0; 
 
-
-
-//width_leyenda=ancho_param-0.8*ancho_param;
+ 
 
 width_leyenda=ancho_param*largoleyenda_param;
 
@@ -287,7 +287,7 @@ left_leyenda=ancho_param  ;
 
 left_mapa=0;
 left_switch=left_mapa;
-top_leyenda=top_mapa;  
+top_leyenda=0;  
 
 top_switch=alto_param ;
 
@@ -318,7 +318,7 @@ width_leyenda=ancho_param*largoleyenda_param;
 
  
 width_switch=ancho_param-width_leyenda;
-height_leyenda=alto_param-alto_param*0.035; 
+height_leyenda=alto_param//-alto_param*0.035; 
 
 
 ancho_param = ancho_param-width_leyenda;
@@ -333,7 +333,7 @@ left_leyenda=ancho_param  ; //left_leyenda=ancho_param+20;
 
 left_mapa=0;
 left_switch=left_mapa;
-top_leyenda=top_mapa;   
+top_leyenda=0;   
 visibilidad_leyenda="visible";
 visibilidad_switcher="visible";
 
@@ -341,20 +341,24 @@ visibilidad_switcher="visible";
  
  
 top_permalink=alto_param+0.05* alto_param;
- 
+
  
  
   
 document.write("<div style='visibility:"+visibilidad_leyenda+";top:" + top_leyenda + ";height:" + height_leyenda + ";width:" + width_leyenda + ";left:" + left_leyenda + ";' id='layerswitcher'> </div>");
 
 
-document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + "' id='map'></div>");
+document.write("<div style='position:absolute;top:" + top_mapa + "; left:" + left_mapa+ " ; width:" + ancho_param + "  ; height:" + alto_param + " ; padding:10px' id='map'></div>");
 
 
 document.write("<div style='top:5 ; width:" + "200" + "; left:" + "110"+ ";' id='medidores'> </div>");
 
 
 document.write("<div style='visibility:"+visibilidad_switcher+";top:" + top_switch + "; left:" + left_switch+ " ;height:" + height_switch + " ; width:" + width_switch + "' id='layerinfo'> </div>");
+
+
+
+
 
 document.write("<div style='position:absolute;top:" + top_control + "' id='options' ><div id='output'></div>");
 
@@ -370,7 +374,7 @@ document.write("<div id='Enlace' class='olControlPermalink olControlNoSelect' st
 if (pan_param == "on" || distancia_param == "on" || area_param == "on") {
 
     document.write("<div id='pan' style='visibility:hidden;'><input type='radio' name='type' value='none' id='noneToggle' onclick='toggleControl(this);' checked='checked' /><label for='noneToggle'>Navegar</label></div>");
-    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/pan_on.png' onClick='btn3Click()'>");
+    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/pan_off.png' onClick='btn3Click()'>");
 
 } else {
     document.write("<div id='pan' style='visibility:hidden;'><input type='radio' name='type' value='none' id='noneToggle' onclick='toggleControl(this);' checked='checked' /><label for='noneToggle'>Navegar</label></div>");
@@ -386,7 +390,7 @@ if (distancia_param == "on") {
 
 if (area_param == "on") {
 
-    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_polygon_on.png' onClick='btn2Click()'>");
+    document.write(" <img name='image1' src='http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_polygon_off.png' onClick='btn2Click()'>");
 
 }
 
@@ -496,7 +500,7 @@ function readWMC(text, merge) {
                 if (map.layers[i].metadataURL != undefined) {
 		    var metadato = map.layers[i].metadataURL;
                     //var metadato = map.layers[i].metadataURL;
-                    metadato = "<a href=" + metadato + " target='_blank' >metadato</a>";
+                    metadato = "<a href=" + metadato + " target='_blank' > Metadato</a>";
 		    nombremetadat = nombre + metadato;
 		    geobol_ArrayInfo1[i] = nombremetadat;
                     geobol_ArrayInfo2[i] = nombre;
@@ -679,7 +683,7 @@ function readWMC(text, merge) {
                            //     geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                           //      geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + "<br>" + "<img src='" + logo + "' style='max-width=16 max-height=16'>";
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
-                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + " " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
 //                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<img src='" + leyenda + "'>";
 //				geobol_leyenda[i] = "<img src='" + leyenda + "'>";
