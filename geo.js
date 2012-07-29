@@ -500,7 +500,7 @@ function readWMC(text, merge) {
                 if (map.layers[i].metadataURL != undefined) {
 		    var metadato = map.layers[i].metadataURL;
                     //var metadato = map.layers[i].metadataURL;
-                    metadato = "<a href=" + metadato + " target='_blank' > metadato</a>";
+                    metadato = "<a href=" + metadato + " target='_blank' > Metadato</a>";
 		    nombremetadat = nombre + metadato;
 		    geobol_ArrayInfo1[i] = nombremetadat;
                     geobol_ArrayInfo2[i] = nombre;
@@ -683,7 +683,7 @@ function readWMC(text, merge) {
                            //     geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                           //      geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + "<br>" + "<img src='" + logo + "' style='max-width=16 max-height=16'>";
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
-                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "<br>" + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + " " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
 //                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<img src='" + leyenda + "'>";
 //				geobol_leyenda[i] = "<img src='" + leyenda + "'>";
