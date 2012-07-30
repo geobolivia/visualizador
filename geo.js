@@ -537,7 +537,7 @@ function readWMC(text, merge) {
 
     
     OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
-    //OpenLayers.ProxyHost = "http://www-dev.geo.gob.bo/proxy/?url=";
+    //OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
 
     var request = OpenLayers.Request.GET({
         url: "http://www.geo.gob.bo/geoserver/wms?service=WMS&version=1.1.0&request=GetCapabilities",
@@ -685,14 +685,15 @@ function readWMC(text, merge) {
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
                                 geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + " " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
-//                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<img src='" + leyenda + "'>";
+				// LO SIGUIENTE
+                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] +  "<img src='" + geobol_leyenda[i] + "' style='max-width=16; max-height=16'>";
 //				geobol_leyenda[i] = "<img src='" + leyenda + "'>";
                                 
                                 
 // EN LA SGTE LINEA SE LE ASIGNA EL STRING HTML FORMADO AL LABEL DEL FRAMESWITCHER                                
 				map.layers[i].name = geobol_ArrayInfo2[i];
 				mivar2 = mivar2 + geobol_ArrayInfo1[i] + "</p>";
-				geobolivia_leyenda(geobol_leyenda[i],i);
+				//geobolivia_leyenda(geobol_leyenda[i],i);
 //	********	DESCOMENTAR LO Q SIGUE PARA VOLVER A LO ANTERIOR
 /*                                map.layers[i].name = map.layers[i].name + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                                 map.layers[i].name = map.layers[i].name + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
@@ -709,7 +710,7 @@ document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[
 document.getElementById('layerinfo').innerHTML = mivar2;
 
 // LA SIGUIENTE LINEA DE CODIGO ES REDUNDANTE A "map.layers[i].name = geobol_ArrayInfo2[i];" Y ES UN ARTIFICIO PARA QUE PERSISTA LA "INYECCIÓN DOM" DEL GRAFICO DE LA LEYENDA DENTRO DE LOS LABELS DEL LAYERSWITCHER
-//document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo2[i];
+document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo2[i];
 
 
 /*
