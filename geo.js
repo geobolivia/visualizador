@@ -670,7 +670,7 @@ function readWMC(text, merge) {
 
                         if (layer.attribution != null) {
 
-                            if (layer.attribution.logo != null) {
+/*                            if (layer.attribution.logo != null) {*/
                                 logo = layer.attribution.logo.href;
                                 leyenda = layer.styles[0].legend.href;
 				geobol_leyenda[i] = leyenda + "&legend_options=fontSize:9";
@@ -708,7 +708,7 @@ document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[
 
 document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo1[i];
 */
-document.getElementById('layerinfo').innerHTML = mivar2;
+document.getElementById('layerinfo').innerHTML = '<p class="p_layerinfo">' + geobol_ArrayInfo1[0] + '</p>' + mivar2;
 
 // LA SIGUIENTE LINEA DE CODIGO ES REDUNDANTE A "map.layers[i].name = geobol_ArrayInfo2[i];" Y ES UN ARTIFICIO PARA QUE PERSISTA LA "INYECCIÓN DOM" DEL GRAFICO DE LA LEYENDA DENTRO DE LOS LABELS DEL LAYERSWITCHER
 document.getElementById('layerswitcher').childNodes[1].childNodes[3].childNodes[mivar].innerHTML = geobol_ArrayInfo2[i];
@@ -721,11 +721,11 @@ jjj.onclick = geobol();
 
 
 
-			    } else {
+/*			    } else {
                                 logo = "xXxXxXxXx";
 				
                             }
-
+*/
 
                         }
 
