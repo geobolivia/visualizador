@@ -423,8 +423,8 @@ function init() {
     //Aqui se introdujo el parametro wmc_param que es el nombre del archivo wmc que viene en la url
 
     // MIENTRAS NO ARREGLEMOS EL PROXY, PARA TRABAJAR DESCOMENTAR LAS LINEAS 278 Y 390, Y COMENTAR LA 279 Y LA 391
-    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
-    //OpenLayers.ProxyHost = "http://www-dev.geo.gob.bo/proxy/?url=";
+    //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
 
     
     OpenLayers.Request.GET({
@@ -536,8 +536,8 @@ function readWMC(text, merge) {
     //Codigo para manejar WMSCapabilities y obtener el logo y el url del metadato 
 
     
-    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
-    //OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
+    //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    OpenLayers.ProxyHost = "http://www.geo.gob.bo/proxy/?url=";
 
     var request = OpenLayers.Request.GET({
         url: "http://www.geo.gob.bo/geoserver/wms?service=WMS&version=1.1.0&request=GetCapabilities",
