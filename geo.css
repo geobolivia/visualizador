@@ -8,7 +8,42 @@ body { background-color: transparent;}
   background-color: transparent;
    
   padding: 10px;
- 
+}
+
+p.p_layerinfo {
+ color: #888888;
+ text-decoration: none;
+ vertical-align: baseline;
+ text-align: left;
+ font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
+ font-size: 10px;
+ padding: 10px 0px;
+ border-style: solid;
+ border-top-width: 1px;
+ width: auto;
+}
+
+p.p_layerinfo a {
+  color: #990000;
+ font-size: 9px;
+}
+
+div.dataLayersDiv label {
+ color: #000000;
+ text-decoration: none;
+ vertical-align: baseline;
+ text-align: left;
+ font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
+ font-size: 9px;
+}
+
+div.dataLayersDiv label:hover {
+ color: #990000;
+ text-decoration: none;
+ vertical-align: baseline;
+ text-align: left;
+ font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
+ font-size: 9px;
 }
 
 #ll_mouse {

@@ -500,7 +500,7 @@ function readWMC(text, merge) {
                 if (map.layers[i].metadataURL != undefined) {
 		    var metadato = map.layers[i].metadataURL;
                     //var metadato = map.layers[i].metadataURL;
-                    metadato = "<a href=" + metadato + " target='_blank' > Metadato</a>";
+                    metadato = " <a href=" + metadato + " target='_blank' >(Metadato)</a>";
 		    nombremetadat = nombre + metadato;
 		    geobol_ArrayInfo1[i] = nombremetadat;
                     geobol_ArrayInfo2[i] = nombre;
@@ -626,7 +626,7 @@ function readWMC(text, merge) {
                 })
             };
 
-	    var mivar2 = '<p></p>';
+	    var mivar2='';
             var control;
             for (var key in measureControls) {
                 control = measureControls[key];
@@ -683,16 +683,17 @@ function readWMC(text, merge) {
                            //     geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
                           //      geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + "<br>" + "<img src='" + logo + "' style='max-width=16 max-height=16'>";
                           //      geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] + "<br><img src='" + leyenda + "' style='max-width=80 max-height=80'>";
-                                geobol_ArrayInfo1[i] = "<p>" + geobol_ArrayInfo1[i] + " " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
+                                geobol_ArrayInfo1[i] = '<p class="p_layerinfo">' + geobol_ArrayInfo1[i] + "<br><a href=" + pagweb + "> (" + titulo + ")</a>";
                                 geobol_ArrayInfo1[i] = geobol_ArrayInfo1[i] + " " + "<img src='" + logo + "' style='max-width=16; max-height=16'>";
-				// LO SIGUIENTE
-                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] +  "<img src='" + geobol_leyenda[i] + "' style='max-width=16; max-height=16'>";
+				// ARTIFICIO-LEYENDA
+                                geobol_ArrayInfo2[i] = geobol_ArrayInfo2[i] +  "<br><img src='" + geobol_leyenda[i] + "' style='max-width=16; max-height=16'>";
+				//LA SIGUIENTE FUNCION SACA LA LEYENDA A SU PROPIO TAG FUERA DEL LABEL, AUNQUE NO LOGRA PERSISTIR
 //				geobol_leyenda[i] = "<img src='" + leyenda + "'>";
                                 
                                 
 // EN LA SGTE LINEA SE LE ASIGNA EL STRING HTML FORMADO AL LABEL DEL FRAMESWITCHER                                
 				map.layers[i].name = geobol_ArrayInfo2[i];
-				mivar2 = mivar2 + geobol_ArrayInfo1[i] + "</p>";
+				mivar2 = mivar2 + geobol_ArrayInfo1[i] + '</p>';
 				//geobolivia_leyenda(geobol_leyenda[i],i);
 //	********	DESCOMENTAR LO Q SIGUE PARA VOLVER A LO ANTERIOR
 /*                                map.layers[i].name = map.layers[i].name + "  " + "<a href=" + pagweb + "> (" + titulo + ")</a>";
