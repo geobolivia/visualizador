@@ -162,7 +162,7 @@ alto_param =alto_param - height_switch
 left_switch=left_mapa;
 
 
-width_Switch=ancho_param;
+width_Switch=ancho_param-20;
 visibilidad_leyenda="hidden";
  
 visibilidad_switcher="visible";
@@ -178,7 +178,7 @@ height_switch=alto_param*altocapas_param ;
 top_mapa=alto_param*0.04;  //40
 top_switch=alto_param-height_switch+4
  
-width_switch=ancho_param 
+width_switch=ancho_param-20; 
 height_leyenda=alto_param-alto_param*0.035; 
 
 ancho_param = ancho_param-2;
@@ -281,7 +281,7 @@ ancho_param = ancho_param-width_leyenda;
  
 alto_param =alto_param - height_switch ;//+top_control
 
-width_switch=ancho_param;
+width_switch=ancho_param-20;
 
 left_leyenda=ancho_param  ; 
 
@@ -327,7 +327,7 @@ ancho_param = ancho_param-width_leyenda;
  var_aux= 83.3333 *altocapas_param -16.6667;
 alto_param =alto_param - height_switch -0.15*height_switch  + var_aux ;// esta se aumento
 
-width_switch=ancho_param;
+width_switch=ancho_param-20;
 
 left_leyenda=ancho_param  ; //left_leyenda=ancho_param+20; 
 
