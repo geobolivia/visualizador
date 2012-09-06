@@ -9,7 +9,6 @@ function btn1Click() {
   }
 }
 
-
 function btn2Click() {
   for (key in measureControls) {
     var control = measureControls[key];
