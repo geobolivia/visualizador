@@ -1,1 +1,4 @@
-ESTA ES LA RAMA-BRANCH MASTER
+Arborescencia
+* api: archivos del visualizador integrado por API
+* test: archivos de prueba de la API
+* old: archivos historicos
