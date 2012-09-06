@@ -1,213 +1,183 @@
-/* al 26 de julio 1100am */
-
 #ll_mouse {
-  color: #436976 !important;
+    color: #436976 !important;
 }
 
 .dataLbl {
-  display: none;
+    display: none;
 }
 
 body { background-color: transparent;}
 #layerinfo {
- overflow:auto; 
- position: absolute;
-
-  background-color: transparent;
-   
-  padding: 10px;
+    overflow:auto;
+    position: absolute;
+    background-color: transparent;
+    padding: 10px;
 }
 
 p.p_layerinfo {
- color: #000000;
- text-decoration: none;
- vertical-align: baseline;
- text-align: left;
- font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
- font-size: 9px;
- padding: 3px 0px;
- /*border-style: solid;
- border-top-width: 1px;*/
- width: -moz-max-content;
+    color: #000000;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: left;
+    font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
+    font-size: 9px;
+    padding: 3px 0px;
+    /*border-style: solid;
+      border-top-width: 1px;*/
+    width: -moz-max-content;
 }
 
 p.p_layerinfo a {
-  color: #990000;
- font-size: 9px;
- text-decoration: none;
+    color: #990000;
+    font-size: 9px;
+    text-decoration: none;
 }
 
 div.dataLayersDiv label {
- color: #000000;
- text-decoration: none;
- vertical-align: baseline;
- text-align: left;
- font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
- font-size: 9px;
+    color: #000000;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: left;
+    font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
+    font-size: 9px;
 }
 
 div.dataLayersDiv label:hover {
- color: #990000;
- text-decoration: none;
- vertical-align: baseline;
- text-align: left;
- font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
- font-size: 9px;
+    color: #990000;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: left;
+    font-family: 'Yanone Kaffeesatz',arial,verdana,helvetica !important;
+    font-size: 9px;
 }
 
 #ll_mouse {
- 
- position: absolute;
-  font-size: 92%;
-  background-color: #ffffff;
-  font-weight:bold;
-  color:darkblue
-   
+    position: absolute;
+    font-size: 92%;
+    background-color: #ffffff;
+    font-weight:bold;
+    color:darkblue
 }
 
 .olControlLayerSwitcher {
-  
-  z-index: 1500;
-  left: 100px;
-  top: 500px;
-  
+    z-index: 1500;
+    left: 100px;
+    top: 500px;
 }
 
 #options {
-  margin-top: 60px;
+    margin-top: 60px;
 }
 
 #layerswitcher {
-	
-	overflow:auto;
-        height:100;
-        margin: 0 auto;
-        color: #003a6b;
-        background-color: transparent;
-         
-        position:absolute;
-	left:0px;
-        width: 640px;
-        padding: 10px;
-      
+    overflow:auto;
+    height:100;
+    margin: 0 auto;
+    color: #003a6b;
+    background-color: transparent;
+
+    position:absolute;
+    left:0px;
+    width: 640px;
+    padding: 10px;
 }
 #layerswitcher2 {
-        left: 500px;
-	     width: 400px;
-        height: 200px; 
+    left: 500px;
+    width: 400px;
+    height: 200px;
 }
 /*
-#map div:first-child div:first-child {
-    top: 100px !important;
+  #map div:first-child div:first-child {
+  top: 100px !important;
+  }
+  */
+
+#wmc {
+    width: 190%;
+    height: 600px;
 }
-*/
 
+/* avoid pink tiles */
+.olImageLoadError {
+    background-color: transparent !important;
+}
 
+#panel {
+    right: 0px;
+    height: 30px;
+    width: 200px;
+}
+#panel div {
+    float: left;
+    margin: 95px;
+}
 
-    #wmc {
-                width: 190%;
-                height: 600px;
-            }
-            /* avoid pink tiles */
-            .olImageLoadError {
-                background-color: transparent !important;
-            }
-            
-    
-     
-     #panel {
-                right: 0px;
-                height: 30px; 
-                width: 200px;
-            }
-            #panel div { 
-                float: left;
-                margin: 95px;
-            }
-     
-     
-     
 #controlToggle li {
-            list-style: none;
-        }
-        p {
-            width: 512px;
-        }
-        #options {
-            position: relative;
-            width: 512px;
-            top: -60px;
-        }
-        #output {
-            float: right;
-            
-        }     
-     
-        #medidores {
-            float: left;
-            position: absolute
-            
-        }     
-     
+    list-style: none;
+}
+p {
+    width: 512px;
+}
+#options {
+    position: relative;
+    width: 512px;
+    top: -60px;
+}
+#output {
+    float: right;
+}
 
-     
-         
-      div.olControlMousePosition {
+#medidores {
+    float: left;
+    position: absolute
+}
 
-      font-family: Times;
+div.olControlMousePosition {
+    font-family: Times;
+    font-size: 0.75em;
+    color: red;
+}
 
-      font-size: 0.75em;
+div.olControlLayerSwitcher {
+    color: yellow;
+    width: 35em;
+}
+div.olControlLayerSwitcher .layersDiv    {
+    background-color: blue;
+}
 
-      color: red;
+.olControlPanel div {
+    display:block;
+    width:  24px;
+    height: 24px;
+    margin: 5px;
+    background-color:white;
+}
 
-      }     
-         
-      div.olControlLayerSwitcher {
-      color: yellow;
-      width: 35em;
-      }   
-       div.olControlLayerSwitcher .layersDiv    {
-     background-color: blue;
-      }    
-   
-   
-   
-   
-   
-   .olControlPanel div { 
-          display:block;
-          width:  24px;
-          height: 24px;
-          margin: 5px;
-          background-color:white;
-        }
-        
-        .olControlPanel .olControlDrawFeatureItemActive { 
-          width:  22px;  
-          height: 22px;
-          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_on.png");
-        }
-        .olControlPanel .olControlDrawFeatureItemInactive { 
-          width:  22px;  
-          height: 22px;
-          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_off.png");
-        }
-        .olControlPanel .olControlZoomBoxItemInactive { 
-          width:  22px;  
-          height: 22px;
-          background-color: orange;
-          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-off.png");
-        }
-        .olControlPanel .olControlZoomBoxItemActive { 
-          width:  22px;  
-          height: 22px;
-          background-color: blue;
-          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-on.png");
-        }
-        .olControlPanel .olControlZoomToMaxExtentItemInactive { 
-          width:  18px;  
-          height: 18px;
-          background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/zoom-world-mini.png");
-        }
-
-
+.olControlPanel .olControlDrawFeatureItemActive {
+    width:  22px;
+    height: 22px;
+    background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_on.png");
+}
+.olControlPanel .olControlDrawFeatureItemInactive {
+    width:  22px;
+    height: 22px;
+    background-image: url("http://www.geo.gob.bo/lib/OpenLayers/theme/default/img/draw_line_off.png");
+}
+.olControlPanel .olControlZoomBoxItemInactive {
+    width:  22px;
+    height: 22px;
+    background-color: orange;
+    background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-off.png");
+}
+.olControlPanel .olControlZoomBoxItemActive {
+    width:  22px;
+    height: 22px;
+    background-color: blue;
+    background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/drag-rectangle-on.png");
+}
+.olControlPanel .olControlZoomToMaxExtentItemInactive {
+    width:  18px;
+    height: 18px;
+    background-image: url("http://www.geo.gob.bo/lib/OpenLayers/img/zoom-world-mini.png");
+}
