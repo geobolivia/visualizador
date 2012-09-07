@@ -17,7 +17,12 @@
  * @author slesage@geo.gob.bo (Sylvain Lesage)
  */
 
+/**
+ * @requires OpenLayers/Map.js
+ */
+
 /*jslint browser: true*/
+/*global OpenLayers*/
 
 (function () {
   "use strict";
@@ -86,12 +91,24 @@
   }
 
   /**
+   * Create an OpenLayers map in the #map <div>
+   */
+  function createMap() {
+    var map, options;
+    options = {
+      theme: null
+    };
+    map = new OpenLayers.Map('map', options);
+  }
+
+  /**
    * Principal function launched on "onLoad" event
    */
   init = function () {
     var conf = new Configuration();
     conf.getURLParameters();
     createLayout(conf);
+    createMap();
   };
 
   window.onload = init;
