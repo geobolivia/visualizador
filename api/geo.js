@@ -17,12 +17,39 @@
  * @author slesage@geo.gob.bo (Sylvain Lesage)
  */
 
-var document, window;
+var document, window, location;
 
 (function () {
   "use strict";
 
   var createLayout, init;
+
+  /*
+   * Create size in pixel for CSS
+   * ex: createSizePx('200') -> '200px'
+   * @param {string} size size in pixels
+   * @return {string} size in the following format '200px'
+   *                  if error: null
+   */
+  function createSizePx(size) {
+    var intSize = parseInt(size, 10);
+    return isNaN(intSize) ? null : intSize.toString() + 'px';
+  }
+
+  /*
+   * Parse the page URL to find a parameter value
+   * @param {string} name name of the parameter
+   * @return {string} value of the parameter
+   *                  if error: null
+   */
+  function getURLParameter(name) {
+    var regexp, regexpRes, firstMatch, value;
+    regexp = new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)');
+    regexpRes = regexp.exec(location.search);
+    firstMatch = (regexpRes || ["", ""])[1];
+    value = decodeURIComponent(firstMatch.replace(/\+/g, '%20'));
+    return value || null;
+  }
 
   /**
    * A Configuration object
@@ -32,6 +59,14 @@ var document, window;
     this.width = '400px';
     this.height = '400px';
   }
+
+  /**
+   * Parse and validate the URL parameters
+   */
+  Configuration.prototype.getURLParameters = function () {
+    this.width = createSizePx(getURLParameter('width')) || this.width;
+    this.height = createSizePx(getURLParameter('height')) || this.height;
+  };
 
   /**
    * Set the size of all <div> elements
@@ -55,6 +90,7 @@ var document, window;
    */
   init = function () {
     var conf = new Configuration();
+    conf.getURLParameters();
     createLayout(conf);
   };
 
