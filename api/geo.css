@@ -1,6 +1,14 @@
-html {}
-body {}
+html {
+}
+body {
+    margin: 0;
+    padding: 0;
+}
 
-#container {background-color: #FFFFCC}
+#container {
+    background-color: #FFFFCC
+}
 
-#map {background-color: #99CCFF}
+#map {
+    background-color: #99CCFF
+}
