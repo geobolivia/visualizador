@@ -22,7 +22,7 @@ var document, window, location;
 (function () {
   "use strict";
 
-  var createLayout, init;
+  var init;
 
   /*
    * Create size in pixel for CSS
@@ -72,7 +72,7 @@ var document, window, location;
    * Set the size of all <div> elements
    * @param {Configuration} conf Configuration of the viewer
    */
-  createLayout = function (conf) {
+  function createLayout(conf) {
     var container, map;
 
     container = document.getElementById('container');
@@ -83,7 +83,7 @@ var document, window, location;
 
     map.style.width = '100%';
     map.style.height = '100%';
-  };
+  }
 
   /**
    * Principal function launched on "onLoad" event
