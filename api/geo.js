@@ -78,8 +78,8 @@ var document, window, location;
     container = document.getElementById('container');
     map = document.getElementById('map');
 
-    container.style.width = conf.width;
-    container.style.height = conf.height;
+    container.style.width = '100%';
+    container.style.height = '100%';
 
     map.style.width = '100%';
     map.style.height = '100%';
