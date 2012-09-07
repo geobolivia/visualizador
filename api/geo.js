@@ -17,7 +17,7 @@
  * @author slesage@geo.gob.bo (Sylvain Lesage)
  */
 
-var document, window, location;
+/*jslint browser: true*/
 
 (function () {
   "use strict";
