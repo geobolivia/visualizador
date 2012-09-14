@@ -61,8 +61,6 @@
    * @constructor
    */
   function Configuration() {
-    this.width = '400px';
-    this.height = '400px';
     this.wmcUrl = '';
     this.proxy = "/cgi-bin/proxy.cgi?url=";
   }
@@ -71,8 +69,6 @@
    * Parse and validate the URL parameters
    */
   Configuration.prototype.getURLParameters = function () {
-    this.width = createSizePx(getURLParameter('width')) || this.width;
-    this.height = createSizePx(getURLParameter('height')) || this.height;
     this.wmcUrl = getURLParameter('wmc') || this.wmc;
   };
 

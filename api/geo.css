@@ -4,11 +4,14 @@ body {
     margin: 0;
     padding: 0;
 }
-
 #container {
+    float: left;
+    height: 100%;
+    width: 100%;
+    min-height: 600px;
+    min-width: 600px;
     background-color: #FFFFCC
 }
-
 #map {
     background-color: #99CCFF
 }
