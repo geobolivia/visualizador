@@ -63,6 +63,8 @@
   function Configuration() {
     this.width = '400px';
     this.height = '400px';
+    this.wmcUrl = '';
+    this.proxy = "/cgi-bin/proxy.cgi?url=";
   }
 
   /**
@@ -71,6 +73,7 @@
   Configuration.prototype.getURLParameters = function () {
     this.width = createSizePx(getURLParameter('width')) || this.width;
     this.height = createSizePx(getURLParameter('height')) || this.height;
+    this.wmcUrl = getURLParameter('wmc') || this.wmc;
   };
 
   /**
@@ -91,24 +94,56 @@
   }
 
   /**
+   * Load the context from the  WMC specified in the URL
+   * A proxy may be necessary for that function
+   * http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#HowdoIsetupaProxyHost
+   * @param {Configuration} conf Configuration of the viewer
+   */
+  function loadWMC(conf) {
+    var request;
+
+    if (!conf.wmcUrl) {
+      return;
+    }
+
+    OpenLayers.ProxyHost = conf.proxy;
+    request = OpenLayers.Request.GET({
+      url: conf.wmcUrl,
+      callback: function (request) {
+        var parser, jsonFormat, mapOptions, bounds, map;
+
+        if (request.status < 200 || request.status >= 300) {
+          // Error
+          alert("Error de status " + request.status);
+          return;
+        }
+        if (!request.responseXML) {
+          // Error
+          alert("Error de responseXML");
+          return;
+        }
+        parser = new OpenLayers.Format.WMC();
+        parser.read(request.responseXML, {map: 'map'});
+      }
+    });
+  }
+
+  /**
    * Create an OpenLayers map in the #map <div>
    */
-  function createMap() {
-    var map, options;
-    options = {
-      theme: null
-    };
-    map = new OpenLayers.Map('map', options);
+  function createMap(conf) {
+    loadWMC(conf);
   }
 
   /**
    * Principal function launched on "onLoad" event
    */
   init = function () {
-    var conf = new Configuration();
+    var conf;
+    conf = new Configuration();
     conf.getURLParameters();
     createLayout(conf);
-    createMap();
+    createMap(conf);
   };
 
   window.onload = init;
