@@ -13,5 +13,12 @@ body {
     background-color: #FFFFCC
 }
 #map {
+    height: 100%;
     background-color: #99CCFF
+}
+#legend {
+    float: right;
+    height: 100%;
+    overflow: auto;
+    background-color: khaki
 }

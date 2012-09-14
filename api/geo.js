@@ -63,6 +63,8 @@
   function Configuration() {
     this.wmcUrl = '';
     this.proxy = "/cgi-bin/proxy.cgi?url=";
+    this.hasLegend = false;
+    this.legendWidth = '200px';
   }
 
   /**
@@ -70,6 +72,8 @@
    */
   Configuration.prototype.getURLParameters = function () {
     this.wmcUrl = getURLParameter('wmc') || this.wmcURL;
+    this.hasLegend = (getURLParameter('legend') === "on") || this.hasLegend;
+    this.legendWidth = createSizePx(getURLParameter('legendwidth')) || this.legendWidth;
   };
 
   /**
@@ -77,16 +81,19 @@
    * @param {Configuration} conf Configuration of the viewer
    */
   function createLayout(conf) {
-    var container, map;
+    var container, map, legend;
 
     container = document.getElementById('container');
     map = document.getElementById('map');
+    legend = document.getElementById('legend');
 
-    container.style.width = '100%';
-    container.style.height = '100%';
-
-    map.style.width = '100%';
-    map.style.height = '100%';
+    if (conf.hasLegend) {
+      container.style.marginLeft = '-' + conf.legendWidth;
+      map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
+      legend.style.width = conf.legendWidth;
+    } else {
+      container.removeChild(legend);
+    }
   }
 
   /**
