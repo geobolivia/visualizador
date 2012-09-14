@@ -69,7 +69,7 @@
    * Parse and validate the URL parameters
    */
   Configuration.prototype.getURLParameters = function () {
-    this.wmcUrl = getURLParameter('wmc') || this.wmc;
+    this.wmcUrl = getURLParameter('wmc') || this.wmcURL;
   };
 
   /**
