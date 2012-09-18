@@ -47,7 +47,7 @@
    * @return {string} value of the parameter
    *                  if error: null
    */
-  function getURLParameter(name) {
+  function getUrlParameter(name) {
     var regexp, regexpRes, firstMatch, value;
     regexp = new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)');
     regexpRes = regexp.exec(location.search);
@@ -70,10 +70,10 @@
   /**
    * Parse and validate the URL parameters
    */
-  Configuration.prototype.getURLParameters = function () {
-    this.wmcUrl = getURLParameter('wmc') || this.wmcURL;
-    this.hasLegend = (getURLParameter('legend') === "on") || this.hasLegend;
-    this.legendWidth = createSizePx(getURLParameter('legendwidth')) || this.legendWidth;
+  Configuration.prototype.getUrlParameters = function () {
+    this.wmcUrl = getUrlParameter('wmc') || this.wmcURL;
+    this.hasLegend = (getUrlParameter('legend') === "on") || this.hasLegend;
+    this.legendWidth = createSizePx(getUrlParameter('legendwidth')) || this.legendWidth;
   };
 
   /**
@@ -102,7 +102,7 @@
    * http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#HowdoIsetupaProxyHost
    * @param {Configuration} conf Configuration of the viewer
    */
-  function loadWMC(conf) {
+  function loadWmc(conf) {
     var request;
 
     if (!conf.wmcUrl) {
@@ -135,7 +135,7 @@
    * Create an OpenLayers map in the #map <div>
    */
   function createMap(conf) {
-    loadWMC(conf);
+    loadWmc(conf);
   }
 
   /**
@@ -144,7 +144,7 @@
   init = function () {
     var conf;
     conf = new Configuration();
-    conf.getURLParameters();
+    conf.getUrlParameters();
     createLayout(conf);
     createMap(conf);
   };
