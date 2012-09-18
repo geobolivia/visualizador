@@ -20,5 +20,12 @@ body {
     float: right;
     height: 100%;
     overflow: auto;
-    background-color: khaki
+    background-color: white;
+}
+#legend .labelSpan {
+    font-size: 16px;
+    vertical-align: top !important;
+}
+#legend .labelSpan img {
+    vertical-align: text-bottom;
 }

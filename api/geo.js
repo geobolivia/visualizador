@@ -127,7 +127,7 @@
     request = OpenLayers.Request.GET({
       url: conf.wmcUrl,
       callback: function (request) {
-        var parser;
+        var parser, i, layer;
         if (request.status < 200 || request.status >= 300) {
           // Error
           alert("Error de status " + request.status);
@@ -140,6 +140,18 @@
         }
         parser = new OpenLayers.Format.WMC();
         map = parser.read(request.responseXML, {map: 'map'});
+
+        for (i = 0; i < map.layers.length; i += 1) {
+          layer = map.layers[i];
+          if (layer.metadata &&
+              layer.metadata.styles[0] &&
+              layer.metadata.styles[0].legend &&
+              layer.metadata.styles[0].legend.href) {
+            layer.name = '<img src="' + layer.metadata.styles[0].legend.href +
+              '&legend_options=dpi:180;bgColor:0xFFF68F;' +
+              '"/>' + layer.name;
+          }
+        }
 
         createLegend(conf);
       }
