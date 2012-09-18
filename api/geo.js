@@ -113,8 +113,7 @@
     request = OpenLayers.Request.GET({
       url: conf.wmcUrl,
       callback: function (request) {
-        var parser, jsonFormat, mapOptions, bounds, map;
-
+        var parser;
         if (request.status < 200 || request.status >= 300) {
           // Error
           alert("Error de status " + request.status);
