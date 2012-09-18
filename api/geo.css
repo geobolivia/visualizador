@@ -21,6 +21,7 @@ body {
     height: 100%;
     overflow: auto;
     background-color: white;
+    border-left: 1px solid black;
 }
 #legend .labelSpan {
     font-size: 16px;

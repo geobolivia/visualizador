@@ -33,11 +33,14 @@
    * Create size in pixel for CSS
    * ex: createSizePx('200') -> '200px'
    * @param {string} size size in pixels
+   * @param {integer} offset offset in pixels
    * @return {string} size in the following format '200px'
    *                  if error: null
    */
-  function createSizePx(size) {
-    var intSize = parseInt(size, 10);
+  function createSizePx(size, offset) {
+    var intSize;
+    offset = (offset) ? parseInt(offset, 10) : 0;
+    intSize = parseInt(size, 10) + offset;
     return isNaN(intSize) ? null : intSize.toString() + 'px';
   }
 
@@ -65,6 +68,7 @@
     this.proxy = "/cgi-bin/proxy.cgi?url=";
     this.hasLegend = false;
     this.legendWidth = '200px';
+    this.legendWidthWithoutBorder = '199px';
   }
 
   /**
@@ -74,6 +78,7 @@
     this.wmcUrl = getUrlParameter('wmc') || this.wmcURL;
     this.hasLegend = (getUrlParameter('legend') === "on") || this.hasLegend;
     this.legendWidth = createSizePx(getUrlParameter('legendwidth')) || this.legendWidth;
+    this.legendWidthWithoutBorder = createSizePx(this.legendWidth, -1);
   };
 
   /**
@@ -90,7 +95,7 @@
     if (conf.hasLegend) {
       container.style.marginLeft = '-' + conf.legendWidth;
       map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
-      legend.style.width = conf.legendWidth;
+      legend.style.width = conf.legendWidthWithoutBorder;
     } else {
       container.removeChild(legend);
     }
