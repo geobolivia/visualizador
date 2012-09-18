@@ -27,7 +27,7 @@
 (function () {
   "use strict";
 
-  var init;
+  var init, map;
 
   /*
    * Create size in pixel for CSS
@@ -97,6 +97,20 @@
   }
 
   /**
+   * Fill the #legend <div>
+   */
+  function createLegend(conf) {
+    var control;
+
+    if (map && conf.hasLegend && document.getElementById('legend')) {
+      control = new OpenLayers.Control.LayerSwitcher({
+        'div': OpenLayers.Util.getElement('legend')
+      });
+      map.addControl(control);
+    }
+  }
+
+  /**
    * Load the context from the  WMC specified in the URL
    * A proxy may be necessary for that function
    * http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#HowdoIsetupaProxyHost
@@ -125,7 +139,9 @@
           return;
         }
         parser = new OpenLayers.Format.WMC();
-        parser.read(request.responseXML, {map: 'map'});
+        map = parser.read(request.responseXML, {map: 'map'});
+
+        createLegend(conf);
       }
     });
   }
