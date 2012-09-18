@@ -112,14 +112,6 @@
         'div': OpenLayers.Util.getElement('legend')
       });
       map.addControl(control);
-
-      elements = document.getElementById('legend').getElementsByTagName("div");
-      for (i = 0; i < elements.length; i += 1) {
-        if (elements[i].className === 'dataLbl' ||
-            elements[i].className === 'baseLbl') {
-          elements[i].style.display = 'none';
-        }
-      }
     }
   }
 

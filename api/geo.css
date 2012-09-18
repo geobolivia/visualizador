@@ -30,3 +30,6 @@ body {
 #legend .labelSpan img {
     vertical-align: text-bottom;
 }
+#legend .dataLbl, #legend .baseLbl {
+    display: none;
+}
