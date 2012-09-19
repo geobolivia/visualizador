@@ -31,6 +31,23 @@ body {
     width: 100%;
     background-color: #FFFFCC;
 }
+#wrapper4 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow: hidden;
+    width: 100%;
+}
+#tools {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #CCFFCC;
+    border-bottom: 1px solid black;
+}
 #map {
     height: 100%;
     background-color: #99CCFF;

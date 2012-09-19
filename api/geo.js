@@ -72,6 +72,9 @@
     this.hasMetadata = false;
     this.metadataHeight = '200px';
     this.metadataHeightWithoutBorder = '199px';
+    this.hasTools = false;
+    this.metadataTools = '40px';
+    this.metadataToolsWithoutBorder = '39px';
   }
 
   /**
@@ -85,6 +88,9 @@
     this.hasMetadata = (getUrlParameter('metadata') === "on") || this.hasMetadata;
     this.metadataHeight = createSizePx(getUrlParameter('metadataheight')) || this.metadataHeight;
     this.metadataHeightWithoutBorder = createSizePx(this.metadataHeight, -1);
+    this.hasTools = (getUrlParameter('tools') === "on") || this.hasTools;
+    this.toolsHeight = createSizePx(getUrlParameter('toolsheight')) || this.metadataTools;
+    this.toolsHeightWithoutBorder = createSizePx(this.toolsHeight, -1);
   };
 
   /**
@@ -92,14 +98,23 @@
    * @param {Configuration} conf Configuration of the viewer
    */
   function createLayout(conf) {
-    var wrapper1, wrapper2, wrapper3, map, legend, metadata;
+    var wrapper1, wrapper2, wrapper3, wrapper4, map, legend, metadata, tools;
 
     wrapper1 = document.getElementById('wrapper1');
     wrapper2 = document.getElementById('wrapper2');
     wrapper3 = document.getElementById('wrapper3');
+    wrapper4 = document.getElementById('wrapper4');
     map = document.getElementById('map');
     legend = document.getElementById('legend');
     metadata = document.getElementById('metadata');
+    tools = document.getElementById('tools');
+
+    if (conf.hasTools) {
+      wrapper4.style.top = conf.toolsHeight;
+      tools.style.height = conf.toolsHeightWithoutBorder;
+    } else {
+      wrapper3.removeChild(tools);
+    }
 
     if (conf.hasMetadata) {
       wrapper2.style.bottom = conf.metadataHeight;
@@ -110,11 +125,14 @@
 
     if (conf.hasLegend) {
       wrapper3.style.marginLeft = '-' + conf.legendWidth;
+      tools.style.marginLeft = '-' + conf.legendWidth;
+      wrapper4.style.marginLeft = '-' + conf.legendWidth;
       map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
       legend.style.width = conf.legendWidthWithoutBorder;
     } else {
       wrapper2.removeChild(legend);
     }
+
   }
 
   /**
