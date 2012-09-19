@@ -105,9 +105,22 @@
    * Fill the #legend <div>
    */
   function createLegend(conf) {
-    var control, elements, i;
+    var control, i, layer;
 
     if (map && conf.hasLegend && document.getElementById('legend')) {
+      /* Include the legend images in the layers name */
+      for (i = 0; i < map.layers.length; i += 1) {
+        layer = map.layers[i];
+        if (layer.metadata &&
+            layer.metadata.styles[0] &&
+            layer.metadata.styles[0].legend &&
+            layer.metadata.styles[0].legend.href) {
+          layer.name = '<img src="' + layer.metadata.styles[0].legend.href +
+            '&legend_options=dpi:180;bgColor:0xFFF68F;' +
+            '"/>' + layer.name;
+        }
+      }
+
       control = new OpenLayers.Control.LayerSwitcher({
         'div': OpenLayers.Util.getElement('legend')
       });
@@ -132,7 +145,7 @@
     request = OpenLayers.Request.GET({
       url: conf.wmcUrl,
       callback: function (request) {
-        var parser, i, layer;
+        var parser;
         if (request.status < 200 || request.status >= 300) {
           // Error
           alert("Error de status " + request.status);
@@ -145,18 +158,6 @@
         }
         parser = new OpenLayers.Format.WMC();
         map = parser.read(request.responseXML, {map: 'map'});
-
-        for (i = 0; i < map.layers.length; i += 1) {
-          layer = map.layers[i];
-          if (layer.metadata &&
-              layer.metadata.styles[0] &&
-              layer.metadata.styles[0].legend &&
-              layer.metadata.styles[0].legend.href) {
-            layer.name = '<img src="' + layer.metadata.styles[0].legend.href +
-              '&legend_options=dpi:180;bgColor:0xFFF68F;' +
-              '"/>' + layer.name;
-          }
-        }
 
         createLegend(conf);
       }
