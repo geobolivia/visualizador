@@ -145,6 +145,33 @@
   }
 
   /**
+   * Fill the #metadata <div>
+   */
+  function createMetadata(conf) {
+    var metadata, list, content, i, layer, nameStr, metadataStr;
+
+    metadata =  document.getElementById('metadata');
+    if (map && conf.hasMetadata && metadata) {
+      if (map.layers.length > 0) {
+        metadata.innerHTML = '<ul id="metadatalist"></ul>';
+        list = document.getElementById('metadatalist');
+        if (list) {
+          content = '';
+          for (i = 0; i < map.layers.length; i += 1) {
+            layer = map.layers[i];
+            nameStr = layer.name;
+            metadataStr = layer.metadataURL ?
+                ' (<a href="' + layer.metadataURL + '">más detalles</a>)' :
+                '';
+            content = content + '<li>' + nameStr + metadataStr + '</li>';
+          }
+          list.innerHTML = content;
+        }
+      }
+    }
+  }
+
+  /**
    * Load the context from the  WMC specified in the URL
    * A proxy may be necessary for that function
    * http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#HowdoIsetupaProxyHost
@@ -176,6 +203,8 @@
         map = parser.read(request.responseXML, {map: 'map'});
 
         createLegend(conf);
+
+        createMetadata(conf);
       }
     });
   }
