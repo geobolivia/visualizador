@@ -97,7 +97,7 @@
       map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
       legend.style.width = conf.legendWidthWithoutBorder;
     } else {
-      container.removeChild(legend);
+      document.body.removeChild(legend);
     }
   }
 
