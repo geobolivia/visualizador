@@ -69,6 +69,9 @@
     this.hasLegend = false;
     this.legendWidth = '200px';
     this.legendWidthWithoutBorder = '199px';
+    this.hasMetadata = false;
+    this.metadataHeight = '200px';
+    this.metadataHeightWithoutBorder = '199px';
   }
 
   /**
@@ -79,6 +82,9 @@
     this.hasLegend = (getUrlParameter('legend') === "on") || this.hasLegend;
     this.legendWidth = createSizePx(getUrlParameter('legendwidth')) || this.legendWidth;
     this.legendWidthWithoutBorder = createSizePx(this.legendWidth, -1);
+    this.hasMetadata = (getUrlParameter('metadata') === "on") || this.hasMetadata;
+    this.metadataHeight = createSizePx(getUrlParameter('metadataheight')) || this.metadataHeight;
+    this.metadataHeightWithoutBorder = createSizePx(this.metadataHeight, -1);
   };
 
   /**
@@ -86,18 +92,28 @@
    * @param {Configuration} conf Configuration of the viewer
    */
   function createLayout(conf) {
-    var container, map, legend;
+    var wrapper1, wrapper2, wrapper3, map, legend, metadata;
 
-    container = document.getElementById('container');
+    wrapper1 = document.getElementById('wrapper1');
+    wrapper2 = document.getElementById('wrapper2');
+    wrapper3 = document.getElementById('wrapper3');
     map = document.getElementById('map');
     legend = document.getElementById('legend');
+    metadata = document.getElementById('metadata');
+
+    if (conf.hasMetadata) {
+      wrapper2.style.bottom = conf.metadataHeight;
+      metadata.style.height = conf.metadataHeightWithoutBorder;
+    } else {
+      wrapper1.removeChild(metadata);
+    }
 
     if (conf.hasLegend) {
-      container.style.marginLeft = '-' + conf.legendWidth;
+      wrapper3.style.marginLeft = '-' + conf.legendWidth;
       map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
       legend.style.width = conf.legendWidthWithoutBorder;
     } else {
-      document.body.removeChild(legend);
+      wrapper2.removeChild(legend);
     }
   }
 
