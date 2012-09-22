@@ -73,10 +73,10 @@
     this.metadataHeightWithin = '199px';
     this.metadataHeight = '200px';
     this.hasTools = false;
-    this.toolsHeightWithin = '24px';
-    this.toolsPadding = '2px';
+    this.toolsHeightWithin = '28px';
     this.toolsBorder = '1px';
     this.toolsHeight = '29px';
+    this.hasMeasureTools = false;
   }
 
   /**
@@ -91,6 +91,7 @@
     this.metadataHeight = createSizePx(getUrlParameter('metadataheight')) || this.metadataHeight;
     this.metadataHeightWithin = createSizePx(this.metadataHeight, -1);
     this.hasTools = (getUrlParameter('tools') === "on") || this.hasTools;
+    this.hasMeasureTools = (getUrlParameter('measuretools') === "on") || this.hasMeasureTools;
   };
 
   /**
@@ -98,7 +99,8 @@
    * @param {Configuration} conf Configuration of the viewer
    */
   function createLayout(conf) {
-    var wrapper1, wrapper2, wrapper3, wrapper4, map, legend, metadata, tools;
+    var wrapper1, wrapper2, wrapper3, wrapper4, map, legend, metadata, tools,
+      icons, measure;
 
     wrapper1 = document.getElementById('wrapper1');
     wrapper2 = document.getElementById('wrapper2');
@@ -108,12 +110,16 @@
     legend = document.getElementById('legend');
     metadata = document.getElementById('metadata');
     tools = document.getElementById('tools');
+    icons = document.getElementById('icons');
+    measure = document.getElementById('measure');
 
     if (conf.hasTools) {
       wrapper4.style.top = conf.toolsHeight;
       tools.style.height = conf.toolsHeightWithin;
-      tools.style.padding = conf.toolsPadding;
       tools.style.borderBottom = conf.toolsBorder + ' solid black';
+      if (!conf.hasMeasureTools) {
+        tools.removeChild(measure);
+      }
     } else {
       wrapper3.removeChild(tools);
     }
@@ -191,14 +197,50 @@
     }
   }
 
+  /*
+   * Show the line measurement within the #measure <div>
+   * Units are in the metric system
+   * @param {OpenLayers.Events} event Event of the line measurement
+   */
+  function handleLineMeasure(event) {
+    var element, out;
+    element = document.getElementById('measure');
+    out = "";
+    if (event.order === 1) {
+      /* Trick for the number format: http://stackoverflow.com/a/4689230 */
+      out += "longitud: " + event.measure.toPrecision(4) + " " + event.units;
+    }
+    element.innerHTML = out;
+  }
+
+  /*
+   * Show the area measurement within the #measure <div>
+   * Units are in the metric system
+   * @param {OpenLayers.Events} event Event of the area measurement
+   */
+  function handleAreaMeasure(event) {
+    var element, out;
+    element = document.getElementById('measure');
+    out = "";
+    if (event.order === 2) {
+      /* Trick for the number format: http://stackoverflow.com/a/4689230 */
+      out += "superficie: " + Number(event.measure.toPrecision(4)) + " " +
+        event.units + "<sup>2</" + "sup>";
+    }
+    element.innerHTML = out;
+  }
+
   /**
    * Fill the #tools <div>
    */
   function createTools(conf) {
-    var tools, panelCtl, fakePanCtl, navCtl;
+    var tools, icons, measure, panelCtl, fakePanCtl, navCtl, lineMeasureCtl,
+      areaMeasureCtl;
 
     tools =  document.getElementById('tools');
-    if (map && conf.hasTools && tools) {
+    icons =  document.getElementById('icons');
+    measure =  document.getElementById('measure');
+    if (map && conf.hasTools && tools && icons) {
       /* Controls */
       navCtl = new OpenLayers.Control.NavigationHistory(
         {'displayClass': 'hist'}
@@ -209,7 +251,7 @@
       /* Controls panel */
       panelCtl = new OpenLayers.Control.Panel(
         {
-          'div': tools,
+          'div': icons,
           'defaultControl': fakePanCtl
         }
       );
@@ -220,6 +262,36 @@
         navCtl.next,
         fakePanCtl
       ]);
+      if (conf.hasMeasureTools && measure) {
+        lineMeasureCtl = new OpenLayers.Control.Measure(
+          OpenLayers.Handler.Path,
+          {
+            persist: true,
+            immediate: true,
+            displayClass: 'path'
+          }
+        );
+        lineMeasureCtl.events.on({
+          "measure": handleLineMeasure,
+          "measurepartial": handleLineMeasure
+        });
+        areaMeasureCtl = new OpenLayers.Control.Measure(
+          OpenLayers.Handler.Polygon,
+          {
+            persist: true,
+            immediate: true,
+            displayClass: 'polygon'
+          }
+        );
+        areaMeasureCtl.events.on({
+          "measure": handleAreaMeasure,
+          "measurepartial": handleAreaMeasure
+        });
+        panelCtl.addControls([
+          lineMeasureCtl,
+          areaMeasureCtl
+        ]);
+      }
       map.addControl(panelCtl);
     }
   }
