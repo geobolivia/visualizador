@@ -45,6 +45,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
+    overflow: hidden;
     background-color: #CCFFCC;
     border-bottom: 1px solid black;
 }
@@ -77,4 +78,47 @@ body {
     width: 100%;
     background-color: #FFCCFF;
     border-top: 1px solid black;
+}
+#tools .olButton {
+    float: left;
+    margin: 0 2px;
+    background-repeat: no-repeat;
+    height: 24px;
+    width: 24px;
+}
+#tools .panItemInactive {
+    background-image: url("theme/fatcow/img/transform_move_off.png");
+}
+#tools .panItemActive {
+    background-image: url("theme/fatcow/img/transform_move_on.png");
+}
+#tools .pathItemInactive {
+    background-image: url("theme/fatcow/img/measure_off.png");
+}
+#tools .pathItemActive {
+    background-image: url("theme/fatcow/img/measure_on.png");
+}
+#tools .polygonItemInactive {
+    background-image: url("theme/fatcow/img/measure_crop_off.png");
+}
+#tools .polygonItemActive {
+    background-image: url("theme/fatcow/img/measure_crop_on.png");
+}
+#tools .histPreviousItemInactive {
+    background-image: url("theme/fatcow/img/resultset_previous_off.png");
+}
+#tools .histPreviousItemActive {
+    background-image: url("theme/fatcow/img/resultset_previous_on.png");
+}
+#tools .histNextItemInactive {
+    background-image: url("theme/fatcow/img/resultset_next_off.png");
+}
+#tools .histNextItemActive {
+    background-image: url("theme/fatcow/img/resultset_next_on.png");
+}
+#tools .infoItemInactive {
+    background-image: url("theme/fatcow/img/information_off.png");
+}
+#tools .infoNextItemActive {
+    background-image: url("theme/fatcow/img/information_on.png");
 }
