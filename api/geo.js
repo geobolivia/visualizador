@@ -134,6 +134,7 @@
     if (conf.hasLegend) {
       wrapper3.style.marginLeft = '-' + conf.legendWidth;
       tools.style.marginLeft = '-' + conf.legendWidth;
+      icons.style.marginLeft = conf.legendWidth;
       wrapper4.style.marginLeft = '-' + conf.legendWidth;
       map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
       legend.style.width = conf.legendWidthWithin;
