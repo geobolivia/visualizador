@@ -15,7 +15,6 @@ body {
     min-height: 600px;
     min-width: 600px;
     overflow: hidden;
-    background-color: #CCFFFF;
 }
 #wrapper2 {
     position: absolute;
@@ -29,7 +28,6 @@ body {
     float: left;
     height: 100%;
     width: 100%;
-    background-color: #FFFFCC;
 }
 #wrapper4 {
     position: absolute;
@@ -46,18 +44,15 @@ body {
     left: 0;
     width: 100%;
     overflow: hidden;
-    background-color: #CCFFCC;
     border-bottom: 1px solid black;
 }
 #map {
     height: 100%;
-    background-color: #99CCFF;
 }
 #legend {
     float: right;
     height: 100%;
     overflow: auto;
-    background-color: white;
     border-left: 1px solid black;
 }
 #legend .labelSpan {
@@ -76,7 +71,6 @@ body {
     left: 0;
     overflow: auto;
     width: 100%;
-    background-color: #FFCCFF;
     border-top: 1px solid black;
 }
 #tools #icons {
@@ -84,14 +78,11 @@ body {
     bottom: 2px;
     left: 2px;
     height: 24px;
-    background-color: #FFCCCC;
 }
 #tools #measure {
     position: absolute;
     bottom: 2px;
     right: 2px;
-/*    height: 24px;*/
-    background-color: #CCCCFF;
 }
 #icons .olButton {
     float: left;
