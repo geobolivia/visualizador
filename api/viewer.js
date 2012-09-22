@@ -320,13 +320,13 @@
           alert("Error de status " + request.status);
           return;
         }
-        if (!request.responseXML) {
+        if (!request.responseText) {
           // Error
-          alert("Error de responseXML");
+          alert("Error de responseText");
           return;
         }
         parser = new OpenLayers.Format.WMC();
-        map = parser.read(request.responseXML, {map: 'map'});
+        map = parser.read(request.responseText, {map: 'map'});
 
         createLegend(conf);
         createMetadata(conf);
