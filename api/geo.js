@@ -67,14 +67,16 @@
     this.wmcUrl = '';
     this.proxy = "/cgi-bin/proxy.cgi?url=";
     this.hasLegend = false;
+    this.legendWidthWithin = '199px';
     this.legendWidth = '200px';
-    this.legendWidthWithoutBorder = '199px';
     this.hasMetadata = false;
+    this.metadataHeightWithin = '199px';
     this.metadataHeight = '200px';
-    this.metadataHeightWithoutBorder = '199px';
     this.hasTools = false;
-    this.metadataTools = '40px';
-    this.metadataToolsWithoutBorder = '39px';
+    this.toolsHeightWithin = '24px';
+    this.toolsPadding = '2px';
+    this.toolsBorder = '1px';
+    this.toolsHeight = '29px';
   }
 
   /**
@@ -84,13 +86,11 @@
     this.wmcUrl = getUrlParameter('wmc') || this.wmcURL;
     this.hasLegend = (getUrlParameter('legend') === "on") || this.hasLegend;
     this.legendWidth = createSizePx(getUrlParameter('legendwidth')) || this.legendWidth;
-    this.legendWidthWithoutBorder = createSizePx(this.legendWidth, -1);
+    this.legendWidthWithin = createSizePx(this.legendWidth, -1);
     this.hasMetadata = (getUrlParameter('metadata') === "on") || this.hasMetadata;
     this.metadataHeight = createSizePx(getUrlParameter('metadataheight')) || this.metadataHeight;
-    this.metadataHeightWithoutBorder = createSizePx(this.metadataHeight, -1);
+    this.metadataHeightWithin = createSizePx(this.metadataHeight, -1);
     this.hasTools = (getUrlParameter('tools') === "on") || this.hasTools;
-    this.toolsHeight = createSizePx(getUrlParameter('toolsheight')) || this.metadataTools;
-    this.toolsHeightWithoutBorder = createSizePx(this.toolsHeight, -1);
   };
 
   /**
@@ -111,14 +111,16 @@
 
     if (conf.hasTools) {
       wrapper4.style.top = conf.toolsHeight;
-      tools.style.height = conf.toolsHeightWithoutBorder;
+      tools.style.height = conf.toolsHeightWithin;
+      tools.style.padding = conf.toolsPadding;
+      tools.style.borderBottom = conf.toolsBorder + ' solid black';
     } else {
       wrapper3.removeChild(tools);
     }
 
     if (conf.hasMetadata) {
       wrapper2.style.bottom = conf.metadataHeight;
-      metadata.style.height = conf.metadataHeightWithoutBorder;
+      metadata.style.height = conf.metadataHeightWithin;
     } else {
       wrapper1.removeChild(metadata);
     }
@@ -128,7 +130,7 @@
       tools.style.marginLeft = '-' + conf.legendWidth;
       wrapper4.style.marginLeft = '-' + conf.legendWidth;
       map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
-      legend.style.width = conf.legendWidthWithoutBorder;
+      legend.style.width = conf.legendWidthWithin;
     } else {
       wrapper2.removeChild(legend);
     }
@@ -190,6 +192,39 @@
   }
 
   /**
+   * Fill the #tools <div>
+   */
+  function createTools(conf) {
+    var tools, panelCtl, fakePanCtl, navCtl;
+
+    tools =  document.getElementById('tools');
+    if (map && conf.hasTools && tools) {
+      /* Controls */
+      navCtl = new OpenLayers.Control.NavigationHistory(
+        {'displayClass': 'hist'}
+      );
+      fakePanCtl = new OpenLayers.Control(
+        {displayClass: 'pan'}
+      );
+      /* Controls panel */
+      panelCtl = new OpenLayers.Control.Panel(
+        {
+          'div': tools,
+          'defaultControl': fakePanCtl
+        }
+      );
+      /* Add to map */
+      map.addControl(navCtl);
+      panelCtl.addControls([
+        navCtl.previous,
+        navCtl.next,
+        fakePanCtl
+      ]);
+      map.addControl(panelCtl);
+    }
+  }
+
+  /**
    * Load the context from the  WMC specified in the URL
    * A proxy may be necessary for that function
    * http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#HowdoIsetupaProxyHost
@@ -221,8 +256,8 @@
         map = parser.read(request.responseXML, {map: 'map'});
 
         createLegend(conf);
-
         createMetadata(conf);
+        createTools(conf);
       }
     });
   }
