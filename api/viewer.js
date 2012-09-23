@@ -65,7 +65,7 @@
    */
   function Configuration() {
     this.wmcUrl = '';
-    this.proxy = "http://www.geo.gob.bo/proxy/?url=";
+    this.proxy = "/proxy/?url=";
     this.hasLegend = false;
     this.legendWidthWithin = '199px';
     this.legendWidth = '200px';
