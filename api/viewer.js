@@ -314,7 +314,7 @@
     request = OpenLayers.Request.GET({
       url: conf.wmcUrl,
       callback: function (request) {
-        var parser;
+        var format, context;
         if (request.status < 200 || request.status >= 300) {
           // Error
           alert("Error de status " + request.status);
@@ -325,9 +325,9 @@
           alert("Error de responseText");
           return;
         }
-        parser = new OpenLayers.Format.WMC();
-        map = parser.read(request.responseText, {map: 'map'});
-
+        format = new OpenLayers.Format.WMC();
+        context = format.read(request.responseText);
+        map = format.contextToMap(context, {div: 'map', allOverlays: true});
         createLegend(conf);
         createMetadata(conf);
         createTools(conf);
