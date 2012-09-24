@@ -127,3 +127,17 @@ body {
 #icons .infoNextItemActive {
     background-image: url("theme/fatcow/img/information_on.png");
 }
+#ajaxloader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    height: 24px;
+    width: 300px;
+    margin-left: -150px; /* -1 * div width / 2 */
+    margin-top: -12px;  /* -1 * div height / 2 */
+    text-align: center;
+}
+#ajaxloader img {
+    vertical-align: middle;
+}

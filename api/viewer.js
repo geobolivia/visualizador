@@ -298,6 +298,17 @@
   }
 
   /**
+   * Remove the ajaxloader image
+   */
+  function removeAjaxLoader() {
+    var ajaxloader;
+    ajaxloader = document.getElementById('ajaxloader');
+    if (ajaxloader) {
+      ajaxloader.parentNode.removeChild(ajaxloader);
+    }
+  }
+
+  /**
    * Load the context from the  WMC specified in the URL
    * A proxy may be necessary for that function
    * http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#HowdoIsetupaProxyHost
@@ -331,6 +342,7 @@
         createLegend(conf);
         createMetadata(conf);
         createTools(conf);
+        removeAjaxLoader();
       }
     });
   }
