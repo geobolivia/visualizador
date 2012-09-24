@@ -24,7 +24,7 @@
 /*jslint browser: true*/
 /*global OpenLayers*/
 
-(function () {
+/*(function () {*/
   "use strict";
 
   var init, map;
@@ -337,8 +337,15 @@
           return;
         }
         format = new OpenLayers.Format.WMC();
+        OpenLayers.DOTS_PER_INCH = 90.71428571428572;
         context = format.read(request.responseText);
-        map = format.contextToMap(context, {div: 'map', allOverlays: true});
+        map = format.contextToMap(context, {
+          div: 'map',
+          allOverlays: true,
+          units: 'm',
+          resolutions: [19567.8792375, 9783.93961875, 4891.969809375, 2445.9849046875, 1222.99245234375, 611.4962261718748, 305.7481130859374, 152.87405654296887, 76.43702827148444, 38.21851413574208, 19.10925706787104, 9.55462853393552, 4.77731426696776],
+          projection: new OpenLayers.Projection('EPSG:900913'),
+        });
         createLegend(conf);
         createMetadata(conf);
         createTools(conf);
@@ -367,4 +374,4 @@
 
   window.onload = init;
 
-}());
+/*}());*/
