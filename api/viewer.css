@@ -9,6 +9,7 @@ body {
     padding: 0;
     font-family: tahoma,arial,helvetica,sans-serif;
     font-size: 14px;
+    color: #333;
 }
 #wrapper1 {
     position: relative;
@@ -46,7 +47,7 @@ body {
     left: 0;
     width: 100%;
     overflow: hidden;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #666;
 }
 #map {
     height: 100%;
@@ -60,12 +61,13 @@ body {
 }
 #attribution a {
     text-decoration: none;
+    color: #777;
 }
 #legend {
     float: right;
     height: 100%;
     overflow: auto;
-    border-left: 1px solid black;
+    border-left: 1px solid #666;
 }
 #legend input {
     vertical-align: top !important;
@@ -81,12 +83,60 @@ body {
     display: none;
 }
 #metadata {
+    display: none;
     position: absolute;
     bottom: 0;
     left: 0;
     overflow: auto;
     width: 100%;
-    border-top: 1px solid black;
+    padding-top: 8px;
+    border-top: 2px solid #666;
+    background: url("/img/noise.gif") repeat scroll -70% 0 #F0F0F0;
+    box-shadow: inset 0 5px 5px 0 rgba(0, 0, 0, 0.15);
+}
+ul#metadata-ul {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none outside none;
+}
+ul#metadata-ul li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    color: #777777;
+    line-height: 1.5em;
+    min-height: 3em;
+}
+ul#metadata-ul li span {
+    padding: 0 1em;
+    border-right: 1px solid #E0E0E0;
+}
+ul#metadata-ul li span:last-child {
+    border-right: none;
+}
+ul#metadata-ul span a {
+    color: #777777;
+    text-decoration: none;
+}
+ul#metadata-ul span a:hover,
+ul#metadata-ul span a:active,
+ul#metadata-ul span a:focus {
+    color: #4083A9;
+}
+ul#metadata-ul li span.title {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    border-right: none;
+}
+ul#metadata-ul li span.metadata-url {
+    margin-left: 2em;
+}
+ul#metadata-ul li span.attribution {
+}
+ul#metadata-ul li span.attribution img {
+    max-height: 1.5em;
+    margin: 0 0.5em;
+    vertical-align: baseline;
 }
 #tools #icons {
     position: absolute;
