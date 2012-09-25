@@ -24,7 +24,7 @@
 /*jslint browser: true*/
 /*global OpenLayers*/
 
-(function () {
+/*(function () {*/
   "use strict";
 
   var init, map;
@@ -158,9 +158,8 @@
             layer.metadata.styles[0] &&
             layer.metadata.styles[0].legend &&
             layer.metadata.styles[0].legend.href) {
-          layer.name = '<img src="' + layer.metadata.styles[0].legend.href +
-            '&legend_options=dpi:180;bgColor:0xFFF68F;' +
-            '"/>' + layer.name;
+          layer.name = layer.name +
+            '<br/><img src="' + layer.metadata.styles[0].legend.href + '"/>';
         }
       }
 
@@ -379,4 +378,4 @@
 
   window.onload = init;
 
-}());
+/*}());*/
