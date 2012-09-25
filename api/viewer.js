@@ -24,7 +24,7 @@
 /*jslint browser: true*/
 /*global OpenLayers*/
 
-/*(function () {*/
+(function () {
   "use strict";
 
   var init, map;
@@ -325,7 +325,7 @@
     request = OpenLayers.Request.GET({
       url: conf.wmcUrl,
       callback: function (request) {
-        var format, context;
+        var format, context, i;
         if (request.status < 200 || request.status >= 300) {
           // Error
           alert("Error de status " + request.status);
@@ -345,7 +345,12 @@
           units: 'm',
           resolutions: [19567.8792375, 9783.93961875, 4891.969809375, 2445.9849046875, 1222.99245234375, 611.4962261718748, 305.7481130859374, 152.87405654296887, 76.43702827148444, 38.21851413574208, 19.10925706787104, 9.55462853393552, 4.77731426696776],
           projection: new OpenLayers.Projection('EPSG:900913'),
+          maxExtent: new OpenLayers.Bounds(-8500000.0, -2900000.0, -3490622.9151999997, 2109377.0848000003)
         });
+        for (i = 0; i < map.layers.length; i += 1) {
+          map.layers[i].gutter = 10;
+          map.layers[i].setTileSize(new OpenLayers.Size(256, 256));
+        }
         createLegend(conf);
         createMetadata(conf);
         createTools(conf);
@@ -374,4 +379,4 @@
 
   window.onload = init;
 
-/*}());*/
+}());
