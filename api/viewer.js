@@ -424,13 +424,27 @@ function removeAjaxLoader() {
  * http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#HowdoIsetupaProxyHost
  * @param {Configuration} conf Configuration of the viewer
  */
-function loadWmc(conf) {
-  var request;
+function loadWmc(conf, protocol) {
+  var request, urlObj, url;
   if (!conf.wmcUrl) {
     return;
   }
+  urlObj = OpenLayers.Util.createUrlObject(conf.wmcUrl);
+  if (!protocol) {
+    protocol = urlObj.protocol;
+  }
+  url = protocol + '//' + urlObj.host;
+  if (urlObj.port && urlObj.port !== "80") {
+    url += ':' + urlObj.port;
+  }
+  url += urlObj.pathname;
+  url = OpenLayers.Util.urlAppend(
+    url,
+    OpenLayers.Util.getParameterString(urlObj.args)
+  );
   request = OpenLayers.Request.GET({
-    url: conf.wmcUrl,
+    url: url,
+    async: false,
     callback: function (request) {
       var format, context, i;
       if (request.status < 200 || request.status >= 300) {
@@ -482,13 +496,19 @@ function loadWmc(conf) {
       removeAjaxLoader();
     }
   });
-}
+  return request;
+};
 
 /**
  * Create an OpenLayers map in the #map <div>
  */
 function createMap(conf) {
-  loadWmc(conf);
+  var request;
+  request = loadWmc(conf);
+  if (request.status < 200 || request.status >= 300 || !request.responseText) {
+    // probamos en HTTP por si acaso
+    request = loadWmc(conf, 'http:');
+  }
 }
 
 /**
