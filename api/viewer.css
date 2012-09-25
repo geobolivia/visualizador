@@ -7,6 +7,8 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    font-family: tahoma,arial,helvetica,sans-serif;
+    font-size: 14px;
 }
 #wrapper1 {
     position: relative;
@@ -55,9 +57,12 @@ body {
     overflow: auto;
     border-left: 1px solid black;
 }
-#legend .labelSpan {
-    font-size: 16px;
+#legend input {
     vertical-align: top !important;
+}
+#legend .labelSpan {
+    font-size: 12px;
+    font-weight: bold;
 }
 #legend .labelSpan img {
     vertical-align: text-bottom;
