@@ -219,12 +219,12 @@ function callbackGetCapabilities(request) {
   capFormat = new OpenLayers.Format.WMSCapabilities();
   if (request.status < 200 || request.status >= 300) {
     // Error
-    alert("Error de status " + request.status);
+    /*alert("Error de status " + request.status);*/
     return;
   }
   if (!request.responseText) {
     // Error
-    alert("Error de responseText");
+    /*alert("Error de responseText");*/
     return;
   }
   /*if (!request.responseXml) {
@@ -304,21 +304,6 @@ function createMetadata(conf) {
   if (map && conf.hasMetadata && metadata) {
     if (map.layers.length > 0) {
       getRemoteMetadata();
-
-/*      metadata.innerHTML = '<ul id="metadatalist"></ul>';
-      list = document.getElementById('metadatalist');
-      if (list) {
-        content = '';
-        for (i = 0; i < map.layers.length; i += 1) {
-          layer = map.layers[i];
-          nameStr = layer.name;
-          metadataStr = layer.metadataURL ?
-            ' (<a href="' + layer.metadataURL + '">más detalles</a>)' :
-            '';
-          content = content + '<li>' + nameStr + metadataStr + '</li>';
-        }
-        list.innerHTML = content;
-      }*/
     }
   }
 }
@@ -450,12 +435,12 @@ function loadWmc(conf) {
       var format, context, i;
       if (request.status < 200 || request.status >= 300) {
         // Error
-        alert("Error de status " + request.status);
+        /*alert("Error de status " + request.status);*/
         return;
       }
       if (!request.responseText) {
         // Error
-        alert("Error de responseText");
+        /*alert("Error de responseText");*/
         return;
       }
       format = new OpenLayers.Format.WMC();
