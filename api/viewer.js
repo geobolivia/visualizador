@@ -345,8 +345,7 @@ function handleAreaMeasure(event) {
  * Fill the #tools <div>
  */
 function createTools(conf) {
-  var tools, icons, measure, panelCtl, fakePanCtl, navCtl, lineMeasureCtl,
-  areaMeasureCtl;
+  var tools, icons, measure, panelCtl, fakePanCtl, navCtl, lineMeasureCtl, areaMeasureCtl;
 
   tools =  document.getElementById('tools');
   icons =  document.getElementById('icons');
@@ -497,7 +496,7 @@ function loadWmc(conf, protocol) {
     }
   });
   return request;
-};
+}
 
 /**
  * Create an OpenLayers map in the #map <div>
