@@ -485,6 +485,7 @@ function loadWmc(conf, protocol) {
         2183915.093470982,
         4367830.186941965,
         8735660.373883929
+        
       ];
       options = { scales: MAP_SCALES };
       map.setOptions(options);
@@ -514,100 +515,6 @@ function createMap(conf) {
   }
 }
 
-/**Generaates a GetFreature information onclick event
-*/
-function enableGetFeature()
-{
-
-	map.events.register('click', map, function (e) {
- 					mouseLoc = map.getLonLatFromPixel(e.xy);
-                    document.getElementById('responseData').innerHTML = "Loading... please wait...";
-					var format = 'image/png';
-                    var params = {
-                        REQUEST: "GetFeatureInfo",
-                        EXCEPTIONS: "application/vnd.ogc.se_xml",
-                        BBOX: map.getExtent().toBBOX(),
-                        SERVICE: "WMS",
-                        INFO_FORMAT: 'text/plain',
-                        QUERY_LAYERS: 'departamentos',
-                        FEATURE_COUNT: 50,
-                        Layers: 'departamentos',
-                        WIDTH: map.size.w,
-                        HEIGHT: map.size.h,
-                        format: 'image/png',
-                        styles: map.layers[0].params.STYLES,
-                        srs: map.layers[0].params.SRS};
-                    // handle the wms 1.3 vs wms 1.1 madness
-                    if(map.layers[0].params.VERSION == "1.3.0") {
-                        params.version = "1.3.0";
-                        params.j = e.xy.x;
-                        params.i = e.xy.y;
-                    } else {
-                        params.version = "1.1.1";
-                        params.x = e.xy.x;
-                        params.y = e.xy.y;
-                    }
-                        
-                    // merge filters
-                    if(map.layers[0].params.CQL_FILTER != null) {
-                        params.cql_filter = map.layers[0].params.CQL_FILTER;
-                    } 
-                    if(map.layers[0].params.FILTER != null) {
-                        params.filter = map.layers[0].params.FILTER;
-                    }
-                    if(map.layers[0].params.FEATUREID) {
-                        params.featureid = map.layers[0].params.FEATUREID;
-                    }
-                    OpenLayers.loadURL("http://mapas.vicepresidencia.gob.bo/geoserver/AtlasElectoral/wms", params, this, setHTML, setHTML);
-                    OpenLayers.Event.stop(e);
-                });
-            
-
-
-
-}
-// Global vars for popup use
-var popup;
-var mouseLoc;
-// parse the response provided into the popup
-            function setHTML(response){
- 			var lines = response.responseText.split('\n');
-			var depto,km2;
-			for (var lcv = 0; lcv < (lines.length); lcv++) {
-		            var vals = lines[lcv].replace(/^\s*/,'').replace(/\s*$/,'').replace(/ = /,"=").replace(/'/g,'').split('=');
-            		if (vals[1] == "") {
-                		vals[1] = "Desconocido";
-                    }
-
-            		if (vals[0].indexOf('nombre') != -1 ) {
-                		depto = vals[1];
-            		} else if (vals[0].indexOf('area_km2') != -1 ) {
-                		km2 = vals[1];
-					}
-            }
-        
-
-				var popup_info = "<img alt=\"Logotipo de GeoBolivia\" src=\"img/geologo_16x16.png\"><h2>" + 
-depto + "</h2><hr/>" +
-                        "<b>&aacute;rea:</b> " + parseFloat(km2).toFixed(3) +
-                        " km2 <hr/>";
-  				if (popup != null) {
-            		popup.destroy();
-            		popup = null;
-		        }
-        		popup = new OpenLayers.Popup.AnchoredBubble("Informion de DEpartamento",
-                                        mouseLoc,
-                                        new OpenLayers.Size(250,120),
-                                        popup_info,
-                                        null,
-                                        true);
-        popup.setBackgroundColor("#bcd2ee");
-        map.addPopup(popup);
-                document.getElementById('responseData').innerHTML = popup_info;   
-
-            };
-            
-
 /**
  * Principal function launched on "onLoad" event
  */
@@ -618,8 +525,6 @@ init = function () {
   conf.getUrlParameters();
   createLayout(conf);
   createMap(conf);
-//method added
-  enableGetFeature();
 };
 
 window.onload = init;
